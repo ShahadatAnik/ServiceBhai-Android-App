@@ -12,7 +12,7 @@ public class signup extends AppCompatActivity {
 
     private EditText name, email, address, phone, password, rePassword;
     private Button save, login;
-
+    MyDatabaseHealper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,7 @@ public class signup extends AppCompatActivity {
         save = findViewById(R.id.save);
 
         save.setOnClickListener(v-> saveInfo());
+        DB= new MyDatabaseHealper(this);
 
     }
     void saveInfo(){
@@ -36,7 +37,7 @@ public class signup extends AppCompatActivity {
             error+="Name length is too high";
         }
         else{
-            System.out.println("User name "+ name);
+            System.out.println("User name "+ prvname);
         }
         String Email = email.getText().toString().trim();
         if(isValidEmail(Email) ==  false){
@@ -46,7 +47,7 @@ public class signup extends AppCompatActivity {
         else{
             System.out.println("Email "+ Email);
         }
-        System.out.println(address.getText().toString().trim());
+        String prvAdress = address.getText().toString().trim();
 
         String Phone = phone.getText().toString().trim();
         int phoneInt=Integer.parseInt(Phone);
@@ -55,14 +56,28 @@ public class signup extends AppCompatActivity {
             error+= "\n";
         }
         else{
-            System.out.println("Phone "+ phoneInt);
+            System.out.println("Phone "+ Phone);
         }
-        System.out.println(password.getText().toString().trim());
-        System.out.println(rePassword.getText().toString().trim());
+        String prvPassword = password.getText().toString().trim();
+        String prvPassword2 = rePassword.getText().toString().trim();
+        if(prvPassword.equals(prvPassword2)){
+            System.out.println(prvPassword);
+        }
+        else{
+            error+= "Password error ";
+            error+= "\n";
+            System.out.println("Password Mismatch");
+        }
+
 
         System.out.println("error"+ error);
         if(error==""){
-
+            System.out.println("Insert data");
+            Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, prvPassword);
+            if(noError==true){
+                System.out.println("Data Inserted");
+            }
+            else System.out.println("Got some error");
         }
     }
 

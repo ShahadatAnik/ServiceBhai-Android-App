@@ -2,6 +2,7 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -76,6 +77,8 @@ public class signup extends AppCompatActivity {
             Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, prvPassword);
             if(noError==true){
                 System.out.println("Data Inserted");
+                Intent i = new Intent(this, Login.class);
+                startActivity(i);
             }
             else System.out.println("Got some error");
         }

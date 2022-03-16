@@ -26,8 +26,10 @@ public class signup extends AppCompatActivity {
         password = findViewById(R.id.password);
         rePassword = findViewById(R.id.password2);
         save = findViewById(R.id.save);
+        login = findViewById(R.id.Login);
 
         save.setOnClickListener(v-> saveInfo());
+        login.setOnClickListener(v->LoginPage());
         DB= new MyDatabaseHealper(this);
 
     }
@@ -77,8 +79,7 @@ public class signup extends AppCompatActivity {
             Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, prvPassword);
             if(noError==true){
                 System.out.println("Data Inserted");
-                Intent i = new Intent(this, Login.class);
-                startActivity(i);
+                LoginPage();
             }
             else System.out.println("Got some error");
         }
@@ -86,5 +87,9 @@ public class signup extends AppCompatActivity {
 
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+    void LoginPage(){
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
     }
 }

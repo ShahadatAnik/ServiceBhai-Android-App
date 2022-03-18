@@ -59,4 +59,15 @@ public class MyDatabaseHealper extends SQLiteOpenHelper {
         }
         return id;
     }
+    public String[] getUserProfleInfo(int id){
+        String profile[]= new String[6];
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor profileInfo = sqLiteDatabase.rawQuery("SELECT * from users WHERE Personid='"+id+"';", null);
+        if (profileInfo.moveToFirst()) {
+            for(int i=1;i<=5;i++){
+                profile[i] = profileInfo.getString(i);
+            }
+        }
+        return profile;
+    }
 }

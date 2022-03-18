@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class homePage extends AppCompatActivity {
 
-    Button logout;
+    Button logout, profile;
     SharedPreferences myPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +17,18 @@ public class homePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         logout = findViewById(R.id.homeLogout);
         logout.setOnClickListener(v->logout());
+        profile = findViewById(R.id.userProfile);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
+
+        profile.setOnClickListener(v->userProfile());
     }
     void logout(){
         myPref.edit().putInt("loggedInID", -1).apply();
         Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+    void userProfile(){
+        Intent intent = new Intent(this, userProfile.class);
         startActivity(intent);
     }
 

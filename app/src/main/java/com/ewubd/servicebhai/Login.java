@@ -19,12 +19,12 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signup = findViewById(R.id.signupButton);
+        signup = findViewById(R.id.signup_btn_login_page);
         signup.setOnClickListener(v -> signupPage());
-        login = findViewById(R.id.loginButton);
+        login = findViewById(R.id.login_btn_login_page);
         login.setOnClickListener(v -> login());
-        email = findViewById(R.id.loginEmail);
-        password = findViewById(R.id.loginPassword);
+        email = findViewById(R.id.et_email_login_page);
+        password = findViewById(R.id.et_pass_login_page);
 
         DB= new MyDatabaseHealper(this);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);

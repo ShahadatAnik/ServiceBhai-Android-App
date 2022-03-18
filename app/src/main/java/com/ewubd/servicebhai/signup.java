@@ -33,14 +33,15 @@ public class signup extends AppCompatActivity {
         phone = findViewById(R.id.et_phone);
         password = findViewById(R.id.et_pass);
         rePassword = findViewById(R.id.et_confirm_pass);
+        rdUser = findViewById(R.id.rdUser);
+        rdWorker = findViewById(R.id.rdWorker);
         save = findViewById(R.id.signUp);
         login = findViewById(R.id.login);
 
         save.setOnClickListener(v-> saveInfo());
         login.setOnClickListener(v->LoginPage());
         DB= new MyDatabaseHealper(this);
-        rdUser = findViewById(R.id.rdUser);
-        rdWorker = findViewById(R.id.rdWorker);
+
 
 
     }

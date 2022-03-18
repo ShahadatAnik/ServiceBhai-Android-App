@@ -27,14 +27,14 @@ public class signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        name = findViewById(R.id.userName);
-        email = findViewById(R.id.email);
-        address = findViewById(R.id.address);
-        phone = findViewById(R.id.phone);
-        password = findViewById(R.id.password);
-        rePassword = findViewById(R.id.password2);
-        save = findViewById(R.id.save);
-        login = findViewById(R.id.Login);
+        name = findViewById(R.id.et_name);
+        email = findViewById(R.id.et_email);
+        address = findViewById(R.id.et_address);
+        phone = findViewById(R.id.et_phone);
+        password = findViewById(R.id.et_pass);
+        rePassword = findViewById(R.id.et_confirm_pass);
+        save = findViewById(R.id.signUp);
+        login = findViewById(R.id.login);
 
         save.setOnClickListener(v-> saveInfo());
         login.setOnClickListener(v->LoginPage());

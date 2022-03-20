@@ -162,5 +162,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout_bottom_form_tv_profile"
         />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_bottom_form_tv_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_history"
+        android:background="@drawable/profile_layout_shaper"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:padding="15dp"
+        >
 
+        <TextView
+            android:id="@+id/tv_profile_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History list will be shown here."
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_history"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_bottom_form_tv_history"
+            android:textSize="17sp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

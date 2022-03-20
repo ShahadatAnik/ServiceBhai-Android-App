@@ -4,11 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/login_btn_shaper.xml" value="0.163" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/profile_layout_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_btn_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_form_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/font/cabinatefont.xml" value="0.28512820512820514" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.259375" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_login.xml" value="0.2553846153846154" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_main.xml" value="0.2553846153846154" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_signup.xml" value="0.264" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_user_profile.xml" value="0.264" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.33" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_login.xml" value="0.33" />

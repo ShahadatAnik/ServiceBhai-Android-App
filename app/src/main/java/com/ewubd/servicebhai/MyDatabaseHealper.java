@@ -9,10 +9,9 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-public class MyDatabaseHealper extends SQLiteOpenHelper {
+public class MyDatabaseHealper extends SQLiteOpenHelper { // MyDatabaseHelper hobay, vhul hoisay banan ta
     private static final String Database_name= "serviceBhai";
     private static final int Version= 3;
-
 
     private Context context;
 

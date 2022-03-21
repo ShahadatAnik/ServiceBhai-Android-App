@@ -17,11 +17,11 @@ public class userProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         DB= new MyDatabaseHealper(this);
-        userName = findViewById(R.id.userName);
-        userEmail = findViewById(R.id.userEmail);
-        userAddress = findViewById(R.id.userAddress);
-        userPhone = findViewById(R.id.userPhone);
-        userType = findViewById(R.id.userType);
+        userName = findViewById(R.id.tv_profile_name_dynamic);
+        userEmail = findViewById(R.id.tv_profile_email_dynamic);
+        userAddress = findViewById(R.id.tv_profile_address_dynamic);
+        userPhone = findViewById(R.id.tv_profile_phone_dynamic);
+        userType = findViewById(R.id.tv_profile_type_dynamic);
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         int userid = myPref.getInt("loggedInID", -1);

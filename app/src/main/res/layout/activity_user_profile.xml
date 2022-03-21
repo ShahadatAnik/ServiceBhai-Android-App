@@ -4,96 +4,184 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".userProfile">
+    tools:context=".userProfile"
+    android:background="@color/green"
+    >
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="92dp"
-        android:text="Your Name: "
+        android:id="@+id/tv_profile"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/profile_layout_shaper"
+        android:fontFamily="@font/belmist"
+        android:gravity="center"
+        android:text="Profile"
+        android:textColor="@color/green"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_bottom_form_tv_profile"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text=""
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/tv_profile"
+        android:background="@drawable/profile_layout_shaper"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:padding="15dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_profile"
+            android:layout_marginLeft="20dp"
+            android:textSize="17sp"
+             />
+        <TextView
+            android:id="@+id/tv_profile_name_dynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text=""
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_name"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_name" />
+
+
+
+        <TextView
+            android:id="@+id/tv_profile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Email:"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_name" />
+        <TextView
+            android:id="@+id/tv_profile_email_dynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="17sp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_email"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_email" />
+
+
+
+        <TextView
+            android:id="@+id/tv_profile_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Address:"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_email" />
+        <TextView
+            android:id="@+id/tv_profile_address_dynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text=""
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_address"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_address" />
+
+
+
+        <TextView
+            android:id="@+id/tv_profile_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Phone:"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_address" />
+        <TextView
+            android:id="@+id/tv_profile_phone_dynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text=""
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_phone"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_phone" />
+
+
+
+        <TextView
+            android:id="@+id/tv_profile_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Type:"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_phone" />
+        <TextView
+            android:id="@+id/tv_profile_type_dynamic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:text=""
+            android:textSize="17sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_type"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_type" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_history"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Email:"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/profile_layout_shaper"
+        android:fontFamily="@font/belmist"
+        android:gravity="center"
+        android:text="History"
+        android:textColor="@color/green"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout_bottom_form_tv_profile"
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_bottom_form_tv_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_history"
+        android:background="@drawable/profile_layout_shaper"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:padding="15dp"
+        >
 
-    <TextView
-        android:id="@+id/userEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text=""
-        app:layout_constraintStart_toStartOf="@+id/userName"
-        app:layout_constraintTop_toBottomOf="@+id/userName" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Address:"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <TextView
-        android:id="@+id/userAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text=""
-        app:layout_constraintStart_toStartOf="@+id/userEmail"
-        app:layout_constraintTop_toBottomOf="@+id/userEmail" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Phone:"
-        app:layout_constraintStart_toStartOf="@+id/textView10"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-    <TextView
-        android:id="@+id/userPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text=""
-        app:layout_constraintStart_toStartOf="@+id/userAddress"
-        app:layout_constraintTop_toBottomOf="@+id/userAddress" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Type"
-        app:layout_constraintStart_toStartOf="@+id/textView12"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
-    <TextView
-        android:id="@+id/userType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text=""
-        app:layout_constraintStart_toStartOf="@+id/userPhone"
-        app:layout_constraintTop_toBottomOf="@+id/userPhone" />
+        <TextView
+            android:id="@+id/tv_profile_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History list will be shown here."
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_history"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_bottom_form_tv_history"
+            android:textSize="17sp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

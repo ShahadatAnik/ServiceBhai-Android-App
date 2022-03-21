@@ -21,8 +21,10 @@ public class Login extends AppCompatActivity {
 
         signup = findViewById(R.id.signup_btn_login_page);
         signup.setOnClickListener(v -> signupPage());
+
         login = findViewById(R.id.login_btn_login_page);
         login.setOnClickListener(v -> login());
+
         email = findViewById(R.id.et_email_login_page);
         password = findViewById(R.id.et_pass_login_page);
 

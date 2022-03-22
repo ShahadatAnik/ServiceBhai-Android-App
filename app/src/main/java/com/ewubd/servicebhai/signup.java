@@ -14,6 +14,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class signup extends AppCompatActivity {
 
     private EditText name, email, address, phone, password, rePassword;
@@ -102,7 +106,8 @@ public class signup extends AppCompatActivity {
         System.out.println(checkedOne);
         if(error==""){
             System.out.println("Insert data");
-            Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, prvPassword, checkedOne);
+            String encryptedPassword = getMd5(prvPassword);
+            Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, encryptedPassword, checkedOne);
             if(noError==true){
                 System.out.println("Data Inserted");
                 LoginPage();
@@ -114,6 +119,24 @@ public class signup extends AppCompatActivity {
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
+
+        public static String getMd5(String input)
+        {
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                byte[] messageDigest = md.digest(input.getBytes());
+                BigInteger no = new BigInteger(1, messageDigest);
+                String hashtext = no.toString(16);
+                while (hashtext.length() < 32) {
+                    hashtext = "0" + hashtext;
+                }
+                return hashtext;
+            }
+            catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     void LoginPage(){
         Intent i = new Intent(this, Login.class);
         startActivity(i);

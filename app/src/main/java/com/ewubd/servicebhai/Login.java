@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Login extends AppCompatActivity {
 
     EditText email, password;
@@ -43,7 +47,8 @@ public class Login extends AppCompatActivity {
     void login(){
         String privEmail = email.getText().toString().trim();
         String privPassword = password.getText().toString().trim();
-        int userid = DB.getUser(privEmail, privPassword);
+        String encrytpedPassword = getMd5(privPassword);
+        int userid = DB.getUser(privEmail, encrytpedPassword);
         if(userid==-1){
             System.out.println("Error on email or password");
         }
@@ -65,5 +70,22 @@ public class Login extends AppCompatActivity {
         a.addCategory(Intent.CATEGORY_HOME);
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
+    }
+
+    public static String getMd5(String input)
+    {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

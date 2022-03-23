@@ -16,7 +16,7 @@ public class Login extends AppCompatActivity {
 
     EditText email, password;
     Button login, signup;
-    MyDatabaseHealper DB;
+    MyDatabaseHelper DB;
     SharedPreferences myPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.et_email_login_page);
         password = findViewById(R.id.et_pass_login_page);
 
-        DB= new MyDatabaseHealper(this);
+        DB= new MyDatabaseHelper(this);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         int userid = myPref.getInt("loggedInID", -1);
         System.out.println(userid);

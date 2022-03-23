@@ -94,7 +94,7 @@
         android:layout_marginTop="56dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Bio"
+        android:hint="Bio"
         app:layout_constraintEnd_toEndOf="@+id/nidNumber"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="@+id/textView2"

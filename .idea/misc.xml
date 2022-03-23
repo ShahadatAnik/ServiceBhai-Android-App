@@ -4,15 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/login_btn_shaper.xml" value="0.163" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/profile_layout_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_btn_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_form_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/font/cabinatefont.xml" value="0.28512820512820514" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.259375" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_login.xml" value="0.2553846153846154" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_main.xml" value="0.2553846153846154" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_signup.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_user_profile.xml" value="0.264" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_create_workers_profile.xml" value="0.33" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.33" />
@@ -23,6 +19,11 @@
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/simple_dropdown.xml" value="0.16614583333333333" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/spinner_item.xml" value="0.3625" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai2/app/src/main/res/layout/activity_signup.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_create_workers_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_problem_posting.xml" value="0.18" />
+        <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_problem_show.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_user_profile.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

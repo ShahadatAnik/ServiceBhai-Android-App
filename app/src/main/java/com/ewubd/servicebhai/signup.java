@@ -22,7 +22,7 @@ public class signup extends AppCompatActivity {
 
     private EditText name, email, address, phone, password, rePassword;
     private Button save, login;
-    MyDatabaseHealper DB;
+    MyDatabaseHelper DB;
     private RadioButton rdUser;
     private RadioButton rdWorker;
 
@@ -44,7 +44,7 @@ public class signup extends AppCompatActivity {
 
         save.setOnClickListener(v-> saveInfo());
         login.setOnClickListener(v->LoginPage());
-        DB= new MyDatabaseHealper(this);
+        DB= new MyDatabaseHelper(this);
 
 
 

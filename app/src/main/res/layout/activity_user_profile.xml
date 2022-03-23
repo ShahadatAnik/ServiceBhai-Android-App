@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_profile"
             android:layout_marginLeft="20dp"
             android:textSize="17sp"
-             />
+            tools:ignore="MissingConstraints" />
         <TextView
             android:id="@+id/tv_profile_name_dynamic"
             android:layout_width="wrap_content"
@@ -182,6 +182,17 @@
             app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_history"
             app:layout_constraintEnd_toEndOf="@id/constraintLayout_bottom_form_tv_history"
             android:textSize="17sp"
-            />
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/workersProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Workers Profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

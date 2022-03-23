@@ -11,7 +11,7 @@ public class workersProfile extends AppCompatActivity {
 
     MyDatabaseHelper DB;
     SharedPreferences myPref;
-    TextView expertise, NID;
+    TextView expertise, NID, workerBio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +20,7 @@ public class workersProfile extends AppCompatActivity {
         DB= new MyDatabaseHelper(this);
         expertise = findViewById(R.id.expertiseText);
         NID = findViewById(R.id.nidText);
+        workerBio = findViewById(R.id.workerbioText);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         int userid = myPref.getInt("loggedInID", -1);
         String profile[]= DB.getWorkersProfile(userid);
@@ -30,6 +31,7 @@ public class workersProfile extends AppCompatActivity {
 
         expertise.setText(profile[2]);
         NID.setText(profile[3]);
+        workerBio.setText(profile[4]);
 
     }
 }

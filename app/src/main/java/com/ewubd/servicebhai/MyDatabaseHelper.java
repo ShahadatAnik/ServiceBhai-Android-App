@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 7;
+    private static final int Version= 8;
 
     private Context context;
 
@@ -25,7 +25,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         try{
             Toast.makeText(context,"Table Created ",Toast.LENGTH_LONG).show();
             db.execSQL("Create TABLE users (Personid INTEGER PRIMARY KEY AUTOINCREMENT,name varchar(50),email varchar(50) UNIQUE,address varchar(100),phone varchar(15),type varchar(15), password varchar(50));");
-            db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
         }
         catch (Exception e){
             Toast.makeText(context,"Error: "+e,Toast.LENGTH_LONG).show();
@@ -71,12 +71,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return profile;
     }
-    public Boolean insertWorker(int personid, String expertise, int NIDNumber){
+    public Boolean insertWorker(int personid, String expertise, int NIDNumber, String bio){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("PersonID", personid);
         contentValues.put("expertise", expertise);
         contentValues.put("NIDNumber", NIDNumber);
+        contentValues.put("bio", bio);
         long result = DB.insert("workers",null,contentValues);
         if(result==-1) return false;
         else return true;
@@ -87,7 +88,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor profileInfo = sqLiteDatabase.rawQuery("SELECT * from workers WHERE PersonID='"+id+"';", null);
         if (profileInfo.moveToFirst()) {
-            for(int i=0;i<=3;i++){
+            for(int i=0;i<=4;i++){
                     profile[i] = profileInfo.getString(i);
             }
         }

@@ -14,7 +14,7 @@ public class createWorkersProfile extends AppCompatActivity {
     SharedPreferences myPref;
     Button save;
     MyDatabaseHelper DB;
-    EditText nid;
+    EditText nid, bio;
     int userid;
     private RadioButton rdElectrician;
     private RadioButton rdPlumber;
@@ -26,6 +26,7 @@ public class createWorkersProfile extends AppCompatActivity {
         setContentView(R.layout.activity_create_workers_profile);
         save = findViewById(R.id.saveWorkersProfile);
         nid = findViewById(R.id.nidNumber);
+        bio = findViewById(R.id.Workersbio);
         rdElectrician = findViewById(R.id.rdElectrician);
         rdPlumber = findViewById(R.id.rdPlumber);
         rdmechanics = findViewById(R.id.rdmechanics);
@@ -55,8 +56,9 @@ public class createWorkersProfile extends AppCompatActivity {
             checkedOne = "Other";
         }
         String prv_nid = nid.getText().toString().trim();
+        String prv_bio = bio.getText().toString().trim();
         int prvNid=Integer.parseInt(prv_nid);
-        Boolean noError = DB.insertWorker(userid, checkedOne, prvNid);
+        Boolean noError = DB.insertWorker(userid, checkedOne, prvNid, prv_bio);
         if(noError==true){
             System.out.println("Data Inserted");
             Intent intent = new Intent(this, workersProfile.class);

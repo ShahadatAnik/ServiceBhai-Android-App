@@ -44,4 +44,24 @@
         app:layout_constraintHorizontal_bias="0.546"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/expertiseText" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:text="Workers bio"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/workerbioText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@+id/nidText"
+        app:layout_constraintStart_toStartOf="@+id/nidText"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

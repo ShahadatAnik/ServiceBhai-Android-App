@@ -49,7 +49,7 @@ public class problemPosting extends AppCompatActivity {
             System.out.println("Post Detail "+ detail);
         }
         if(error==""){
-            System.out.println("Insert data To ProblemPosting Table");
+            System.out.println("Insert data To Problem Posting Table");
             Boolean noError = DB.insertproblemPosting(userid,type,detail);
             if(noError){
                 System.out.println("Data Inserted");

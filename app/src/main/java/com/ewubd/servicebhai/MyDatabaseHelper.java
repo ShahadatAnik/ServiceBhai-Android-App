@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
     private static final int Version= 9;
+    private int totalProblem;
 
     private Context context;
 
@@ -106,19 +107,24 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if(result==-1) return false;
         else return true;
     }
-    public void getPostedProblems (int id){
+    public String[][] getPostedProblems (){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
         int totalValue = getProblem.getCount();
+        totalProblem = totalValue;
         String postedproblems[][] = new String[totalValue+1][4];
         for(int j=0; j<=totalValue; j++){
             if (getProblem.moveToPosition(j)) {
                 for (int i = 0; i <= 3; i++) {
                     postedproblems[j][i] = getProblem.getString(i);
-                    System.out.println(postedproblems[j][i]);
+                    //System.out.println(postedproblems[j][i]);
                 }
             }
         }
+        return postedproblems;
+    }
+    public int totalProblems(){
+        return totalProblem;
     }
 
 

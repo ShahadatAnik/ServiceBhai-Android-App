@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class homePage extends AppCompatActivity {
 
-    Button logout, profile, problempost;
+    Button logout, profile, problempost,problemshow;
     SharedPreferences myPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,11 @@ public class homePage extends AppCompatActivity {
 
         profile.setOnClickListener(v->userProfile());
         problempost.setOnClickListener(v -> problemPage());
+        problemshow = findViewById(R.id.problemShow);
+        problemshow.setOnClickListener(v -> {
+            Intent intent = new Intent(this, problemShow.class);
+            startActivity(intent);
+        });
     }
     void logout(){
         myPref.edit().putInt("loggedInID", -1).apply();

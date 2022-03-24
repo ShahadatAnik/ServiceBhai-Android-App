@@ -106,4 +106,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if(result==-1) return false;
         else return true;
     }
+    public void getPostedProblems (int id){
+        String postedproblems[] = new String[4];
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
+        int i=0;
+        while(getProblem.moveToNext()){
+            postedproblems[i] = getProblem.getString(i);
+            System.out.println(postedproblems[i]);
+            i++;
+        }
+    }
 }

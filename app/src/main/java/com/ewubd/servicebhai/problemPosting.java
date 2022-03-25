@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class problemPosting extends AppCompatActivity {
 
-    private EditText helptype, postDetails;
+    private EditText helptype, postDetails,posttitle;
     private Button savetodb;
     MyDatabaseHelper DB;
     SharedPreferences myPref;
@@ -23,6 +23,7 @@ public class problemPosting extends AppCompatActivity {
         setContentView(R.layout.activity_problem_posting);
 
         helptype = findViewById(R.id.helpType);
+        posttitle = findViewById(R.id.title);
         postDetails = findViewById(R.id.postDetails);
         savetodb = findViewById(R.id.saveToProblem);
         savetodb.setOnClickListener(v -> insertProblem());
@@ -48,9 +49,17 @@ public class problemPosting extends AppCompatActivity {
         else{
             System.out.println("Post Detail "+ detail);
         }
+        String title = posttitle.getText().toString().trim();
+        if(title.length()>51){
+            error+= "title Length is too high";
+            error+= "\n";
+        }
+        else{
+            System.out.println("Post Title "+ title);
+        }
         if(error==""){
             System.out.println("Insert data To Problem Posting Table");
-            Boolean noError = DB.insertproblemPosting(userid,type,detail);
+            Boolean noError = DB.insertproblemPosting(userid,title,type,detail);
             if(noError){
                 System.out.println("Data Inserted");
                 problemshow();

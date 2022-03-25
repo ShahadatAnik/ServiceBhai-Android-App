@@ -2,15 +2,24 @@ package com.ewubd.servicebhai;
 
 public class postedProblem {
     int id;
-    String name,helptype,postdetail;
+    String name,helptype,postdetail,title;
 
-    public postedProblem(int id, String name, String helptype, String postdetail) {
+    public postedProblem(int id, String title , String name, String helptype, String postdetail) {
         this.id = id;
+        this.title = title;
         this.name = name;
         this.helptype = helptype;
         this.postdetail = postdetail;
     }
     public postedProblem(){}
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getId() {
         return id;

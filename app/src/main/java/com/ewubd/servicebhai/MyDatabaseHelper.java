@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 9;
+    private static final int Version= 10;
     private int totalProblem;
 
     private Context context;
@@ -29,7 +29,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context,"Table Created ",Toast.LENGTH_LONG).show();
             db.execSQL("Create TABLE users (Personid INTEGER PRIMARY KEY AUTOINCREMENT,name varchar(50),email varchar(50) UNIQUE,address varchar(100),phone varchar(15),type varchar(15), password varchar(50));");
             db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
-            db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER, helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
         }
         catch (Exception e){
             Toast.makeText(context,"Error: "+e,Toast.LENGTH_LONG).show();
@@ -99,10 +99,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return profile;
     }
-    public Boolean insertproblemPosting(int PersonID, String helptype, String postdetails){
+    public Boolean insertproblemPosting(int PersonID,String title,String helptype, String postdetails){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("PersonID", PersonID);
+        contentValues.put("title", title);
         contentValues.put("helptype", helptype);
         contentValues.put("postdetails", postdetails);
         long result = DB.insert("problemPosting",null,contentValues);
@@ -113,14 +114,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<postedProblem> getProblems(){
         ArrayList<postedProblem> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
+        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.title, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
         while(getProblem.moveToNext()){
             int postid = getProblem.getInt(0);
-            String name = getProblem.getString(1);
-            String helptype = getProblem.getString(2);
-            String postdetail = getProblem.getString(3);
+            String title = getProblem.getString(1);
+            String name = getProblem.getString(2);
+            String helptype = getProblem.getString(3);
+            String postdetail = getProblem.getString(4);
+            System.out.println(title);
 
-            postedProblem postedProblem = new postedProblem(postid,name,helptype,postdetail);
+            postedProblem postedProblem = new postedProblem(postid,title,name,helptype,postdetail);
             arrayList.add(postedProblem);
         }
         return arrayList;

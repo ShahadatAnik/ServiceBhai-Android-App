@@ -41,6 +41,7 @@ public class customProblemAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.problemcustomview, parent, false);
 
         TextView postid = rowView.findViewById(R.id.postid);
+        TextView title = rowView.findViewById(R.id.title);
         TextView postername = rowView.findViewById(R.id.poster_name);
         TextView post_type = rowView.findViewById(R.id.post_helptype);
         TextView post_detail = rowView.findViewById(R.id.post_detail);
@@ -48,9 +49,11 @@ public class customProblemAdapter extends BaseAdapter {
         postedProblem postedProblem = arrayList.get(position);
 
         postid.setText(String.valueOf(postedProblem.getId()));
+        title.setText(postedProblem.getTitle());
         postername.setText(postedProblem.getName());
         post_type.setText(postedProblem.getHelptype());
         post_detail.setText(postedProblem.getPostdetail());
+        System.out.println("Title "+title);
 
         return rowView;
     }

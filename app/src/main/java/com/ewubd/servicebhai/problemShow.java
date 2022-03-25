@@ -12,8 +12,9 @@ import java.util.ArrayList;
 public class problemShow extends AppCompatActivity {
 
     private ListView postShow;
-    private Button print;
     MyDatabaseHelper DB;
+    ArrayList<postedProblem> arrayList;
+    customProblemAdapter customProblemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,19 +24,15 @@ public class problemShow extends AppCompatActivity {
         postShow = findViewById(R.id.postShow);
         DB= new MyDatabaseHelper(this);
 
-        String[][] list = DB.getPostedProblems();
-        ArrayList<ArrayList<String>> listoflist = new ArrayList<>();
+        arrayList = new ArrayList<>();
+        loadDatainList();
 
-        for(int j=0; j<DB.totalProblems(); j++){
-            for (int i = 0; i <= 3; i++) {
-
-                //listoflist.get(j).add(list[j][i]);
-
-                System.out.println(list[j][i]);
-            }
-        }
-        //System.out.println(listoflist);
-
+    }
+    public void loadDatainList(){
+        arrayList = DB.getProblems();
+        customProblemAdapter = new customProblemAdapter(this,arrayList);
+        postShow.setAdapter(customProblemAdapter);
+        customProblemAdapter.notifyDataSetChanged();
     }
 
     @Override

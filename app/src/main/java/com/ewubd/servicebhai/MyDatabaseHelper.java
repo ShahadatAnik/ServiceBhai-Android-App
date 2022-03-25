@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
     private static final int Version= 9;
@@ -107,21 +109,21 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         if(result==-1) return false;
         else return true;
     }
-    public String[][] getPostedProblems (){
+
+    public ArrayList<postedProblem> getProblems(){
+        ArrayList<postedProblem> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
-        int totalValue = getProblem.getCount();
-        totalProblem = totalValue;
-        String postedproblems[][] = new String[totalValue+1][4];
-        for(int j=0; j<=totalValue; j++){
-            if (getProblem.moveToPosition(j)) {
-                for (int i = 0; i <= 3; i++) {
-                    postedproblems[j][i] = getProblem.getString(i);
-                    //System.out.println(postedproblems[j][i]);
-                }
-            }
+        while(getProblem.moveToNext()){
+            int postid = getProblem.getInt(0);
+            String name = getProblem.getString(1);
+            String helptype = getProblem.getString(2);
+            String postdetail = getProblem.getString(3);
+
+            postedProblem postedProblem = new postedProblem(postid,name,helptype,postdetail);
+            arrayList.add(postedProblem);
         }
-        return postedproblems;
+        return arrayList;
     }
     public int totalProblems(){
         return totalProblem;

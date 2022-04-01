@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceBhai">
         <activity
+            android:name=".problemShow"
+            android:exported="false" />
+        <activity
+            android:name=".problemPosting"
+            android:exported="false" />
+        <activity
             android:name=".createWorkersProfile"
             android:exported="false" />
         <activity

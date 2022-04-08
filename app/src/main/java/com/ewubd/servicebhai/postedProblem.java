@@ -2,7 +2,7 @@ package com.ewubd.servicebhai;
 
 public class postedProblem {
     int id;
-    String name,helptype,postdetail,title;
+    String name, helptype, postdetail, title;
 
     public postedProblem(int id, String title , String name, String helptype, String postdetail) {
         this.id = id;

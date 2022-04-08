@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ServiceBhai</string>
+
+    <string-array name="problem_category">
+        <item>Java</item>
+        <item>Kotlin</item>
+        <item>Python</item>
+        <item>CPP</item>
+    </string-array>
 </resources>

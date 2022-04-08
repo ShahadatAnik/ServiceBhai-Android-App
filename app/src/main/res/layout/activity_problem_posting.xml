@@ -1,57 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".problemPosting">
-
+    tools:context=".Login"
+    android:background="#3ECC3E"
+    >
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_Post_Your_Problem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/profile_layout_shaper"
+        android:fontFamily="@font/belmist"
         android:gravity="center"
-        android:text="Problem Posting Page"
-        android:textSize="40dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-16dp" />
-
-    <EditText
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:hint="what is the Problem"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <EditText
-        android:id="@+id/helpType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:hint="What type of help you need?"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <EditText
-        android:id="@+id/postDetails"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:hint="Write Details"
-        app:layout_constraintTop_toBottomOf="@+id/helpType"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/saveToProblem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Save"
+        android:text="Post Your Problem"
+        android:textColor="@color/green"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postDetails" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_weight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/signup_form_shaper"
+        android:padding="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_Post_Your_Problem"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tv_problem_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Problem Title"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            app:hintTextColor="@color/primaryTextColor"
+            app:boxStrokeColor="@color/primaryTextColor"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout_form"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_problem_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryTextColor"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tv_problem_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Problem Category"
+            app:hintTextColor="@color/primaryTextColor"
+            app:boxStrokeColor="@color/primaryTextColor"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+            app:layout_constraintTop_toBottomOf="@id/tv_problem_title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_problem_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryTextColor"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="10dp"-->
+<!--            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tv_problem_category"-->
+<!--            >-->
+
+<!--            <AutoCompleteTextView-->
+<!--                android:id="@+id/autoCompleteTextView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:inputType="none"-->
+<!--                android:text="Choose Problem Category"-->
+<!--                />-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tv_problem_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Problem Details"
+            app:counterEnabled="true"
+            app:counterMaxLength="200"
+            app:hintTextColor="@color/primaryTextColor"
+            app:boxStrokeColor="@color/primaryTextColor"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+            app:layout_constraintTop_toBottomOf="@id/tv_problem_category"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_problem_details"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:textColor="@color/primaryTextColor"
+                android:inputType="textEmailAddress"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_post_Post_Your_Problem"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/signup_btn_shaper"
+        android:text="Post"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout_form"
+        app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+        app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+        android:layout_margin="12dp"
+        />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,17 +8,6 @@
     tools:context=".Login"
     android:background="#3ECC3E"
     >
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_logo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayout_form"
-        android:layout_marginBottom="16dp"
-        >
-
         <TextView
             android:id="@+id/tv_logo"
             android:layout_width="match_parent"
@@ -30,19 +19,17 @@
             android:fontFamily="@font/belmist"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/constraintLayout_form"
             tools:ignore="MissingConstraints" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_weight="1"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/signup_form_shaper"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout_logo"
         android:padding="15dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,13 +39,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tv_email_login_page"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="Email"
             app:hintTextColor="@color/primaryTextColor"
             app:boxStrokeColor="@color/primaryTextColor"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
             app:layout_constraintTop_toTopOf="@id/constraintLayout_form"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -77,8 +66,11 @@
             android:hint="Password"
             app:hintTextColor="@color/primaryTextColor"
             app:boxStrokeColor="@color/primaryTextColor"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
             app:endIconMode="password_toggle"
             app:layout_constraintTop_toBottomOf="@id/tv_email_login_page"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -96,26 +88,17 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_btn"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_form"
-        app:layout_constraintVertical_weight="1"
-        tools:ignore="MissingConstraints">
-
         <Button
             android:id="@+id/login_btn_login_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp"
             android:background="@drawable/signup_btn_shaper"
             android:text="Login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout_form"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+            android:layout_margin="12dp"
+            />
 
         <TextView
             android:id="@+id/textView_login_btn_before_text"
@@ -146,7 +129,6 @@
             android:textSize="17sp"
             app:layout_constraintBaseline_toBaselineOf="@id/signup_btn_login_page"
             app:layout_constraintLeft_toRightOf="@id/signup_btn_login_page" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

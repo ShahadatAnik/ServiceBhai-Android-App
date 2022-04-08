@@ -59,7 +59,7 @@ public class signup extends AppCompatActivity {
             System.out.println("User name "+ prvname);
         }
         String Email = email.getText().toString().trim();
-        if(isValidEmail(Email) ==  false){
+        if(isValidEmail(Email) == false){
             error+= "Wrong Email";
             error+= "\n";
         }
@@ -101,7 +101,6 @@ public class signup extends AppCompatActivity {
             System.out.println("Password Mismatch");
         }
 
-
         System.out.println("error"+ error);
         System.out.println(checkedOne);
         if(error==""){
@@ -119,7 +118,6 @@ public class signup extends AppCompatActivity {
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
-
         public static String getMd5(String input)
         {
             try {

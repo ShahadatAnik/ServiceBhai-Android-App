@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceBhai">
         <activity
+            android:name=".workersList"
+            android:exported="false" />
+        <activity
             android:name=".homepageForUser"
             android:exported="false" />
         <activity

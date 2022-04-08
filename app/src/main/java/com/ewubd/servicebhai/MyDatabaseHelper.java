@@ -162,5 +162,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return userorworker;
     }
 
+    public ArrayList<workersByCatagory> workersByCatagory(String category){
+        ArrayList<workersByCatagory> arrayList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT w.workerid, u.name, w.bio FROM workers w, users u  WHERE w.PersonID = u.Personid and w.expertise ='"+category+"';",null);
+        while(getWorkers.moveToNext()){
+            int workersid = getWorkers.getInt(0);
+            String workersname = getWorkers.getString(1);
+            String workersbio = getWorkers.getString(2);
+            workersByCatagory workersByCatagory = new workersByCatagory(workersid, workersname, workersbio);
+            arrayList.add(workersByCatagory);
+        }
+        return arrayList;
+    }
+
 
 }

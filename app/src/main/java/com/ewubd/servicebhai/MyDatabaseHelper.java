@@ -114,22 +114,52 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<postedProblem> getProblems(){
         ArrayList<postedProblem> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.title, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
+        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.personid,p.title, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
         while(getProblem.moveToNext()){
             int postid = getProblem.getInt(0);
-            String title = getProblem.getString(1);
-            String name = getProblem.getString(2);
-            String helptype = getProblem.getString(3);
-            String postdetail = getProblem.getString(4);
+            int personid = getProblem.getInt(1);
+            String title = getProblem.getString(2);
+            String name = getProblem.getString(3);
+            String helptype = getProblem.getString(4);
+            String postdetail = getProblem.getString(5);
             System.out.println(title);
 
-            postedProblem postedProblem = new postedProblem(postid,title,name,helptype,postdetail);
+            postedProblem postedProblem = new postedProblem(postid,personid,title,name,helptype,postdetail);
             arrayList.add(postedProblem);
         }
         return arrayList;
     }
     public int totalProblems(){
         return totalProblem;
+    }
+
+    public String[] getProblembyID(int id){
+        String problem[]= new String[6];
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor problems = sqLiteDatabase.rawQuery("SELECT title,helptype,postdetails from problemPosting WHERE postid='"+id+"';", null);
+        if (problems.moveToFirst()) {
+            for(int i=0;i<=2;i++){
+                problem[i] = problems.getString(i);
+            }
+        }
+        return problem;
+    }
+
+    public Boolean deletePost(int postid){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        long result = DB.delete("problemPosting", "postid = ?", new String[]{String.valueOf(postid)});
+        if(result==-1) return false;
+        else return true;
+    }
+
+    public String userOrWorker (int personid){
+        String userorworker = null;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getType = sqLiteDatabase.rawQuery("SELECT type from users WHERE Personid='"+personid+"';", null);
+        if (getType.moveToFirst()) {
+            userorworker = getType.getString(0);
+        }
+        return userorworker;
     }
 
 

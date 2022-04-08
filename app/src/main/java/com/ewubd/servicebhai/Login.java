@@ -37,7 +37,9 @@ public class Login extends AppCompatActivity {
         int userid = myPref.getInt("loggedInID", -1);
         System.out.println(userid);
         if(userid!= -1){
-            homePageProvoke();
+            String userOrWorker = DB.userOrWorker(userid);
+            if(userOrWorker.equals("Worker")) homePageProvoke();
+            else homePageForUserProvoke();
         }
     }
     void signupPage(){
@@ -55,12 +57,18 @@ public class Login extends AppCompatActivity {
         else{
             System.out.println(userid);
             myPref.edit().putInt("loggedInID", userid).apply();
-            homePageProvoke();
+            String userOrWorker = DB.userOrWorker(userid);
+            if(userOrWorker.equals("Worker")) homePageProvoke();
+            else homePageForUserProvoke();
         }
 
     }
     void homePageProvoke(){
         Intent intent = new Intent(this, homePage.class);
+        startActivity(intent);
+    }
+    void homePageForUserProvoke(){
+        Intent intent = new Intent(this, homepageForUser.class);
         startActivity(intent);
     }
 

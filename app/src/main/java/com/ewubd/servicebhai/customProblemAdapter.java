@@ -1,6 +1,7 @@
 package com.ewubd.servicebhai;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ public class customProblemAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<postedProblem> arrayList;
+    int id,personid;
     public customProblemAdapter(Context context, ArrayList<postedProblem> arrayList){
         this.context = context;
         this.arrayList = arrayList;
@@ -42,12 +44,24 @@ public class customProblemAdapter extends BaseAdapter {
 
         TextView title = rowView.findViewById(R.id.title);
         TextView post_type = rowView.findViewById(R.id.post_helptype);
+        title.setOnClickListener(v->problemopenpage());
+
 
         postedProblem postedProblem = arrayList.get(position);
+
+        id = postedProblem.getId();
+        personid = postedProblem.getPersonid();
 
         title.setText(postedProblem.getTitle());
         post_type.setText(postedProblem.getHelptype());
 
         return rowView;
+    }
+
+    private void problemopenpage() {
+        Intent intent = new Intent(context, problemOpen.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("postid",id);
+        intent.putExtra("personid",personid);
+        context.startActivity(intent);
     }
 }

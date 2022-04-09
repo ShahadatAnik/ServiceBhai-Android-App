@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class customWorkersAdapter extends BaseAdapter {
 
         TextView name = rowView.findViewById(R.id.workersName);
         TextView bio = rowView.findViewById(R.id.bio);
+        Button contact = rowView.findViewById(R.id.sendWorkerMessage);
         //name.setOnClickListener(v->problemopenpage());
 
 
@@ -56,6 +58,14 @@ public class customWorkersAdapter extends BaseAdapter {
         name.setText(workersByCatagory.getWorkesrName());
         bio.setText(workersByCatagory.getBio());
         System.out.println(workersid);
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("workersIDToSendMessage", workersid);
+                context.startActivity(intent);
+            }
+        });
 
         return rowView;
     }

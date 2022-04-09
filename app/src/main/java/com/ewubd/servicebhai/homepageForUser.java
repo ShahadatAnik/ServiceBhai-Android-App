@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class homepageForUser extends AppCompatActivity {
 
-    Button electrician, plumber, mechanics, other, logoutUser, profile, userinbox;
+    Button electrician, plumber, mechanics, other, logoutUser, profile, userinbox, problempost, problemshow;
     SharedPreferences myPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,15 @@ public class homepageForUser extends AppCompatActivity {
         profile.setOnClickListener(v->userProfilePage());
         userinbox = findViewById(R.id.userInbox);
         userinbox.setOnClickListener(v->userInbox());
+
+        problempost = findViewById(R.id.problemPostUser);
+        problempost.setOnClickListener(v -> problemPage());
+        problemshow = findViewById(R.id.problemShowUser);
+        problemshow.setOnClickListener(v -> {
+            Intent intent = new Intent(this, problemShow.class);
+            startActivity(intent);
+        });
+
     }
 
     private void otherActivity() {
@@ -67,6 +76,11 @@ public class homepageForUser extends AppCompatActivity {
     }
     void userInbox(){
         Intent intent = new Intent(this, inbox.class);
+        startActivity(intent);
+    }
+
+    void problemPage(){
+        Intent intent = new Intent(this, problemPosting.class);
         startActivity(intent);
     }
 }

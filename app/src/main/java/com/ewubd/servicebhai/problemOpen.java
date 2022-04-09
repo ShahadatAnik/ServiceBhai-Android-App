@@ -31,6 +31,7 @@ public class problemOpen extends AppCompatActivity {
         accept.setVisibility(View.INVISIBLE);
 
         delete.setOnClickListener(v->deletePost());
+        accept.setOnClickListener(v->acceptWork());
 
         DB= new MyDatabaseHelper(this);
 
@@ -74,5 +75,10 @@ public class problemOpen extends AppCompatActivity {
         probtitle.setText(problem[0]);
         probcategory.setText(problem[1]);
         probdetail.setText(problem[2]);
+    }
+    void acceptWork(){
+        Intent intent = new Intent(this, chatbox.class);
+        intent.putExtra("workersIDToSendMessage", personid);
+        startActivity(intent);
     }
 }

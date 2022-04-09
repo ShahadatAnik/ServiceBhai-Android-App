@@ -30,6 +30,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("Create TABLE users (Personid INTEGER PRIMARY KEY AUTOINCREMENT,name varchar(50),email varchar(50) UNIQUE,address varchar(100),phone varchar(15),type varchar(15), password varchar(50));");
             db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE messages (messageid INTEGER PRIMARY KEY AUTOINCREMENT, fromID INTEGER, toID INTEGER,message varchar(100), FOREIGN KEY (fromID) REFERENCES users(Personid), FOREIGN KEY (toID) REFERENCES users(Personid) )");
         }
         catch (Exception e){
             Toast.makeText(context,"Error: "+e,Toast.LENGTH_LONG).show();
@@ -165,12 +166,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<workersByCatagory> workersByCatagory(String category){
         ArrayList<workersByCatagory> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT w.workerid, u.name, w.bio FROM workers w, users u  WHERE w.PersonID = u.Personid and w.expertise ='"+category+"';",null);
+        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT w.workerid, u.name, w.bio, u.Personid FROM workers w, users u  WHERE w.PersonID = u.Personid and w.expertise ='"+category+"';",null);
         while(getWorkers.moveToNext()){
             int workersid = getWorkers.getInt(0);
             String workersname = getWorkers.getString(1);
             String workersbio = getWorkers.getString(2);
-            workersByCatagory workersByCatagory = new workersByCatagory(workersid, workersname, workersbio);
+            int personid = getWorkers.getInt(3);
+            workersByCatagory workersByCatagory = new workersByCatagory(workersid, workersname, workersbio, personid);
             arrayList.add(workersByCatagory);
         }
         return arrayList;

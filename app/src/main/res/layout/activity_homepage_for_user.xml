@@ -60,4 +60,12 @@
         android:text="Profile"
         app:layout_constraintEnd_toStartOf="@+id/logoutUser"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/userInbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inbox"
+        app:layout_constraintEnd_toStartOf="@+id/userProfileButton"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

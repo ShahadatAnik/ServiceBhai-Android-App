@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceBhai">
         <activity
+            android:name=".inbox"
+            android:exported="false" />
+        <activity
             android:name=".chatbox"
             android:exported="false" />
         <activity

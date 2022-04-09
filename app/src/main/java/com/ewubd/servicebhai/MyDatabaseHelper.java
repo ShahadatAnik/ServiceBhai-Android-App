@@ -189,5 +189,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
+    public ArrayList<inboxArrayList> inboxMessages(int id){
+        ArrayList<inboxArrayList> arrayList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT fromID, toID, message FROM messages WHERE toID="+id+";",null);
+        while(getWorkers.moveToNext()){
+            int fromID = getWorkers.getInt(0);
+            int toID = getWorkers.getInt(1);
+            String messages = getWorkers.getString(2);
+            inboxArrayList inboxArrayList = new inboxArrayList(fromID, toID, messages);
+            arrayList.add(inboxArrayList);
+        }
+        return arrayList;
+    }
+
 
 }

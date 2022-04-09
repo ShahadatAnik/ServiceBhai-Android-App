@@ -22,7 +22,7 @@ public class workersList extends AppCompatActivity {
         if (extras != null) {
             category = extras.getString("category");
         }
-        System.out.println(category);
+//        System.out.println(category);
 
         workersList = findViewById(R.id.workersListView);
         DB= new MyDatabaseHelper(this);

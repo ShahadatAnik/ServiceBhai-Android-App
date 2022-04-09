@@ -1,13 +1,14 @@
 package com.ewubd.servicebhai;
 
 public class workersByCatagory {
-    int workersid;
+    int workersid, personID;
     String workersName, bio;
 
-    public workersByCatagory(int workersid , String workersName, String bio) {
+    public workersByCatagory(int workersid , String workersName, String bio, int personID) {
         this.workersid = workersid;
         this.workersName = workersName;
         this.bio = bio;
+        this.personID = personID;
     }
     public workersByCatagory(){}
 
@@ -33,5 +34,13 @@ public class workersByCatagory {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public int getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(int personID) {
+        this.personID = personID;
     }
 }

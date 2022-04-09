@@ -9,8 +9,9 @@ import android.widget.Button;
 
 public class homePage extends AppCompatActivity {
 
-    Button logout, profile, problempost,problemshow;
+    Button logout, profile, problempost, problemshow, inboxButton;
     SharedPreferences myPref;
+    int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,8 @@ public class homePage extends AppCompatActivity {
         profile = findViewById(R.id.userProfile);
         problempost = findViewById(R.id.problemPost);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
+        userid = myPref.getInt("loggedInID", -1);
+        System.out.println(userid);
 
         profile.setOnClickListener(v->userProfile());
         problempost.setOnClickListener(v -> problemPage());
@@ -28,6 +31,9 @@ public class homePage extends AppCompatActivity {
             Intent intent = new Intent(this, problemShow.class);
             startActivity(intent);
         });
+        inboxButton = findViewById(R.id.inbox);
+        inboxButton.setOnClickListener(v->inboxPro());
+
     }
     void logout(){
         myPref.edit().putInt("loggedInID", -1).apply();
@@ -49,5 +55,9 @@ public class homePage extends AppCompatActivity {
         a.addCategory(Intent.CATEGORY_HOME);
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
+    }
+    void inboxPro(){
+        Intent intent=  new Intent(this, inbox.class);
+        startActivity(intent);
     }
 }

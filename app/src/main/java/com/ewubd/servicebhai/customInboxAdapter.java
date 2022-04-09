@@ -11,13 +11,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class customWorkersAdapter extends BaseAdapter {
+public class customInboxAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<workersByCatagory> arrayList;
-    int workersid, personID;
-    String workersName;
-    public customWorkersAdapter(Context context, ArrayList<workersByCatagory> arrayList){
+    ArrayList<inboxArrayList> arrayList;
+    int getfromID, gettoID;
+    String getmessages;
+
+    public customInboxAdapter(Context context, ArrayList<inboxArrayList> arrayList){
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -42,31 +43,33 @@ public class customWorkersAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.workerscustomview, parent, false);
+        View rowView = inflater.inflate(R.layout.inboxcustomview, parent, false);
 
-        TextView name = rowView.findViewById(R.id.workersName);
-        TextView bio = rowView.findViewById(R.id.bio);
-        Button contact = rowView.findViewById(R.id.sendWorkerMessage);
-        //name.setOnClickListener(v->problemopenpage());
+        TextView messages = rowView.findViewById(R.id.messageText);
+        TextView fromID = rowView.findViewById(R.id.fromUserText);
+        TextView toID = rowView.findViewById(R.id.toUserText);
+        Button sendToChat = rowView.findViewById(R.id.sendToChat);
+        //title.setOnClickListener(v->problemopenpage());
 
 
-        workersByCatagory workersByCatagory = arrayList.get(position);
+        inboxArrayList inboxArrayList = arrayList.get(position);
 
-        workersid = workersByCatagory.getWorkersid();
-        workersName = workersByCatagory.getWorkesrName();
-        personID = workersByCatagory.getPersonID();
+        getfromID = inboxArrayList.getFromIDid();
+        gettoID = inboxArrayList.getToID();
+        getmessages = inboxArrayList.getMessages();
 
-        name.setText(workersByCatagory.getWorkesrName());
-        bio.setText(workersByCatagory.getBio());
-        //System.out.println(workersid);
-        contact.setOnClickListener(new View.OnClickListener() {
+        messages.setText(getmessages);
+        fromID.setText(String.valueOf(getfromID));
+        toID.setText(String.valueOf(gettoID));
+        sendToChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("workersIDToSendMessage", personID);
+                intent.putExtra("workersIDToSendMessage", inboxArrayList.getFromIDid());
                 context.startActivity(intent);
             }
         });
+
 
         return rowView;
     }

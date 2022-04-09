@@ -13,11 +13,13 @@ public class chatbox extends AppCompatActivity {
     Button sendMessages;
     EditText messagesBox;
     int userid;
+    MyDatabaseHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbox);
         Bundle extras = getIntent().getExtras();
+        DB= new MyDatabaseHelper(this);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         if (extras != null) {
             workersID = extras.getInt("workersIDToSendMessage");
@@ -32,6 +34,11 @@ public class chatbox extends AppCompatActivity {
         System.out.println(userid);
         String message = messagesBox.getText().toString().trim();
         System.out.println(message);
-        messagesBox.getText().clear();
+        Boolean noError = DB.sendMessages(userid, workersID, message);
+        if(noError==true){
+            System.out.println("Message Send");
+            messagesBox.getText().clear();
+        }
+        else System.out.println("Got some error");
     }
 }

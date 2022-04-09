@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 10;
+    private static final int Version= 11;
     private int totalProblem;
 
     private Context context;
@@ -176,6 +176,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             arrayList.add(workersByCatagory);
         }
         return arrayList;
+    }
+
+    public Boolean sendMessages(int fromID, int toID, String message){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("fromID", fromID);
+        contentValues.put("toID", toID);
+        contentValues.put("message", message);
+        long result = DB.insert("messages",null,contentValues);
+        if(result==-1) return false;
+        else return true;
     }
 
 

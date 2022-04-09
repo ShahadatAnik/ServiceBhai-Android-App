@@ -38,8 +38,14 @@ public class Login extends AppCompatActivity {
         System.out.println(userid);
         if(userid!= -1){
             String userOrWorker = DB.userOrWorker(userid);
-            if(userOrWorker.equals("Worker")) homePageProvoke();
-            else homePageForUserProvoke();
+            if(userOrWorker!=null){
+                if(userOrWorker.equals("Worker")) homePageProvoke();
+                else homePageForUserProvoke();
+            }
+            else{
+                signupPage();
+            }
+
         }
     }
     void signupPage(){

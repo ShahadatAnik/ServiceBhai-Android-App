@@ -3,6 +3,7 @@ package com.ewubd.servicebhai;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -25,6 +26,7 @@ public class signup extends AppCompatActivity {
     MyDatabaseHelper DB;
     private RadioButton rdUser;
     private RadioButton rdWorker;
+    SharedPreferences myPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class signup extends AppCompatActivity {
         save.setOnClickListener(v-> saveInfo());
         login.setOnClickListener(v->LoginPage());
         DB= new MyDatabaseHelper(this);
+        myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
+        myPref.edit().putInt("loggedInID", -1).apply();
 
 
 

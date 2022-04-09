@@ -57,7 +57,7 @@ public class customWorkersAdapter extends BaseAdapter {
 
         name.setText(workersByCatagory.getWorkesrName());
         bio.setText(workersByCatagory.getBio());
-        System.out.println(workersid);
+        //System.out.println(workersid);
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -192,7 +192,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<inboxArrayList> inboxMessages(int id){
         ArrayList<inboxArrayList> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT fromID, toID, message FROM messages WHERE toID="+id+";",null);
+        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT a.fromID, a.toID, a.message FROM messages a LEFT OUTER JOIN messages b ON a.fromID = b.fromID AND a.messageid < b.messageid WHERE (b.fromID IS NULL) and (a.toID = "+id+") ORDER BY a.messageid desc;",null);
         while(getWorkers.moveToNext()){
             int fromID = getWorkers.getInt(0);
             int toID = getWorkers.getInt(1);

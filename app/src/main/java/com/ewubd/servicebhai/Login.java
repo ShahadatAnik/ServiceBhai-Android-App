@@ -18,6 +18,7 @@ public class Login extends AppCompatActivity {
     Button login, signup;
     MyDatabaseHelper DB;
     SharedPreferences myPref;
+    static int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class Login extends AppCompatActivity {
 
         DB= new MyDatabaseHelper(this);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
-        int userid = myPref.getInt("loggedInID", -1);
+        userid = myPref.getInt("loggedInID", -1);
         System.out.println(userid);
         if(userid!= -1){
             String userOrWorker = DB.userOrWorker(userid);
@@ -101,5 +102,8 @@ public class Login extends AppCompatActivity {
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+    public int getUserid(){
+        return this.userid;
     }
 }

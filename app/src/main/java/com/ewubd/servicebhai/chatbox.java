@@ -56,7 +56,7 @@ public class chatbox extends AppCompatActivity {
     public void loadDatainList(){
 
         arrayList = DB.chatBox(userid, workersID);
-        customChatAdapter = new customChatAdapter(this,arrayList);
+        customChatAdapter = new customChatAdapter(this,arrayList, userid);
         chatListView.setAdapter(customChatAdapter);
         customChatAdapter.notifyDataSetChanged();
     }

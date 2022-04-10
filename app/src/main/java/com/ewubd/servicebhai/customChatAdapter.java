@@ -2,6 +2,8 @@ package com.ewubd.servicebhai;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +18,13 @@ public class customChatAdapter extends BaseAdapter {
     Context context;
     ArrayList<chatArrayList> arrayList;
     int getfromID;
+    int userID;
     String getmessages;
 
-    public customChatAdapter(Context context, ArrayList<chatArrayList> arrayList){
+    public customChatAdapter(Context context, ArrayList<chatArrayList> arrayList, int userID){
         this.context = context;
         this.arrayList = arrayList;
+        this.userID = userID;
     }
     @Override
     public int getCount() {
@@ -53,7 +57,12 @@ public class customChatAdapter extends BaseAdapter {
         getmessages = chatArrayList.getMessages();
 
         messages.setText(getmessages);
-        System.out.println(getfromID);
+
+        if(chatArrayList.getFromIDid()==userID){
+            messages.setGravity(Gravity.RIGHT);
+        }
+
+        System.out.println(userID);
 
 
         return rowView;

@@ -29,8 +29,6 @@ public class inbox extends AppCompatActivity {
         arrayList = new ArrayList<>();
         loadDatainList();
 
-
-
     }
 
     public void loadDatainList(){

@@ -203,5 +203,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
+    public ArrayList<chatArrayList> chatBox(int fromID, int toID){
+        ArrayList<chatArrayList> arrayList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getWorkers = sqLiteDatabase.rawQuery("select fromID, message from messages  where  (fromID="+fromID+" and toID ="+toID+") or (fromID="+toID+" and toID="+fromID+") order by messageid asc;",null);
+        while(getWorkers.moveToNext()){
+            int fromIDD = getWorkers.getInt(0);
+            String messages = getWorkers.getString(1);
+            chatArrayList chatArrayList = new chatArrayList(fromIDD, messages);
+            arrayList.add(chatArrayList);
+        }
+        return arrayList;
+    }
+
 
 }

@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class chatbox extends AppCompatActivity {
     int workersID;
@@ -14,6 +17,9 @@ public class chatbox extends AppCompatActivity {
     EditText messagesBox;
     int userid;
     MyDatabaseHelper DB;
+    ArrayList<chatArrayList> arrayList;
+    customChatAdapter customChatAdapter;
+    private ListView chatListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +34,11 @@ public class chatbox extends AppCompatActivity {
         sendMessages = findViewById(R.id.sendMessageButton);
         sendMessages.setOnClickListener(v-> sendingMessages());
         messagesBox = findViewById(R.id.messageBox);
+        chatListView = findViewById(R.id.chatListView);
+        arrayList = new ArrayList<>();
+        loadDatainList();
     }
+
     void sendingMessages(){
         System.out.println(workersID);
         System.out.println(userid);
@@ -38,7 +48,16 @@ public class chatbox extends AppCompatActivity {
         if(noError==true){
             System.out.println("Message Send");
             messagesBox.getText().clear();
+            loadDatainList();
         }
         else System.out.println("Got some error");
+    }
+
+    public void loadDatainList(){
+
+        arrayList = DB.chatBox(userid, workersID);
+        customChatAdapter = new customChatAdapter(this,arrayList);
+        chatListView.setAdapter(customChatAdapter);
+        customChatAdapter.notifyDataSetChanged();
     }
 }

@@ -18,17 +18,19 @@ public class homePage extends AppCompatActivity {
     Button logout, profile, problempost, problemshow, inboxButton;
     SharedPreferences myPref;
     int userid;
+    MyDatabaseHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        DB= new MyDatabaseHelper(this);
         logout = findViewById(R.id.homeLogout);
         logout.setOnClickListener(v->logout());
         profile = findViewById(R.id.userProfile);
         problempost = findViewById(R.id.problemPost);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         userid = myPref.getInt("loggedInID", -1);
-        System.out.println(userid);
+        //System.out.println(userid);
 
         profile.setOnClickListener(v->userProfile());
         problempost.setOnClickListener(v -> problemPage());
@@ -47,20 +49,19 @@ public class homePage extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        Intent intent = new Intent(this, inbox.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        int user = myPref.getInt("loggedInID", -1);
+        int messageCount = DB.messageCountOfUser(user);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
-                .setSmallIcon(R.drawable.profile_layout_shaper)
-                .setContentTitle("You have a new message")
-                .setContentText("Someone Wants to get Hire you")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());
+        int prevMessageCount = myPref.getInt("messageCount"+user, -1);
+        if(prevMessageCount == -1 ){
+            myPref.edit().putInt("messageCount"+user, 0).apply();
+        }
+        if(messageCount > prevMessageCount){
+            //System.out.println("New Message");
+            getNotification();
+            myPref.edit().putInt("messageCount"+user, messageCount).apply();
+        }
 
     }
     void logout(){
@@ -87,5 +88,21 @@ public class homePage extends AppCompatActivity {
     void inboxPro(){
         Intent intent=  new Intent(this, inbox.class);
         startActivity(intent);
+    }
+    void getNotification(){
+        Intent intent = new Intent(this, inbox.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
+                .setSmallIcon(R.drawable.profile_layout_shaper)
+                .setContentTitle("You have a new message")
+                .setContentText("Someone Wants to Hire you")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, builder.build());
     }
 }

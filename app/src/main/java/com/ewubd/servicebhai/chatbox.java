@@ -40,10 +40,10 @@ public class chatbox extends AppCompatActivity {
     }
 
     void sendingMessages(){
-        System.out.println(workersID);
-        System.out.println(userid);
+        //System.out.println(workersID);
+        //System.out.println(userid);
         String message = messagesBox.getText().toString().trim();
-        System.out.println(message);
+        //System.out.println(message);
         Boolean noError = DB.sendMessages(userid, workersID, message);
         if(noError==true){
             System.out.println("Message Send");
@@ -54,7 +54,6 @@ public class chatbox extends AppCompatActivity {
     }
 
     public void loadDatainList(){
-
         arrayList = DB.chatBox(userid, workersID);
         customChatAdapter = new customChatAdapter(this,arrayList, userid);
         chatListView.setAdapter(customChatAdapter);

@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
         DB= new MyDatabaseHelper(this);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         userid = myPref.getInt("loggedInID", -1);
-        System.out.println(userid);
+        //System.out.println(userid);
         if(userid!= -1){
             String userOrWorker = DB.userOrWorker(userid);
             if(userOrWorker!=null){
@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
             System.out.println("Error on email or password");
         }
         else{
-            System.out.println(userid);
+            //System.out.println(userid);
             myPref.edit().putInt("loggedInID", userid).apply();
             String userOrWorker = DB.userOrWorker(userid);
             if(userOrWorker.equals("Worker")) homePageProvoke();

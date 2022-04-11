@@ -62,7 +62,7 @@ public class customChatAdapter extends BaseAdapter {
             messages.setGravity(Gravity.RIGHT);
         }
 
-        System.out.println(userID);
+        //System.out.println(userID);
 
 
         return rowView;

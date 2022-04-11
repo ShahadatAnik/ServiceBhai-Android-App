@@ -216,5 +216,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
+    public int messageCountOfUser(int userid){
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor count = sqLiteDatabase.rawQuery("select count(message) from messages where toID = "+userid+";",null);
+        count.moveToFirst();
+        int countInt= count.getInt(0);
+        return countInt;
+    }
 
 }

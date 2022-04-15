@@ -227,5 +227,31 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int countInt= count.getInt(0);
         return countInt;
     }
+    public Boolean insertRating(int raterID,String userID,int rate, String review){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("raterID", raterID);
+        contentValues.put("userID", userID);
+        contentValues.put("rate", rate);
+        contentValues.put("review", review);
+        long result = DB.insert("rating",null,contentValues);
+        if(result==-1) return false;
+        else return true;
+    }
+    public ArrayList<workerReviewClass> getReviewbyID(int id){
+        ArrayList<workerReviewClass> reviews = null;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor workerReviews = sqLiteDatabase.rawQuery("SELECT * from rating WHERE userID='"+id+"';", null);
+        while(workerReviews.moveToNext()){
+            int rateid = workerReviews.getInt(0);
+            int raterid = workerReviews.getInt(1);
+            int userID = workerReviews.getInt(2);
+            int rate = workerReviews.getInt(3);
+            String review = workerReviews.getString(4);
+            workerReviewClass workerReviewClass =new workerReviewClass(rateid,raterid,userID,rate,review);
+            reviews.add(workerReviewClass);
+        }
+        return reviews;
+    }
 
 }

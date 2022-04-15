@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 12;
+    private static final int Version= 13;
     private int totalProblem;
 
     private Context context;
@@ -227,7 +227,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int countInt= count.getInt(0);
         return countInt;
     }
-    public Boolean insertRating(int raterID,String userID,int rate, String review){
+    public Boolean insertRating(int raterID,int userID,int rate, String review){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("raterID", raterID);

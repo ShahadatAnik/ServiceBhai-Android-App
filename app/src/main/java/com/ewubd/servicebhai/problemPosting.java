@@ -7,11 +7,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class problemPosting<val> extends AppCompatActivity {
 
-    private EditText helptype, postDetails,posttitle;
+    private EditText postDetails, posttitle;
+    private RadioButton rb_electrical, rb_mechanical;
     private Button savetodb;
     MyDatabaseHelper DB;
     SharedPreferences myPref;
@@ -22,7 +24,9 @@ public class problemPosting<val> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_posting);
 
-        helptype = findViewById(R.id.et_problem_category);
+        rb_electrical = findViewById(R.id.rb_electrical);
+        rb_mechanical = findViewById(R.id.rb_mechanical);
+
         posttitle = findViewById(R.id.et_problem_title);
         postDetails = findViewById(R.id.et_problem_details);
         savetodb = findViewById(R.id.btn_post_Post_Your_Problem);
@@ -35,14 +39,18 @@ public class problemPosting<val> extends AppCompatActivity {
     }
     void insertProblem(){
         String error = "";
-        String type = helptype.getText().toString().trim();
-        if(type.length()>51 || type.length()<1 ){
-            error += "Help Type length is too high";
-            error+= "\n";
+
+        String type="";
+        boolean electricalIsChecked = rb_electrical.isChecked();
+        if(electricalIsChecked== true){
+            type = "Electrical";
         }
-        else{
-            System.out.println("Help Type "+ type);
+
+        boolean mechanicalIsChecked = rb_mechanical.isChecked();
+        if(mechanicalIsChecked== true){
+            type = "Mechanical";
         }
+
         String detail = postDetails.getText().toString().trim();
         if(detail.length()>201 || detail.length()<1){
             error+= "Detail Length is too high";
@@ -59,15 +67,16 @@ public class problemPosting<val> extends AppCompatActivity {
         else{
             System.out.println("Post Title "+ title);
         }
-        if(error==""){
+        if(error=="" && type != ""){
             System.out.println("Insert data To Problem Posting Table");
             Boolean noError = DB.insertproblemPosting(userid,title,type,detail);
             if(noError){
                 System.out.println("Data Inserted");
                 problemshow();
                 posttitle.setText("");
-                helptype.setText("");
                 postDetails.setText("");
+                rb_electrical.setSelected(false);
+                rb_mechanical.setSelected(false);
             }
             else System.out.println("Got some error");
         }

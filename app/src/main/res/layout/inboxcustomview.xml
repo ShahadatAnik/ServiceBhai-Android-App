@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="25sp"
-            android:text="title"/>
+            android:text="messageText"/>
 
         <Button
             android:id="@+id/sendToChat"
@@ -34,14 +34,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="15sp"
-        android:text="type"/>
+        android:text="fromUserText"/>
         <TextView
             android:id="@+id/toUserText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="type"/>
+            android:text="toUserText"/>
     </LinearLayout>
 
 </LinearLayout>

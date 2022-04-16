@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class problemOpen extends AppCompatActivity {
 
     int postid,personid;
-    TextView probtitle, probcategory, probdetail;
+    TextView probtitle, probdetail;
     SharedPreferences myPref;
     Button delete, accept;
     MyDatabaseHelper DB;
@@ -39,9 +39,8 @@ public class problemOpen extends AppCompatActivity {
         System.out.println(usertype);
 
 
-        probtitle = findViewById(R.id.prob_title);
-        probcategory = findViewById(R.id.prob_category);
-        probdetail = findViewById(R.id.prob_details);
+        probtitle = findViewById(R.id.tv_prob_title);
+        probdetail = findViewById(R.id.tv_prob_details);
         if (extras != null) {
             postid = extras.getInt("postid");
             personid = extras.getInt("personid");
@@ -73,7 +72,6 @@ public class problemOpen extends AppCompatActivity {
         String problem[];
         problem = DB.getProblembyID(postid);
         probtitle.setText(problem[0]);
-        probcategory.setText(problem[1]);
         probdetail.setText(problem[2]);
     }
     void acceptWork(){

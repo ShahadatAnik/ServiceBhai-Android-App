@@ -41,6 +41,8 @@ public class insertReview extends AppCompatActivity {
         String rating= reviewRate.toString();
         String review = workerReview.toString();
         int rate = Integer.parseInt(rating);
+        System.out.println("userid"+userid);
+        System.out.println("workerid"+workerid);
 
         Boolean noError = DB.insertRating(userid,workerid,rate,review);
         if(noError){

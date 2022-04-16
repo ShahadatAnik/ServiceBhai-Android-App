@@ -17,6 +17,7 @@ public class customWorkersAdapter extends BaseAdapter {
     ArrayList<workersByCatagory> arrayList;
     int workersid, personID;
     String workersName;
+    Button contact_worker;
     public customWorkersAdapter(Context context, ArrayList<workersByCatagory> arrayList){
         this.context = context;
         this.arrayList = arrayList;
@@ -45,8 +46,10 @@ public class customWorkersAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.workerscustomview, parent, false);
 
         TextView name = rowView.findViewById(R.id.workersName);
-        TextView bio = rowView.findViewById(R.id.bio);
-        Button contact = rowView.findViewById(R.id.sendWorkerMessage);
+        TextView bio = rowView.findViewById(R.id.worker_location);
+        Button contact_worker = rowView.findViewById(R.id.btn_worker_contact);
+
+        // workers location need to be as input
         //name.setOnClickListener(v->problemopenpage());
 
 
@@ -59,7 +62,7 @@ public class customWorkersAdapter extends BaseAdapter {
         name.setText(workersByCatagory.getWorkesrName());
         bio.setText(workersByCatagory.getBio());
         //System.out.println(workersid);
-        contact.setOnClickListener(new View.OnClickListener() {
+        contact_worker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -67,6 +70,7 @@ public class customWorkersAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+
 
         return rowView;
     }

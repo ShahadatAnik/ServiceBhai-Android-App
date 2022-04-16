@@ -15,26 +15,26 @@
         android:text="title"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:textStyle="bold |italic"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/post_helptype"
 
         />
 
-    <TextView android:id="@+id/post_helptype"
+    <TextView
+        android:id="@+id/post_helptype"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="type"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/title"
-        app:layout_constraintBottom_toBottomOf="@id/tv_description"
-        android:gravity="center"
         android:background="@drawable/signup_btn_shaper"
-        />
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="type"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/title" />
 
     <TextView android:id="@+id/tv_description"
         android:layout_width="0dp"

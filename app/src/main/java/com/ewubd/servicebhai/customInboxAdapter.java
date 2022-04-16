@@ -46,9 +46,7 @@ public class customInboxAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.inboxcustomview, parent, false);
 
         TextView messages = rowView.findViewById(R.id.messageText);
-        TextView fromID = rowView.findViewById(R.id.fromUserText);
         TextView toID = rowView.findViewById(R.id.toUserText);
-        Button sendToChat = rowView.findViewById(R.id.sendToChat);
         //title.setOnClickListener(v->problemopenpage());
 
 
@@ -58,10 +56,15 @@ public class customInboxAdapter extends BaseAdapter {
         gettoID = inboxArrayList.getToID();
         getmessages = inboxArrayList.getMessages();
 
-        messages.setText(getmessages);
-        fromID.setText(String.valueOf(getfromID));
+        if(inboxArrayList.getMessages().length() > 25){
+            messages.setText(inboxArrayList.getMessages().substring(0,25)+"...");
+        }
+        else messages.setText(inboxArrayList.getMessages());
+
         toID.setText(String.valueOf(gettoID));
-        sendToChat.setOnClickListener(new View.OnClickListener() {
+
+
+        rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

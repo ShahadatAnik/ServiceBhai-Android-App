@@ -1,47 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/messageText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="25sp"
-            android:text="title"/>
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:layout_margin="20dp"
+    tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/sendToChat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reply"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/fromUserText"
+    <TextView android:id="@+id/toUserText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="15sp"
-        android:text="type"/>
-        <TextView
-            android:id="@+id/toUserText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="type"/>
-    </LinearLayout>
+        android:text="toUserText"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/inbox_time"
+        />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/inbox_time"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/signup_btn_shaper"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Time"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/messageText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/toUserText" />
+
+    <TextView android:id="@+id/messageText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="messageText"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/toUserText"
+        app:layout_constraintStart_toStartOf="@id/toUserText"
+        app:layout_constraintEnd_toStartOf="@id/inbox_time"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

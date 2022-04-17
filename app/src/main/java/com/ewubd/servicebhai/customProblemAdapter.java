@@ -44,7 +44,8 @@ public class customProblemAdapter extends BaseAdapter {
 
         TextView title = rowView.findViewById(R.id.title);
         TextView post_type = rowView.findViewById(R.id.post_helptype);
-        title.setOnClickListener(v->problemopenpage());
+        TextView post_desc = rowView.findViewById(R.id.tv_description);
+
 
 
         postedProblem postedProblem = arrayList.get(position);
@@ -52,8 +53,28 @@ public class customProblemAdapter extends BaseAdapter {
         id = postedProblem.getId();
         personid = postedProblem.getPersonid();
 
-        title.setText(postedProblem.getTitle());
+
+        if(postedProblem.getTitle().length() > 15){
+            title.setText(postedProblem.getTitle().substring(0,15)+"...");
+        }
+        else title.setText(postedProblem.getTitle());
+
         post_type.setText(postedProblem.getHelptype());
+        if(postedProblem.getPostdetail().length() > 30){
+            post_desc.setText(postedProblem.getPostdetail().substring(0,30)+"...");
+        }
+        else post_desc.setText(postedProblem.getPostdetail());
+
+        rowView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int id = postedProblem.getId();
+                Intent intent = new Intent(context, problemOpen.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("postid",id);
+                intent.putExtra("personid",personid);
+                context.startActivity(intent);
+            }
+        });
 
         return rowView;
     }

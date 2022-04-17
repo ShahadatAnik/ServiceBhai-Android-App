@@ -32,7 +32,6 @@ public class inbox extends AppCompatActivity {
     }
 
     public void loadDatainList(){
-
         arrayList = DB.inboxMessages(userid);
         customInboxAdapter = new customInboxAdapter(this,arrayList);
         messagesListView.setAdapter(customInboxAdapter);

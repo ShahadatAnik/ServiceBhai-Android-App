@@ -60,6 +60,7 @@ public class customChatAdapter extends BaseAdapter {
 
         if(chatArrayList.getFromIDid()==userID){
             messages.setGravity(Gravity.RIGHT);
+            //messages.setBackgroundResource(R.color.green);
         }
 
         //System.out.println(userID);

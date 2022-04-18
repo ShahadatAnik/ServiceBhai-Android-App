@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 11;
+    private static final int Version= 13;
     private int totalProblem;
 
     private Context context;
@@ -31,6 +31,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE messages (messageid INTEGER PRIMARY KEY AUTOINCREMENT, fromID INTEGER, toID INTEGER,message varchar(100), FOREIGN KEY (fromID) REFERENCES users(Personid), FOREIGN KEY (toID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE rating (rateid INTEGER PRIMARY KEY AUTOINCREMENT, raterID INTEGER, userID INTEGER, rate INTEGER,review varchar(100), FOREIGN KEY (userID) REFERENCES users(Personid), FOREIGN KEY (raterID) REFERENCES users(Personid) )");
         }
         catch (Exception e){
             Toast.makeText(context,"Error: "+e,Toast.LENGTH_LONG).show();
@@ -42,6 +43,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE if exists users;");
         db.execSQL("DROP TABLE if exists workers;");
         db.execSQL("DROP TABLE if exists problemPosting;");
+        db.execSQL("DROP TABLE if exists messages;");
+        db.execSQL("DROP TABLE if exists rating;");
         onCreate(db);
     }
     public Boolean insertUser(String name, String email, String address, String phone, String password, String type){
@@ -223,6 +226,32 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         count.moveToFirst();
         int countInt= count.getInt(0);
         return countInt;
+    }
+    public Boolean insertRating(int raterID,int userID,int rate, String review){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("raterID", raterID);
+        contentValues.put("userID", userID);
+        contentValues.put("rate", rate);
+        contentValues.put("review", review);
+        long result = DB.insert("rating",null,contentValues);
+        if(result==-1) return false;
+        else return true;
+    }
+    public ArrayList<workerReviewClass> getReviewbyID(int id){
+        ArrayList<workerReviewClass> reviews = null;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor workerReviews = sqLiteDatabase.rawQuery("SELECT * from rating WHERE userID='"+id+"';", null);
+        while(workerReviews.moveToNext()){
+            int rateid = workerReviews.getInt(0);
+            int raterid = workerReviews.getInt(1);
+            int userID = workerReviews.getInt(2);
+            int rate = workerReviews.getInt(3);
+            String review = workerReviews.getString(4);
+            workerReviewClass workerReviewClass =new workerReviewClass(rateid,raterid,userID,rate,review);
+            reviews.add(workerReviewClass);
+        }
+        return reviews;
     }
 
 }

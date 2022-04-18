@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceBhai">
         <activity
+            android:name=".insertReview"
+            android:exported="false" />
+        <activity
+            android:name=".workerReview"
+            android:exported="false" />
+        <activity
             android:name=".inbox"
             android:exported="false" />
         <activity

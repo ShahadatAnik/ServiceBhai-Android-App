@@ -239,7 +239,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         else return true;
     }
     public ArrayList<workerReviewClass> getReviewbyID(int id){
-        ArrayList<workerReviewClass> reviews = null;
+        ArrayList<workerReviewClass> reviews = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor workerReviews = sqLiteDatabase.rawQuery("SELECT * from rating WHERE userID='"+id+"';", null);
         while(workerReviews.moveToNext()){

@@ -57,7 +57,7 @@ public class customWorkerReviewAdapter extends BaseAdapter {
         workerreview = workerReviewClass.getReview();
 
 
-        ratings.setText(workerReviewClass.getRate());
+        ratings.setText(String.valueOf(workerReviewClass.getRate()));
         review.setText(workerReviewClass.getReview());
         //System.out.println(workersid);
 

@@ -38,8 +38,8 @@ public class insertReview extends AppCompatActivity {
     }
 
     private void saveReview() {
-        String rating= reviewRate.toString();
-        String review = workerReview.toString();
+        String rating= reviewRate.getText().toString().trim();
+        String review = workerReview.getText().toString().trim();
         int rate = Integer.parseInt(rating);
         System.out.println("userid"+userid);
         System.out.println("workerid"+workerid);

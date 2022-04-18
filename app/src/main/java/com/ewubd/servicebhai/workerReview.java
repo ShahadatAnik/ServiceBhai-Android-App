@@ -49,4 +49,10 @@ public class workerReview extends AppCompatActivity {
         intent.putExtra("workersidReview", workerid);
         startActivity(intent);
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadDatainList();
+    }
 }

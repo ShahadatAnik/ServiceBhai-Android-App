@@ -47,7 +47,6 @@ public class customWorkersAdapter extends BaseAdapter {
         TextView name = rowView.findViewById(R.id.workersName);
         TextView bio = rowView.findViewById(R.id.bio);
         Button contact = rowView.findViewById(R.id.sendWorkerMessage);
-        Button review = rowView.findViewById(R.id.workerReview);
         //name.setOnClickListener(v->problemopenpage());
 
 
@@ -68,7 +67,7 @@ public class customWorkersAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-        review.setOnClickListener(new View.OnClickListener() {
+        rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -59,8 +59,15 @@ public class customChatAdapter extends BaseAdapter {
         messages.setText(getmessages);
 
         if(chatArrayList.getFromIDid()==userID){
+
             messages.setGravity(Gravity.RIGHT);
-            //messages.setBackgroundResource(R.color.green);
+            messages.setBackgroundResource(R.drawable.signup_btn_shaper);
+            messages.setTextColor(context.getResources().getColor(R.color.white));
+
+        } else{
+            messages.setGravity(Gravity.LEFT);
+            messages.setTextColor(context.getResources().getColor(R.color.green));
+
         }
 
         //System.out.println(userID);

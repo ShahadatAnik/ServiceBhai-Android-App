@@ -25,8 +25,8 @@ public class createWorkersProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_workers_profile);
         save = findViewById(R.id.saveWorkersProfile);
-        nid = findViewById(R.id.nidNumber);
-        bio = findViewById(R.id.Workersbio);
+        nid = findViewById(R.id.et_nidNumber);
+        bio = findViewById(R.id.et_Workersbio);
         rdElectrician = findViewById(R.id.rdElectrician);
         rdPlumber = findViewById(R.id.rdPlumber);
         rdmechanics = findViewById(R.id.rdmechanics);

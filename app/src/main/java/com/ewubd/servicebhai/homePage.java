@@ -15,7 +15,7 @@ import android.widget.Button;
 
 public class homePage extends AppCompatActivity {
 
-    Button logout, profile, problempost, problemshow, inboxButton;
+    Button logout, profile, problemshow, inboxButton;
     SharedPreferences myPref;
     int userid;
     MyDatabaseHelper DB;
@@ -27,13 +27,11 @@ public class homePage extends AppCompatActivity {
         logout = findViewById(R.id.homeLogout);
         logout.setOnClickListener(v->logout());
         profile = findViewById(R.id.userProfile);
-        problempost = findViewById(R.id.problemPost);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         userid = myPref.getInt("loggedInID", -1);
         //System.out.println(userid);
 
         profile.setOnClickListener(v->userProfile());
-        problempost.setOnClickListener(v -> problemPage());
         problemshow = findViewById(R.id.problemShow);
         problemshow.setOnClickListener(v -> {
             Intent intent = new Intent(this, problemShow.class);

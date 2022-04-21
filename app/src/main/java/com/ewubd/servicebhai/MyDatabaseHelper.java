@@ -227,7 +227,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         int countInt= count.getInt(0);
         return countInt;
     }
-    public Boolean insertRating(int raterID,int userID,int rate, String review){
+    public Boolean insertRating(int raterID,int userID,String rate, String review){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("raterID", raterID);

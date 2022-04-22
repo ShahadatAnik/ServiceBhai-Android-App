@@ -45,6 +45,7 @@ public class customWorkerReviewAdapter extends BaseAdapter {
 
         TextView ratings = rowView.findViewById(R.id.ratings);
         TextView review = rowView.findViewById(R.id.review);
+        TextView ratername = rowView.findViewById(R.id.ratings_userName);
         //name.setOnClickListener(v->problemopenpage());
 
 
@@ -59,6 +60,7 @@ public class customWorkerReviewAdapter extends BaseAdapter {
 
         ratings.setText(String.valueOf(workerReviewClass.getRate()));
         review.setText(workerReviewClass.getReview());
+        ratername.setText(workerReviewClass.getRatername());
         //System.out.println(workersid);
 
         return rowView;

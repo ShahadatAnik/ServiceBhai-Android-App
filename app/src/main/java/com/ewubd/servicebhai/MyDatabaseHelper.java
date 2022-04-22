@@ -256,7 +256,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             int userID = workerReviews.getInt(2);
             int rate = workerReviews.getInt(3);
             String review = workerReviews.getString(4);
-            workerReviewClass workerReviewClass =new workerReviewClass(rateid,raterid,userID,rate,review);
+            String ratername = getUserame(raterid);
+            workerReviewClass workerReviewClass =new workerReviewClass(rateid,raterid,userID,rate,review, ratername);
             reviews.add(workerReviewClass);
         }
         return reviews;

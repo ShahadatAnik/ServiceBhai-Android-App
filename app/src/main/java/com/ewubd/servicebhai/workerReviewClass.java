@@ -3,13 +3,15 @@ package com.ewubd.servicebhai;
 public class workerReviewClass {
     int rateid, raterID, userID, rate;
     String review;
+    String ratername;
 
-    public workerReviewClass(int rateid, int raterID, int userID, int rate, String review) {
+    public workerReviewClass(int rateid, int raterID, int userID, int rate, String review, String ratername) {
         this.rateid = rateid;
         this.raterID = raterID;
         this.userID = userID;
         this.rate = rate;
         this.review = review;
+        this.ratername = ratername;
     }
 
     public int getRateid() {
@@ -50,5 +52,13 @@ public class workerReviewClass {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public String getRatername() {
+        return ratername;
+    }
+
+    public void setRatername(String ratername) {
+        this.ratername = ratername;
     }
 }

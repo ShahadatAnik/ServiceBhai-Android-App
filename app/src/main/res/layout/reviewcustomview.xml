@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/ratings"
 
-        />
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/ratings"

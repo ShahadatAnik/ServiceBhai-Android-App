@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "798206283911",
+    "project_id": "servicebhai-4eda9",
+    "storage_bucket": "servicebhai-4eda9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798206283911:android:ab02d57bc17ade3bd6e822",
+        "android_client_info": {
+          "package_name": "com.ewubd.servicebhai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798206283911-eenfqf91nfdu00ucvd72ng4p4620ncqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6sjXVZPI6Wl8iGzPwRMpzd6xep5MvqqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798206283911-eenfqf91nfdu00ucvd72ng4p4620ncqg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class chatbox extends AppCompatActivity {
     SharedPreferences myPref;
     Button sendMessages;
     EditText messagesBox;
+    TextView inboxname;
     int userid;
     MyDatabaseHelper DB;
     ArrayList<chatArrayList> arrayList;
@@ -35,6 +37,9 @@ public class chatbox extends AppCompatActivity {
         sendMessages.setOnClickListener(v-> sendingMessages());
         messagesBox = findViewById(R.id.messageBox);
         chatListView = findViewById(R.id.chatListView);
+        inboxname = findViewById(R.id.inboxname);
+        String getname = DB.getUserame(workersID);
+        inboxname.setText(getname);
         arrayList = new ArrayList<>();
         loadDatainList();
     }

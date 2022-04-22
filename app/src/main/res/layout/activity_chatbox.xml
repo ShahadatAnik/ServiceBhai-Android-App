@@ -8,7 +8,7 @@
     tools:context=".chatbox">
 
     <TextView
-        android:id="@+id/tv_Post_Your_Problem"
+        android:id="@+id/inboxname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"
@@ -31,7 +31,7 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Post_Your_Problem"
+        app:layout_constraintTop_toBottomOf="@id/inboxname"
         app:layout_constraintBottom_toTopOf="@id/messageBox"
        >
 

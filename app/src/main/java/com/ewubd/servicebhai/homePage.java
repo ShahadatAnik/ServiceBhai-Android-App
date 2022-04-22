@@ -11,11 +11,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class homePage extends AppCompatActivity {
 
-    Button logout, profile, problemshow, inboxButton;
+    Button logout, profile, problemshow, inboxButton, uploadNID;
     SharedPreferences myPref;
     int userid;
     MyDatabaseHelper DB;
@@ -61,6 +62,15 @@ public class homePage extends AppCompatActivity {
             myPref.edit().putInt("messageCount"+user, messageCount).apply();
         }
 
+        uploadNID = findViewById(R.id.uploadNID);
+        uploadNID.setOnClickListener(v-> uploadID());
+
+
+
+    }
+    void uploadID(){
+        Intent intent = new Intent(this, uploadNID.class);
+        startActivity(intent);
     }
     void logout(){
         myPref.edit().putInt("loggedInID", -1).apply();

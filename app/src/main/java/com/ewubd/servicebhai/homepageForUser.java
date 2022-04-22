@@ -61,7 +61,7 @@ public class homepageForUser extends AppCompatActivity {
         if(prevMessageCount == -1 ){
             myPref.edit().putInt("messageCount"+user, 0).apply();
         }
-        if(messageCount > prevMessageCount){
+        if(messageCount > prevMessageCount && messageCount!=0){
             //System.out.println("New Message");
             getNotification();
             myPref.edit().putInt("messageCount"+user, messageCount).apply();

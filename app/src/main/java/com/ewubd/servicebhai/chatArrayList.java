@@ -3,10 +3,12 @@ package com.ewubd.servicebhai;
 public class chatArrayList {
     int fromID;
     String messages;
+    String date;
 
-    public chatArrayList(int fromID, String messages) {
+    public chatArrayList(int fromID, String messages, String date) {
         this.fromID = fromID;
         this.messages = messages;
+        this.date = date;
     }
     public chatArrayList(){}
 
@@ -26,4 +28,11 @@ public class chatArrayList {
         this.messages = messages;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

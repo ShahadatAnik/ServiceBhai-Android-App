@@ -3,11 +3,15 @@ package com.ewubd.servicebhai;
 public class inboxArrayList {
     int fromID, toID;
     String messages;
+    String dateTime;
+    String name;
 
-    public inboxArrayList(int fromID , int toID, String messages) {
+    public inboxArrayList(int fromID , int toID, String messages, String dateTime, String name) {
         this.fromID = fromID;
         this.toID = toID;
         this.messages = messages;
+        this.dateTime = dateTime;
+        this.name = name;
     }
     public inboxArrayList(){}
 
@@ -35,4 +39,19 @@ public class inboxArrayList {
         this.messages = messages;
     }
 
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -9,11 +9,13 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 13;
+    private static final int Version= 14;
     private int totalProblem;
 
     private Context context;
@@ -30,7 +32,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("Create TABLE users (Personid INTEGER PRIMARY KEY AUTOINCREMENT,name varchar(50),email varchar(50) UNIQUE,address varchar(100),phone varchar(15),type varchar(15), password varchar(50));");
             db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
-            db.execSQL("Create TABLE messages (messageid INTEGER PRIMARY KEY AUTOINCREMENT, fromID INTEGER, toID INTEGER,message varchar(100), FOREIGN KEY (fromID) REFERENCES users(Personid), FOREIGN KEY (toID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE messages (messageid INTEGER PRIMARY KEY AUTOINCREMENT, fromID INTEGER, toID INTEGER, message varchar(100), datetime date, FOREIGN KEY (fromID) REFERENCES users(Personid), FOREIGN KEY (toID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE rating (rateid INTEGER PRIMARY KEY AUTOINCREMENT, raterID INTEGER, userID INTEGER, rate INTEGER,review varchar(100), FOREIGN KEY (userID) REFERENCES users(Personid), FOREIGN KEY (raterID) REFERENCES users(Personid) )");
         }
         catch (Exception e){
@@ -183,10 +185,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public Boolean sendMessages(int fromID, int toID, String message){
         SQLiteDatabase DB = this.getWritableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
         ContentValues contentValues = new ContentValues();
         contentValues.put("fromID", fromID);
         contentValues.put("toID", toID);
         contentValues.put("message", message);
+        contentValues.put("datetime", dateFormat.format(date));
         long result = DB.insert("messages",null,contentValues);
         if(result==-1) return false;
         else return true;
@@ -195,12 +200,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<inboxArrayList> inboxMessages(int id){
         ArrayList<inboxArrayList> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT a.fromID, a.toID, a.message FROM messages a LEFT OUTER JOIN messages b ON a.fromID = b.fromID AND a.messageid < b.messageid WHERE (b.fromID IS NULL) and (a.toID = "+id+") ORDER BY a.messageid desc;",null);
+        Cursor getWorkers = sqLiteDatabase.rawQuery("SELECT a.fromID, a.toID, a.message, a.datetime FROM messages a LEFT OUTER JOIN messages b ON a.fromID = b.fromID AND a.messageid < b.messageid WHERE (b.fromID IS NULL) and (a.toID = "+id+") ORDER BY a.messageid desc;",null);
         while(getWorkers.moveToNext()){
             int fromID = getWorkers.getInt(0);
             int toID = getWorkers.getInt(1);
             String messages = getWorkers.getString(2);
-            inboxArrayList inboxArrayList = new inboxArrayList(fromID, toID, messages);
+            String dateTime = getWorkers.getString(3);
+            String name = getUserame(fromID);
+            inboxArrayList inboxArrayList = new inboxArrayList(fromID, toID, messages, dateTime, name);
             arrayList.add(inboxArrayList);
         }
         return arrayList;
@@ -209,11 +216,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<chatArrayList> chatBox(int fromID, int toID){
         ArrayList<chatArrayList> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getWorkers = sqLiteDatabase.rawQuery("select fromID, message from messages  where  (fromID="+fromID+" and toID ="+toID+") or (fromID="+toID+" and toID="+fromID+") order by messageid asc;",null);
+        Cursor getWorkers = sqLiteDatabase.rawQuery("select fromID, message, datetime from messages  where  (fromID="+fromID+" and toID ="+toID+") or (fromID="+toID+" and toID="+fromID+") order by messageid asc;",null);
         while(getWorkers.moveToNext()){
             int fromIDD = getWorkers.getInt(0);
             String messages = getWorkers.getString(1);
-            chatArrayList chatArrayList = new chatArrayList(fromIDD, messages);
+            String date = getWorkers.getString(1);
+            chatArrayList chatArrayList = new chatArrayList(fromIDD, messages, date);
             arrayList.add(chatArrayList);
         }
         return arrayList;
@@ -252,6 +260,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             reviews.add(workerReviewClass);
         }
         return reviews;
+    }
+
+
+    public String getUserame(int id){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor count = sqLiteDatabase.rawQuery("select name from users where Personid = "+id+";",null);
+        count.moveToFirst();
+        String name= count.getString(0);
+        return name;
     }
 
 }

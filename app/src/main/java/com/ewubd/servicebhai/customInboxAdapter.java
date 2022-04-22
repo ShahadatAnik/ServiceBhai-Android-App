@@ -46,7 +46,10 @@ public class customInboxAdapter extends BaseAdapter {
         View rowView = inflater.inflate(R.layout.inboxcustomview, parent, false);
 
         TextView messages = rowView.findViewById(R.id.messageText);
-        TextView toID = rowView.findViewById(R.id.toUserText);
+        TextView toname = rowView.findViewById(R.id.toUserText);
+        TextView inboxTime = rowView.findViewById(R.id.inbox_time);
+
+
         //title.setOnClickListener(v->problemopenpage());
 
 
@@ -56,12 +59,14 @@ public class customInboxAdapter extends BaseAdapter {
         gettoID = inboxArrayList.getToID();
         getmessages = inboxArrayList.getMessages();
 
+        inboxTime.setText(inboxArrayList.getDateTime().split(" ")[1]);
+
         if(inboxArrayList.getMessages().length() > 25){
             messages.setText(inboxArrayList.getMessages().substring(0,25)+"...");
         }
         else messages.setText(inboxArrayList.getMessages());
 
-        toID.setText(String.valueOf(gettoID));
+        toname.setText(inboxArrayList.getName());
 
 
         rowView.setOnClickListener(new View.OnClickListener() {

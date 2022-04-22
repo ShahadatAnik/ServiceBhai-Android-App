@@ -20,6 +20,7 @@ public class customChatAdapter extends BaseAdapter {
     int getfromID;
     int userID;
     String getmessages;
+    String getDate;
 
     public customChatAdapter(Context context, ArrayList<chatArrayList> arrayList, int userID){
         this.context = context;

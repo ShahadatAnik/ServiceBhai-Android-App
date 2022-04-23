@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +36,6 @@ public class uploadNID extends AppCompatActivity {
     private Button mButtonChooseImage;
     private Button mButtonUpload;
     private TextView mTextViewShowUploads;
-    private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
 
@@ -42,6 +43,10 @@ public class uploadNID extends AppCompatActivity {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+
+    private StorageTask mUploadTask;
+    SharedPreferences myPref;
+    int userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +56,11 @@ public class uploadNID extends AppCompatActivity {
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.button_upload);
         mTextViewShowUploads = findViewById(R.id.text_view_show_upload);
-        mEditTextFileName = findViewById(R.id.edittext_file_name);
         mImageView = findViewById(R.id.NID_image_view);
         mProgressBar = findViewById(R.id.progress_bar);
+
+        myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
+        userid = myPref.getInt("loggedInID", -1);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -68,7 +75,13 @@ public class uploadNID extends AppCompatActivity {
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadFile();
+                if(mUploadTask != null && mUploadTask.isInProgress()){
+                    Toast.makeText(uploadNID.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadFile();
+                }
+
             }
         });
 
@@ -108,7 +121,7 @@ public class uploadNID extends AppCompatActivity {
         if (mImageUri != null){
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
 
-            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            mUploadTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Handler handler = new Handler();
@@ -124,7 +137,7 @@ public class uploadNID extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             final Uri downloadUrl = uri;
                             Toast.makeText(uploadNID.this, "Upload Successfull", Toast.LENGTH_LONG).show();
-                            upload upload = new upload(mEditTextFileName.getText().toString().trim(), downloadUrl.toString());
+                            upload upload = new upload(String.valueOf(userid), downloadUrl.toString());
                             String uploadID = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadID).setValue(upload);
                         }

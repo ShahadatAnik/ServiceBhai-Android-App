@@ -14,20 +14,13 @@
         android:layout_height="wrap_content"
         android:text="Choose file" />
 
-    <EditText
-        android:id="@+id/edittext_file_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_toEndOf="@id/button_choose_image"
-        android:hint="Enter File name" />
 
     <ImageView
         android:id="@+id/NID_image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/progress_bar"
-        android:layout_below="@id/edittext_file_name"
+        android:layout_below="@id/button_choose_image"
         android:layout_margin="16dp" />
 
     <ProgressBar

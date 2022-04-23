@@ -72,16 +72,28 @@
            app:layout_constraintBottom_toTopOf="@id/tv_prob_details"
             android:layout_marginTop="16dp"
             />
+
         <TextView
             android:id="@+id/tv_prob_details"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="315dp"
+            android:layout_height="107dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="34dp"
             android:text="Description dynamic"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/tv_prob_details_static"
-            app:layout_constraintBottom_toBottomOf="@id/constraintLayout_form"
-            android:layout_marginTop="16dp"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_prob_details_static" />
+
+        <Button
+            android:id="@+id/bidding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bid"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -109,8 +121,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout_form"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout_form" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

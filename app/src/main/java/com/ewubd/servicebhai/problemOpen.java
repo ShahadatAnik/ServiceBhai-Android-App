@@ -14,7 +14,7 @@ public class problemOpen extends AppCompatActivity {
     int postid,personid;
     TextView probtitle, probdetail;
     SharedPreferences myPref;
-    Button delete, accept;
+    Button delete, accept, bid;
     MyDatabaseHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +27,14 @@ public class problemOpen extends AppCompatActivity {
 
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
+        bid = findViewById(R.id.bidding);
         delete.setVisibility(View.INVISIBLE);
         accept.setVisibility(View.INVISIBLE);
+        bid.setVisibility(View.INVISIBLE);
 
         delete.setOnClickListener(v->deletePost());
         accept.setOnClickListener(v->acceptWork());
+        bid.setOnClickListener(v->bidingIntent());
 
         DB= new MyDatabaseHelper(this);
 
@@ -50,6 +53,7 @@ public class problemOpen extends AppCompatActivity {
         }
         if(usertype.equals("Worker")){
             accept.setVisibility(View.VISIBLE);
+            bid.setVisibility(View.VISIBLE);
         }
         //System.out.println(postid+" "+personid);
     }
@@ -74,9 +78,15 @@ public class problemOpen extends AppCompatActivity {
         probtitle.setText(problem[0]);
         probdetail.setText(problem[2]);
     }
+
     void acceptWork(){
         Intent intent = new Intent(this, chatbox.class);
         intent.putExtra("workersIDToSendMessage", personid);
+        startActivity(intent);
+    }
+
+    void bidingIntent(){
+        Intent intent = new Intent(this, bidding.class);
         startActivity(intent);
     }
 }

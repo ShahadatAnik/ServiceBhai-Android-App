@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceBhai">
         <activity
+            android:name=".bidding"
+            android:exported="false" />
+        <activity
             android:name=".showNID"
             android:exported="false" />
         <activity

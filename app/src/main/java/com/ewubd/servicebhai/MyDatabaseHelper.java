@@ -222,7 +222,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         while(getWorkers.moveToNext()){
             int fromIDD = getWorkers.getInt(0);
             String messages = getWorkers.getString(1);
-            String date = getWorkers.getString(1);
+            String date = getWorkers.getString(2);
             chatArrayList chatArrayList = new chatArrayList(fromIDD, messages, date);
             arrayList.add(chatArrayList);
         }
@@ -284,6 +284,23 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         long result = DB.insert("biding",null,contentValues);
         if(result==-1) return false;
         else return true;
+    }
+
+    public ArrayList<biddingArrayList> bidding(int postID){
+        ArrayList<biddingArrayList> arrayList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor bidding = sqLiteDatabase.rawQuery("select bidingid, postid, userID, biddingAmount, comment  from biding  where postid="+postID+";",null);
+        while(bidding.moveToNext()){
+            int biddingid = bidding.getInt(0);
+            int postid = bidding.getInt(1);
+            int userid = bidding.getInt(2);
+            int biddingamount = bidding.getInt(3);
+            String comment = bidding.getString(4);
+            String biddername = getUserame(userid);
+            biddingArrayList biddingArrayList = new biddingArrayList(biddingid, postid, userid, biddingamount, comment, biddername);
+            arrayList.add(biddingArrayList);
+        }
+        return arrayList;
     }
 
 }

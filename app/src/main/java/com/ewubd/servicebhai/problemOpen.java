@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class problemOpen extends AppCompatActivity {
 
@@ -16,11 +19,17 @@ public class problemOpen extends AppCompatActivity {
     SharedPreferences myPref;
     Button delete, accept, bid;
     MyDatabaseHelper DB;
+
+    ArrayList<biddingArrayList> arrayList;
+    customBiddingAdapter customBiddingAdapter;
+    private ListView biddingListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_open);
         Bundle extras = getIntent().getExtras();
+        biddingListView = findViewById(R.id.biddingListView);
+
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         int userid = myPref.getInt("loggedInID", -1);
@@ -56,6 +65,8 @@ public class problemOpen extends AppCompatActivity {
             bid.setVisibility(View.VISIBLE);
         }
         //System.out.println(postid+" "+personid);
+
+        loadDatainList();
     }
 
     private void deletePost() {
@@ -89,5 +100,12 @@ public class problemOpen extends AppCompatActivity {
         Intent intent = new Intent(this, bidding.class);
         intent.putExtra("postID", postid);
         startActivity(intent);
+    }
+
+    public void loadDatainList(){
+        arrayList = DB.bidding(postid);
+        customBiddingAdapter = new customBiddingAdapter(this,arrayList);
+        biddingListView.setAdapter(customBiddingAdapter);
+        customBiddingAdapter.notifyDataSetChanged();
     }
 }

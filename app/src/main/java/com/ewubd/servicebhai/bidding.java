@@ -40,10 +40,10 @@ public class bidding extends AppCompatActivity {
     void saveBid(){
         String prvBiddingAmount = bidingAmount.getText().toString().trim();
         String prvnote = notes.getText().toString().trim();
-        System.out.println(prvBiddingAmount);
-        System.out.println(prvnote);
-        System.out.println(userid);
-        System.out.println(postid);
+        //System.out.println(prvBiddingAmount);
+        //System.out.println(prvnote);
+        //System.out.println(userid);
+        //System.out.println(postid);
 
         int amount = Integer.parseInt(prvBiddingAmount);
 

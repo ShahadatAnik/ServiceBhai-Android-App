@@ -87,6 +87,7 @@ public class problemOpen extends AppCompatActivity {
 
     void bidingIntent(){
         Intent intent = new Intent(this, bidding.class);
+        intent.putExtra("postID", postid);
         startActivity(intent);
     }
 }

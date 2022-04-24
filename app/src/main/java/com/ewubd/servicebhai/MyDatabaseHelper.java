@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 14;
+    private static final int Version= 15;
     private int totalProblem;
 
     private Context context;
@@ -34,6 +34,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE messages (messageid INTEGER PRIMARY KEY AUTOINCREMENT, fromID INTEGER, toID INTEGER, message varchar(100), datetime date, FOREIGN KEY (fromID) REFERENCES users(Personid), FOREIGN KEY (toID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE rating (rateid INTEGER PRIMARY KEY AUTOINCREMENT, raterID INTEGER, userID INTEGER, rate INTEGER,review varchar(100), FOREIGN KEY (userID) REFERENCES users(Personid), FOREIGN KEY (raterID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE biding (bidingid INTEGER PRIMARY KEY AUTOINCREMENT, postid INTEGER, userID INTEGER, biddingAmount INTEGER,comment varchar(100), FOREIGN KEY (postid) REFERENCES problemPosting(postid), FOREIGN KEY (userID) REFERENCES users(Personid))");
         }
         catch (Exception e){
             Toast.makeText(context,"Error: "+e,Toast.LENGTH_LONG).show();
@@ -47,6 +48,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE if exists problemPosting;");
         db.execSQL("DROP TABLE if exists messages;");
         db.execSQL("DROP TABLE if exists rating;");
+        db.execSQL("DROP TABLE if exists biding;");
         onCreate(db);
     }
     public Boolean insertUser(String name, String email, String address, String phone, String password, String type){
@@ -270,6 +272,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         count.moveToFirst();
         String name= count.getString(0);
         return name;
+    }
+
+    public Boolean insertBidding(int postID,int userID,int biddingAmount, String notes){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("postid", postID);
+        contentValues.put("userID", userID);
+        contentValues.put("biddingAmount", biddingAmount);
+        contentValues.put("comment", notes);
+        long result = DB.insert("biding",null,contentValues);
+        if(result==-1) return false;
+        else return true;
     }
 
 }

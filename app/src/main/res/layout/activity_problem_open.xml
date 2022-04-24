@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:background="@drawable/signup_btn_shaper"
-        android:text="Accept"
+        android:text="Contact post publisher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout_form"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout_form" />

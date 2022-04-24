@@ -60,9 +60,9 @@ public class customBiddingAdapter extends BaseAdapter {
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("workersidReview", workersid);
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("workersIDToSendMessage", biddingArrayList.getUserid());
+                context.startActivity(intent);
             }
         });
 

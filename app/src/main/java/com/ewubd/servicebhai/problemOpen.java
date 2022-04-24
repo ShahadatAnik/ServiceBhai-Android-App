@@ -7,31 +7,43 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class problemOpen extends AppCompatActivity {
 
     int postid,personid;
     TextView probtitle, probdetail;
     SharedPreferences myPref;
-    Button delete, accept;
+    Button delete, accept, bid;
     MyDatabaseHelper DB;
+
+    ArrayList<biddingArrayList> arrayList;
+    customBiddingAdapter customBiddingAdapter;
+    private ListView biddingListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_open);
         Bundle extras = getIntent().getExtras();
+        biddingListView = findViewById(R.id.biddingListView);
+
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         int userid = myPref.getInt("loggedInID", -1);
 
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
+        bid = findViewById(R.id.bidding);
         delete.setVisibility(View.INVISIBLE);
         accept.setVisibility(View.INVISIBLE);
+        bid.setVisibility(View.INVISIBLE);
 
         delete.setOnClickListener(v->deletePost());
         accept.setOnClickListener(v->acceptWork());
+        bid.setOnClickListener(v->bidingIntent());
 
         DB= new MyDatabaseHelper(this);
 
@@ -50,8 +62,11 @@ public class problemOpen extends AppCompatActivity {
         }
         if(usertype.equals("Worker")){
             accept.setVisibility(View.VISIBLE);
+            bid.setVisibility(View.VISIBLE);
         }
         //System.out.println(postid+" "+personid);
+
+        loadDatainList();
     }
 
     private void deletePost() {
@@ -74,9 +89,23 @@ public class problemOpen extends AppCompatActivity {
         probtitle.setText(problem[0]);
         probdetail.setText(problem[2]);
     }
+
     void acceptWork(){
         Intent intent = new Intent(this, chatbox.class);
         intent.putExtra("workersIDToSendMessage", personid);
         startActivity(intent);
+    }
+
+    void bidingIntent(){
+        Intent intent = new Intent(this, bidding.class);
+        intent.putExtra("postID", postid);
+        startActivity(intent);
+    }
+
+    public void loadDatainList(){
+        arrayList = DB.bidding(postid);
+        customBiddingAdapter = new customBiddingAdapter(this,arrayList);
+        biddingListView.setAdapter(customBiddingAdapter);
+        customBiddingAdapter.notifyDataSetChanged();
     }
 }

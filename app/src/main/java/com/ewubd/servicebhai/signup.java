@@ -1,9 +1,13 @@
 package com.ewubd.servicebhai;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -15,9 +19,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class signup extends AppCompatActivity {
 
@@ -110,12 +125,53 @@ public class signup extends AppCompatActivity {
         if(error==""){
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
+            saveToAppServer(prvname,Email,prvAdress,Phone,checkedOne,encryptedPassword);
             Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, encryptedPassword, checkedOne);
             if(noError==true){
                 System.out.println("Data Inserted");
                 LoginPage();
             }
             else System.out.println("Got some error");
+        }
+    }
+
+    private void saveToAppServer(String prvname, String email, String prvAdress, String phone, String checkedOne, String encryptedPassword) {
+        if(checkNetworkConnection()){
+            System.out.println("ggwp");
+            MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_URL, response -> {
+                System.out.println("Name in :"+prvname);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    System.out.println(Response);
+                    if(Response.equals("ok")){
+                        System.out.println("Data Inserted in Remote DB");
+                    }
+                    else{
+                        System.out.println("Error Data not inserted in remote1");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }, error -> System.out.println(error))
+            {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> params = new HashMap<>();
+                    params.put("name",prvname);
+                    params.put("email",email);
+                    params.put("address",prvAdress);
+                    params.put("phone",phone);
+                    params.put("type",checkedOne);
+                    params.put("password",encryptedPassword);
+                    return params;
+                }
+            };
+            MySingleton.getInstance(signup.this).addToRequestQue(stringRequest);
+        }
+        else{
+            System.out.println("no network");
         }
     }
 
@@ -142,5 +198,11 @@ public class signup extends AppCompatActivity {
     void LoginPage(){
         Intent i = new Intent(this, Login.class);
         startActivity(i);
+    }
+
+    public boolean checkNetworkConnection(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo!=null && networkInfo.isConnected());
     }
 }

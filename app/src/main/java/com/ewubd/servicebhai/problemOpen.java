@@ -19,10 +19,13 @@ public class problemOpen extends AppCompatActivity {
     SharedPreferences myPref;
     Button delete, accept, bid, markASDone;
     MyDatabaseHelper DB;
+    String userOrWorker;
+    int user;
 
     ArrayList<biddingArrayList> arrayList;
     customBiddingAdapter customBiddingAdapter;
     private ListView biddingListView;
+    int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,7 @@ public class problemOpen extends AppCompatActivity {
 
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
-        int userid = myPref.getInt("loggedInID", -1);
+        userid = myPref.getInt("loggedInID", -1);
 
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
@@ -49,6 +52,15 @@ public class problemOpen extends AppCompatActivity {
         markASDone.setOnClickListener(v->markAsDoneObj());
 
         DB= new MyDatabaseHelper(this);
+
+        userOrWorker = DB.userOrWorker(userid);
+        System.out.println(userOrWorker);
+        if(userOrWorker.equals("User")){
+            user = 1;
+        }
+        else{
+            user = 0;
+        }
 
         String usertype = DB.userOrWorker(userid);
         System.out.println(usertype);
@@ -108,7 +120,7 @@ public class problemOpen extends AppCompatActivity {
 
     public void loadDatainList(){
         arrayList = DB.bidding(postid);
-        customBiddingAdapter = new customBiddingAdapter(this,arrayList);
+        customBiddingAdapter = new customBiddingAdapter(this,arrayList, user);
         biddingListView.setAdapter(customBiddingAdapter);
         customBiddingAdapter.notifyDataSetChanged();
     }

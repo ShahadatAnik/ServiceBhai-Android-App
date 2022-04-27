@@ -115,5 +115,13 @@ public class problemOpen extends AppCompatActivity {
 
     void markAsDoneObj(){
         System.out.println(DB.markAsDone(postid));
+        Intent intent = new Intent(this, problemShow.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadDatainList();
     }
 }

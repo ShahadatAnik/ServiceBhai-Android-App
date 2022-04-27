@@ -122,7 +122,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<postedProblem> getProblems(){
         ArrayList<postedProblem> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.personid,p.title, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
+        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.personid,p.title, u.name,p.helptype,p.postdetails,p.markAsDone FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
         while(getProblem.moveToNext()){
             int postid = getProblem.getInt(0);
             int personid = getProblem.getInt(1);
@@ -130,10 +130,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             String name = getProblem.getString(3);
             String helptype = getProblem.getString(4);
             String postdetail = getProblem.getString(5);
-            System.out.println(title);
+            int marksAsDone = getProblem.getInt(6);
+            //System.out.println(title);
+            if(marksAsDone==0){
+                postedProblem postedProblem = new postedProblem(postid,personid,title,name,helptype,postdetail, marksAsDone);
+                arrayList.add(postedProblem);
+            }
 
-            postedProblem postedProblem = new postedProblem(postid,personid,title,name,helptype,postdetail);
-            arrayList.add(postedProblem);
         }
         return arrayList;
     }

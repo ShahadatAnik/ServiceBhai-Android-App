@@ -1,16 +1,17 @@
 package com.ewubd.servicebhai;
 
 public class biddingArrayList {
-    int biddingid, postid, userid, biddingamount;
+    int biddingid, postid, userid, biddingamount, workerID;
     String username, comment;
 
-    public biddingArrayList(int biddingid, int postid, int userid, int biddingamount, String comment, String username) {
+    public biddingArrayList(int biddingid, int postid, int userid, int biddingamount, String comment, String username, int workerID) {
         this.biddingid = biddingid;
         this.postid = postid;
         this.userid = userid;
         this.biddingamount = biddingamount;
         this.comment = comment;
         this.username = username;
+        this.workerID = workerID;
     }
 
     public int getBiddingid() {
@@ -59,5 +60,13 @@ public class biddingArrayList {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getWorkerID() {
+        return workerID;
+    }
+
+    public void setWorkerID(int workerID) {
+        this.workerID = workerID;
     }
 }

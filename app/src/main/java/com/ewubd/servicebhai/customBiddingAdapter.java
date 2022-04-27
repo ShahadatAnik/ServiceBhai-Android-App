@@ -52,6 +52,7 @@ public class customBiddingAdapter extends BaseAdapter {
         TextView biddername = rowView.findViewById(R.id.biddername);
         TextView biddingamount = rowView.findViewById(R.id.biddingamount);
         TextView biddernote = rowView.findViewById(R.id.biddernotes);
+        Button info = rowView.findViewById(R.id.btn_workers_info);
 
 
         biddingArrayList biddingArrayList = arrayList.get(position);
@@ -61,6 +62,17 @@ public class customBiddingAdapter extends BaseAdapter {
         biddername.setText(biddingArrayList.getUsername());
         biddingamount.setText(String.valueOf(biddingArrayList.getBiddingamount()));
         biddernote.setText(biddingArrayList.getComment());
+        if(userOrWorker == 0){
+            info.setVisibility(View.INVISIBLE);
+        }
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("workersidReview", biddingArrayList.getWorkerID());
+                context.startActivity(intent);
+            }
+        });
 
         if(userOrWorker == 1){
             rowView.setOnClickListener(new View.OnClickListener() {

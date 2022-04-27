@@ -300,7 +300,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             int biddingamount = bidding.getInt(3);
             String comment = bidding.getString(4);
             String biddername = getUserame(userid);
-            biddingArrayList biddingArrayList = new biddingArrayList(biddingid, postid, userid, biddingamount, comment, biddername);
+            int workersID = getWorkersID(userid);
+            biddingArrayList biddingArrayList = new biddingArrayList(biddingid, postid, userid, biddingamount, comment, biddername, workersID);
             arrayList.add(biddingArrayList);
         }
         return arrayList;
@@ -335,6 +336,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         }
         return arrayList;
+    }
+
+    public int getWorkersID(int userID){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor count = sqLiteDatabase.rawQuery("select workerid from workers where PersonID = "+userID+";",null);
+        count.moveToFirst();
+        int workerid= count.getInt(0);
+        return workerid;
     }
 
 }

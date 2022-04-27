@@ -86,7 +86,7 @@ public class userProfile extends AppCompatActivity {
     }
     void loadDataInArrayList(){
         arrayList = DB.history(userid);
-        customProblemAdapter = new customProblemAdapter(this,arrayList);
+        customProblemAdapter = new customProblemAdapter(this,arrayList, 1);
         history.setAdapter(customProblemAdapter);
         customProblemAdapter.notifyDataSetChanged();
     }

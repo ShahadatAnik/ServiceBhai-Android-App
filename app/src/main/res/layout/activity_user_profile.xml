@@ -178,24 +178,36 @@
             android:id="@+id/history_list_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_history"
-            app:layout_constraintEnd_toEndOf="@id/constraintLayout_bottom_form_tv_history"
-            app:layout_constraintTop_toTopOf="@id/constraintLayout_bottom_form_tv_history"
             app:layout_constraintBottom_toBottomOf="@id/constraintLayout_bottom_form_tv_history"
-            />
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_bottom_form_tv_history"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_history"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout_bottom_form_tv_history" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/workersProfile"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginLeft="64dp"
         android:layout_marginRight="64dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/profile_layout_shaper"
         android:text="Workers Profile"
         android:textSize="17sp"
-        android:background="@drawable/profile_layout_shaper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/show_upload_NID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="246dp"
+        android:background="@drawable/profile_layout_shaper"
+        android:text="Your NID"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/workersProfile"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout_bottom_form_tv_history" />
 </androidx.constraintlayout.widget.ConstraintLayout>

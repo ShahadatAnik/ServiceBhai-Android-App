@@ -18,7 +18,7 @@ public class userProfile extends AppCompatActivity {
     MyDatabaseHelper DB;
     SharedPreferences myPref;
     private TextView userName, userAddress, userEmail, userPhone, userType;
-    private Button workersProfile;
+    private Button workersProfile, nid;
     ListView history;
     int userid;
     int flag, userID;
@@ -43,8 +43,11 @@ public class userProfile extends AppCompatActivity {
         userPhone = findViewById(R.id.tv_profile_phone_dynamic);
         userType = findViewById(R.id.tv_profile_type_dynamic);
         workersProfile = findViewById(R.id.workersProfile);
+        nid = findViewById(R.id.show_upload_NID);
         workersProfile.setOnClickListener(v->workersProfileIntent());
         workersProfile.setVisibility(View.GONE);
+        nid.setVisibility(View.GONE);
+        nid.setOnClickListener(v->nidIn());
         history = findViewById(R.id.history_list_view);
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
@@ -71,11 +74,10 @@ public class userProfile extends AppCompatActivity {
 
             if(profile[5].equals("Worker")){
                 workersProfile.setVisibility(View.VISIBLE);
+                nid.setVisibility(View.VISIBLE);
             }
             loadDataInArrayList();
         }
-
-
 
     }
     void workersProfileIntent(){
@@ -93,5 +95,10 @@ public class userProfile extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         loadDataInArrayList();
+    }
+
+    void nidIn(){
+        Intent intent = new Intent(this, showNID.class);
+        startActivity(intent);
     }
 }

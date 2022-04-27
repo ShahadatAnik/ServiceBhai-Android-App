@@ -1,18 +1,19 @@
 package com.ewubd.servicebhai;
 
 public class postedProblem {
-    int id,personid;
+    int id,personid, markAsDone;
     String name, helptype, postdetail, title;
 
 
 
-    public postedProblem(int id , int personid, String title , String name, String helptype, String postdetail) {
+    public postedProblem(int id , int personid, String title , String name, String helptype, String postdetail, int markAsDone) {
         this.id = id;
         this.title = title;
         this.name = name;
         this.helptype = helptype;
         this.postdetail = postdetail;
         this.personid = personid;
+        this.markAsDone = markAsDone;
     }
     public postedProblem(){}
 
@@ -62,5 +63,13 @@ public class postedProblem {
 
     public void setPostdetail(String postdetail) {
         this.postdetail = postdetail;
+    }
+
+    public int getMarkAsDone() {
+        return markAsDone;
+    }
+
+    public void setMarkAsDone(int markAsDone) {
+        this.markAsDone = markAsDone;
     }
 }

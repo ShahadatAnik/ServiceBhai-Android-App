@@ -81,11 +81,4 @@ public class customProblemAdapter extends BaseAdapter {
 
         return rowView;
     }
-
-    private void problemopenpage() {
-        Intent intent = new Intent(context, problemOpen.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("postid",id);
-        intent.putExtra("personid",personid);
-        context.startActivity(intent);
-    }
 }

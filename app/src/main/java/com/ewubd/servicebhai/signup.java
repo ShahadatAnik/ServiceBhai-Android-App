@@ -1,9 +1,13 @@
 package com.ewubd.servicebhai;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -15,9 +19,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class signup extends AppCompatActivity {
 
@@ -110,6 +119,7 @@ public class signup extends AppCompatActivity {
         if(error==""){
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
+            //saveToAppServer(prvname,Email,prvAdress,Phone,checkedOne,encryptedPassword);
             Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, encryptedPassword, checkedOne);
             if(noError==true){
                 System.out.println("Data Inserted");
@@ -118,6 +128,8 @@ public class signup extends AppCompatActivity {
             else System.out.println("Got some error");
         }
     }
+
+
 
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
@@ -143,4 +155,5 @@ public class signup extends AppCompatActivity {
         Intent i = new Intent(this, Login.class);
         startActivity(i);
     }
+
 }

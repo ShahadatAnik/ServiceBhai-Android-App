@@ -17,7 +17,7 @@ public class problemOpen extends AppCompatActivity {
     int postid,personid;
     TextView probtitle, probdetail;
     SharedPreferences myPref;
-    Button delete, accept, bid;
+    Button delete, accept, bid, markASDone;
     MyDatabaseHelper DB;
 
     ArrayList<biddingArrayList> arrayList;
@@ -37,6 +37,8 @@ public class problemOpen extends AppCompatActivity {
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
         bid = findViewById(R.id.bidding);
+        markASDone = findViewById(R.id.btn_mark_as_done);
+        markASDone.setVisibility(View.INVISIBLE);
         delete.setVisibility(View.INVISIBLE);
         accept.setVisibility(View.INVISIBLE);
         bid.setVisibility(View.INVISIBLE);
@@ -44,6 +46,7 @@ public class problemOpen extends AppCompatActivity {
         delete.setOnClickListener(v->deletePost());
         accept.setOnClickListener(v->acceptWork());
         bid.setOnClickListener(v->bidingIntent());
+        markASDone.setOnClickListener(v->markAsDoneObj());
 
         DB= new MyDatabaseHelper(this);
 
@@ -59,6 +62,7 @@ public class problemOpen extends AppCompatActivity {
         }
         if(userid == personid){
             delete.setVisibility(View.VISIBLE);
+            markASDone.setVisibility(View.VISIBLE);
         }
         if(usertype.equals("Worker")){
             accept.setVisibility(View.VISIBLE);
@@ -107,5 +111,9 @@ public class problemOpen extends AppCompatActivity {
         customBiddingAdapter = new customBiddingAdapter(this,arrayList);
         biddingListView.setAdapter(customBiddingAdapter);
         customBiddingAdapter.notifyDataSetChanged();
+    }
+
+    void markAsDoneObj(){
+        System.out.println(DB.markAsDone(postid));
     }
 }

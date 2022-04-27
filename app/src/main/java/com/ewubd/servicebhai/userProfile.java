@@ -21,12 +21,20 @@ public class userProfile extends AppCompatActivity {
     private Button workersProfile;
     ListView history;
     int userid;
+    int flag, userID;
     ArrayList<postedProblem> arrayList;
     customProblemAdapter customProblemAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            flag = extras.getInt("Flag");
+            userID = extras.getInt("userID");
+        }
 
         DB= new MyDatabaseHelper(this);
         userName = findViewById(R.id.tv_profile_name_dynamic);
@@ -41,18 +49,34 @@ public class userProfile extends AppCompatActivity {
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         userid = myPref.getInt("loggedInID", -1);
-        String profile[]= DB.getUserProfleInfo(userid);
-        userName.setText(profile[1]);
-        userEmail.setText(profile[2]);
-        userAddress.setText(profile[3]);
-        userPhone.setText(profile[4]);
-        userType.setText(profile[5]);
+        if(flag == 1){
+            String profile[]= DB.getUserProfleInfo(userID);
+            userName.setText(profile[1]);
+            userEmail.setText(profile[2]);
+            userAddress.setText(profile[3]);
+            userPhone.setText(profile[4]);
+            userType.setText(profile[5]);
 
-        if(profile[5].equals("Worker")){
-            workersProfile.setVisibility(View.VISIBLE);
+            if(profile[5].equals("Worker")){
+                workersProfile.setVisibility(View.VISIBLE);
+            }
+        }
+        else{
+            String profile[]= DB.getUserProfleInfo(userid);
+            userName.setText(profile[1]);
+            userEmail.setText(profile[2]);
+            userAddress.setText(profile[3]);
+            userPhone.setText(profile[4]);
+            userType.setText(profile[5]);
+
+            if(profile[5].equals("Worker")){
+                workersProfile.setVisibility(View.VISIBLE);
+            }
+            loadDataInArrayList();
         }
 
-        loadDataInArrayList();
+
+
     }
     void workersProfileIntent(){
         Intent intent = new Intent(this, workersProfile.class);

@@ -2,8 +2,10 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,6 +42,15 @@ public class chatbox extends AppCompatActivity {
         inboxname = findViewById(R.id.inboxname);
         String getname = DB.getUserame(workersID);
         inboxname.setText(getname);
+        inboxname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(chatbox.this, userProfile.class);
+                intent.putExtra("Flag", 1);
+                intent.putExtra("userID", workersID);
+                startActivity(intent);
+            }
+        });
         arrayList = new ArrayList<>();
         loadDatainList();
     }

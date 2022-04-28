@@ -116,7 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/green_color_cursor"
+                android:inputType="textCapSentences | textMultiLine"
                 android:textColor="@color/primaryTextColor" />
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -54,7 +54,7 @@ public class customBiddingAdapter extends BaseAdapter {
 
 
         biddername.setText(biddingArrayList.getUsername());
-        biddingamount.setText(String.valueOf(biddingArrayList.getBiddingamount()));
+        biddingamount.setText(String.valueOf(biddingArrayList.getBiddingamount())+" BDT");
         biddernote.setText(biddingArrayList.getComment());
 
         rowView.setOnClickListener(new View.OnClickListener() {

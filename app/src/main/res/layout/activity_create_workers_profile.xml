@@ -127,6 +127,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:inputType="number"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -153,6 +154,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
+                android:textCursorDrawable="@drawable/green_color_cursor"
+                android:inputType="textCapSentences | textMultiLine"
                 android:textColor="@color/primaryTextColor" />
         </com.google.android.material.textfield.TextInputLayout>
 

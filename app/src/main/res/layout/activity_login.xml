@@ -54,6 +54,7 @@
                 android:id="@+id/et_email_login_page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor"
                 android:inputType="textEmailAddress"
                  />
@@ -81,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryTextColor"
                 android:inputType="textPassword"
-
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

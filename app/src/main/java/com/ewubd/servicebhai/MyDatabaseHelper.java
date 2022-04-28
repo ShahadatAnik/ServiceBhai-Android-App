@@ -28,7 +28,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try{
-            Toast.makeText(context,"Table Created ",Toast.LENGTH_LONG).show();
             db.execSQL("Create TABLE users (Personid INTEGER PRIMARY KEY AUTOINCREMENT,name varchar(50),email varchar(50) UNIQUE,address varchar(100),phone varchar(15),type varchar(15), password varchar(50));");
             db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), markAsDone INTEGER DEFAULT 0, FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
@@ -102,7 +101,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Cursor profileInfo = sqLiteDatabase.rawQuery("SELECT * from workers WHERE PersonID='"+id+"';", null);
         if (profileInfo.moveToFirst()) {
             for(int i=0;i<=4;i++){
-                    profile[i] = profileInfo.getString(i);
+                profile[i] = profileInfo.getString(i);
             }
         }
         return profile;
@@ -115,8 +114,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("helptype", helptype);
         contentValues.put("postdetails", postdetails);
         long result = DB.insert("problemPosting",null,contentValues);
-        if(result==-1) return false;
-        else return true;
+        if(result==-1){
+            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else{
+            Toast.makeText(context,"Your Problem Has Been Posted Successfully",Toast.LENGTH_LONG).show();
+            return true;
+        }
     }
 
     public ArrayList<postedProblem> getProblems(){
@@ -159,8 +164,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public Boolean deletePost(int postid){
         SQLiteDatabase DB = this.getWritableDatabase();
         long result = DB.delete("problemPosting", "postid = ?", new String[]{String.valueOf(postid)});
-        if(result==-1) return false;
-        else return true;
+        if(result==-1){
+            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else{
+            Toast.makeText(context,"Your Problem Has Been Deleted Successfully",Toast.LENGTH_LONG).show();
+            return true;
+        }
     }
 
     public String userOrWorker (int personid){
@@ -248,8 +259,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("rate", rate);
         contentValues.put("review", review);
         long result = DB.insert("rating",null,contentValues);
-        if(result==-1) return false;
-        else return true;
+        if(result==-1){
+            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else{
+            Toast.makeText(context,"Rating Has Been Posted Successfully",Toast.LENGTH_LONG).show();
+            return true;
+        }
     }
     public ArrayList<workerReviewClass> getReviewbyID(int id){
         ArrayList<workerReviewClass> reviews = new ArrayList<>();
@@ -285,8 +302,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("biddingAmount", biddingAmount);
         contentValues.put("comment", notes);
         long result = DB.insert("biding",null,contentValues);
-        if(result==-1) return false;
-        else return true;
+        if(result==-1){
+            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
+            return false;
+        }
+        else{
+            Toast.makeText(context,"Bidding Has Been Posted Successfully",Toast.LENGTH_LONG).show();
+            return true;
+        }
     }
 
     public ArrayList<biddingArrayList> bidding(int postID){

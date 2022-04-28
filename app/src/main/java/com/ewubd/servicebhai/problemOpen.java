@@ -17,12 +17,15 @@ public class problemOpen extends AppCompatActivity {
     int postid,personid;
     TextView probtitle, probdetail;
     SharedPreferences myPref;
-    Button delete, accept, bid;
+    Button delete, accept, bid, markASDone;
     MyDatabaseHelper DB;
+    String userOrWorker;
+    int user;
 
     ArrayList<biddingArrayList> arrayList;
     customBiddingAdapter customBiddingAdapter;
     private ListView biddingListView;
+    int userid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +35,13 @@ public class problemOpen extends AppCompatActivity {
 
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
-        int userid = myPref.getInt("loggedInID", -1);
+        userid = myPref.getInt("loggedInID", -1);
 
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
         bid = findViewById(R.id.bidding);
+        markASDone = findViewById(R.id.btn_mark_as_done);
+        markASDone.setVisibility(View.INVISIBLE);
         delete.setVisibility(View.INVISIBLE);
         accept.setVisibility(View.INVISIBLE);
         bid.setVisibility(View.INVISIBLE);
@@ -44,8 +49,18 @@ public class problemOpen extends AppCompatActivity {
         delete.setOnClickListener(v->deletePost());
         accept.setOnClickListener(v->acceptWork());
         bid.setOnClickListener(v->bidingIntent());
+        markASDone.setOnClickListener(v->markAsDoneObj());
 
         DB= new MyDatabaseHelper(this);
+
+        userOrWorker = DB.userOrWorker(userid);
+        System.out.println(userOrWorker);
+        if(userOrWorker.equals("User")){
+            user = 1;
+        }
+        else{
+            user = 0;
+        }
 
         String usertype = DB.userOrWorker(userid);
         System.out.println(usertype);
@@ -59,6 +74,7 @@ public class problemOpen extends AppCompatActivity {
         }
         if(userid == personid){
             delete.setVisibility(View.VISIBLE);
+            markASDone.setVisibility(View.VISIBLE);
         }
         if(usertype.equals("Worker")){
             accept.setVisibility(View.VISIBLE);
@@ -104,8 +120,20 @@ public class problemOpen extends AppCompatActivity {
 
     public void loadDatainList(){
         arrayList = DB.bidding(postid);
-        customBiddingAdapter = new customBiddingAdapter(this,arrayList);
+        customBiddingAdapter = new customBiddingAdapter(this,arrayList, user);
         biddingListView.setAdapter(customBiddingAdapter);
         customBiddingAdapter.notifyDataSetChanged();
+    }
+
+    void markAsDoneObj(){
+        System.out.println(DB.markAsDone(postid));
+        Intent intent = new Intent(this, problemShow.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadDatainList();
     }
 }

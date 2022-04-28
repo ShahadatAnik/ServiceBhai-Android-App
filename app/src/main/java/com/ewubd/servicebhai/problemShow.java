@@ -30,7 +30,7 @@ public class problemShow extends AppCompatActivity {
     }
     public void loadDatainList(){
         arrayList = DB.getProblems();
-        customProblemAdapter = new customProblemAdapter(this,arrayList);
+        customProblemAdapter = new customProblemAdapter(this,arrayList, 0);
         postShow.setAdapter(customProblemAdapter);
         customProblemAdapter.notifyDataSetChanged();
     }

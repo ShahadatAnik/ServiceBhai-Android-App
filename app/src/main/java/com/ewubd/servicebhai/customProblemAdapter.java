@@ -14,10 +14,11 @@ public class customProblemAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<postedProblem> arrayList;
-    int id,personid;
-    public customProblemAdapter(Context context, ArrayList<postedProblem> arrayList){
+    int id,personid, flag = 1;
+    public customProblemAdapter(Context context, ArrayList<postedProblem> arrayList, int flag){
         this.context = context;
         this.arrayList = arrayList;
+        this.flag = flag;
     }
     @Override
     public int getCount() {
@@ -64,25 +65,20 @@ public class customProblemAdapter extends BaseAdapter {
             post_desc.setText(postedProblem.getPostdetail().substring(0,30)+"...");
         }
         else post_desc.setText(postedProblem.getPostdetail());
+        if(flag == 0){
+            rowView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int id = postedProblem.getId();
+                    Intent intent = new Intent(context, problemOpen.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("postid",id);
+                    intent.putExtra("personid",personid);
+                    context.startActivity(intent);
+                }
+            });
+        }
 
-        rowView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int id = postedProblem.getId();
-                Intent intent = new Intent(context, problemOpen.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("postid",id);
-                intent.putExtra("personid",personid);
-                context.startActivity(intent);
-            }
-        });
 
         return rowView;
-    }
-
-    private void problemopenpage() {
-        Intent intent = new Intent(context, problemOpen.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra("postid",id);
-        intent.putExtra("personid",personid);
-        context.startActivity(intent);
     }
 }

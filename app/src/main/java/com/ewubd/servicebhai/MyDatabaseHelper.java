@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 15;
+    private static final int Version= 18;
     private int totalProblem;
 
     private Context context;
@@ -30,7 +30,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         try{
             db.execSQL("Create TABLE users (Personid INTEGER PRIMARY KEY AUTOINCREMENT,name varchar(50),email varchar(50) UNIQUE,address varchar(100),phone varchar(15),type varchar(15), password varchar(50));");
             db.execSQL("Create TABLE workers (workerid INTEGER PRIMARY KEY AUTOINCREMENT,PersonID INTEGER UNIQUE, expertise varchar(50), NIDNumber INTEGER, bio varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
-            db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
+            db.execSQL("Create TABLE problemPosting (postid INTEGER PRIMARY KEY AUTOINCREMENT, PersonID INTEGER,title varchar(50), helptype varchar(50), postdetails varchar(100), markAsDone INTEGER DEFAULT 0, FOREIGN KEY (PersonID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE messages (messageid INTEGER PRIMARY KEY AUTOINCREMENT, fromID INTEGER, toID INTEGER, message varchar(100), datetime date, FOREIGN KEY (fromID) REFERENCES users(Personid), FOREIGN KEY (toID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE rating (rateid INTEGER PRIMARY KEY AUTOINCREMENT, raterID INTEGER, userID INTEGER, rate INTEGER,review varchar(100), FOREIGN KEY (userID) REFERENCES users(Personid), FOREIGN KEY (raterID) REFERENCES users(Personid) )");
             db.execSQL("Create TABLE biding (bidingid INTEGER PRIMARY KEY AUTOINCREMENT, postid INTEGER, userID INTEGER, biddingAmount INTEGER,comment varchar(100), FOREIGN KEY (postid) REFERENCES problemPosting(postid), FOREIGN KEY (userID) REFERENCES users(Personid))");
@@ -127,7 +127,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<postedProblem> getProblems(){
         ArrayList<postedProblem> arrayList = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.personid,p.title, u.name,p.helptype,p.postdetails FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
+        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.personid,p.title, u.name,p.helptype,p.postdetails,p.markAsDone FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
         while(getProblem.moveToNext()){
             int postid = getProblem.getInt(0);
             int personid = getProblem.getInt(1);
@@ -135,10 +135,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             String name = getProblem.getString(3);
             String helptype = getProblem.getString(4);
             String postdetail = getProblem.getString(5);
-            System.out.println(title);
+            int marksAsDone = getProblem.getInt(6);
+            //System.out.println(title);
+            if(marksAsDone==0){
+                postedProblem postedProblem = new postedProblem(postid,personid,title,name,helptype,postdetail, marksAsDone);
+                arrayList.add(postedProblem);
+            }
 
-            postedProblem postedProblem = new postedProblem(postid,personid,title,name,helptype,postdetail);
-            arrayList.add(postedProblem);
         }
         return arrayList;
     }
@@ -320,10 +323,50 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             int biddingamount = bidding.getInt(3);
             String comment = bidding.getString(4);
             String biddername = getUserame(userid);
-            biddingArrayList biddingArrayList = new biddingArrayList(biddingid, postid, userid, biddingamount, comment, biddername);
+            int workersID = getWorkersID(userid);
+            biddingArrayList biddingArrayList = new biddingArrayList(biddingid, postid, userid, biddingamount, comment, biddername, workersID);
             arrayList.add(biddingArrayList);
         }
         return arrayList;
+    }
+
+    public boolean markAsDone(int postID){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("markAsDone", 1);
+        long result = DB.update("problemPosting",contentValues, "postid="+postID,null);
+        if(result==-1) return false;
+        else return true;
+    }
+
+    public ArrayList<postedProblem> history(int userID){
+        ArrayList<postedProblem> arrayList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor getProblem = sqLiteDatabase.rawQuery("SELECT p.postid,p.personid,p.title, u.name,p.helptype,p.postdetails,p.markAsDone FROM problemPosting p,users u  WHERE p.Personid = u.Personid;",null);
+        while(getProblem.moveToNext()){
+            int postid = getProblem.getInt(0);
+            int personid = getProblem.getInt(1);
+            String title = getProblem.getString(2);
+            String name = getProblem.getString(3);
+            String helptype = getProblem.getString(4);
+            String postdetail = getProblem.getString(5);
+            int marksAsDone = getProblem.getInt(6);
+            //System.out.println(title);
+            if(marksAsDone==1 && userID == personid){
+                postedProblem postedProblem = new postedProblem(postid,personid,title,name,helptype,postdetail, marksAsDone);
+                arrayList.add(postedProblem);
+            }
+
+        }
+        return arrayList;
+    }
+
+    public int getWorkersID(int userID){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor count = sqLiteDatabase.rawQuery("select workerid from workers where PersonID = "+userID+";",null);
+        count.moveToFirst();
+        int workerid= count.getInt(0);
+        return workerid;
     }
 
 }

@@ -53,17 +53,6 @@
 
 
     <Button
-        android:id="@+id/shownid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="228dp"
-        android:text="Show NID"
-        app:layout_constraintEnd_toStartOf="@+id/textView9"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userProfile" />
-
-    <Button
         android:id="@+id/inbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

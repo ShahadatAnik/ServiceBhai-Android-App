@@ -54,16 +54,13 @@ public class customBiddingAdapter extends BaseAdapter {
         TextView biddernote = rowView.findViewById(R.id.biddernotes);
         Button info = rowView.findViewById(R.id.btn_workers_info);
 
-
         biddingArrayList biddingArrayList = arrayList.get(position);
-
-
 
         biddername.setText(biddingArrayList.getUsername());
         biddingamount.setText(String.valueOf(biddingArrayList.getBiddingamount())+" BDT");
         biddernote.setText(biddingArrayList.getComment());
         if(userOrWorker == 0){
-            info.setVisibility(View.INVISIBLE);
+            info.setVisibility(View.GONE);
         }
         info.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class problemPosting<val> extends AppCompatActivity {
 
     private EditText postDetails, posttitle;
-    private RadioButton rb_electrical, rb_mechanical;
+    private RadioButton rb_electrical, rb_mechanical, rb_plumber, rb_other;
     private Button savetodb;
     MyDatabaseHelper DB;
     SharedPreferences myPref;
@@ -26,6 +26,8 @@ public class problemPosting<val> extends AppCompatActivity {
 
         rb_electrical = findViewById(R.id.rb_electrical);
         rb_mechanical = findViewById(R.id.rb_mechanical);
+        rb_plumber = findViewById(R.id.rb_plumber);
+        rb_other = findViewById(R.id.rb_other);
 
         posttitle = findViewById(R.id.et_problem_title);
         postDetails = findViewById(R.id.et_problem_details);
@@ -49,6 +51,15 @@ public class problemPosting<val> extends AppCompatActivity {
         boolean mechanicalIsChecked = rb_mechanical.isChecked();
         if(mechanicalIsChecked== true){
             type = "Mechanical";
+        }
+        boolean plumberIsChecked = rb_plumber.isChecked();
+        if(plumberIsChecked== true){
+            type = "Plumber";
+        }
+
+        boolean otherIsChecked = rb_other.isChecked();
+        if(otherIsChecked== true){
+            type = "Other";
         }
 
         String detail = postDetails.getText().toString().trim();

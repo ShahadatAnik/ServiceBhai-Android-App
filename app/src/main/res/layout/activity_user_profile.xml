@@ -25,36 +25,36 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_bottom_form_tv_profile"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_profile"
+        android:layout_marginTop="8dp"
         android:background="@drawable/profile_layout_shaper"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="36dp"
         android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_profile"
+        app:layout_constraintStart_toStartOf="@+id/tv_profile"
+        app:layout_constraintTop_toBottomOf="@id/tv_profile"
         >
 
         <TextView
             android:id="@+id/tv_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:"
-            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_profile"
             android:layout_marginLeft="20dp"
+            android:text="Name:"
             android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_profile"
             tools:ignore="MissingConstraints" />
+
         <TextView
             android:id="@+id/tv_profile_name_dynamic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textStyle="bold"
             android:text=""
             android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_name"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_name" />
-
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_name" />
 
 
         <TextView
@@ -66,17 +66,17 @@
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_name" />
+
         <TextView
             android:id="@+id/tv_profile_email_dynamic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:text=""
             android:textSize="17sp"
-            android:layout_marginStart="10dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_email"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_email" />
-
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_email"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_email" />
 
 
         <TextView
@@ -88,17 +88,17 @@
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_email" />
+
         <TextView
             android:id="@+id/tv_profile_address_dynamic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textStyle="bold"
             android:text=""
             android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_address"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_address" />
-
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_address"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_address" />
 
 
         <TextView
@@ -110,17 +110,17 @@
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_address" />
+
         <TextView
             android:id="@+id/tv_profile_phone_dynamic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textStyle="bold"
             android:text=""
             android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_phone"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_phone" />
-
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_phone"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_phone" />
 
 
         <TextView
@@ -132,16 +132,17 @@
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_phone" />
+
         <TextView
             android:id="@+id/tv_profile_type_dynamic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:textStyle="bold"
             android:text=""
             android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_type"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_type" />
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_type"
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_type" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/profile_layout_shaper"
         android:fontFamily="@font/belmist"
         android:gravity="center"
@@ -169,6 +170,8 @@
         android:layout_height="0dp"
         android:background="@drawable/profile_layout_shaper"
         android:padding="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/workersProfile"
         app:layout_constraintEnd_toEndOf="@+id/tv_history"
         app:layout_constraintStart_toStartOf="@+id/tv_history"
@@ -186,28 +189,26 @@
 
     <Button
         android:id="@+id/workersProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/profile_layout_shaper"
         android:text="Workers Profile"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout_bottom_form_tv_history"
+        android:layout_margin="4dp"
+        />
 
     <Button
         android:id="@+id/show_upload_NID"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="246dp"
         android:background="@drawable/profile_layout_shaper"
-        android:text="Your NID"
+        android:text="NID"
         android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout_bottom_form_tv_history"
         app:layout_constraintStart_toEndOf="@+id/workersProfile"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout_bottom_form_tv_history" />
+        android:layout_margin="4dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

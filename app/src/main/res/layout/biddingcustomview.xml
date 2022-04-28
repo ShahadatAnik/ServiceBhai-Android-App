@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/biddingamount"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/signup_btn_shaper"
         android:gravity="center"
         android:padding="8dp"
@@ -31,27 +31,29 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/biddernotes"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_workers_info"
+        app:layout_constraintEnd_toEndOf="@+id/btn_workers_info"
+        app:layout_constraintStart_toStartOf="@+id/btn_workers_info"
         app:layout_constraintTop_toTopOf="@id/biddername" />
 
-    <TextView android:id="@+id/biddernotes"
+    <TextView
+        android:id="@+id/biddernotes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="bidder notes"
         android:textColor="@color/black"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/biddername"
+        app:layout_constraintEnd_toStartOf="@+id/btn_workers_info"
         app:layout_constraintStart_toStartOf="@id/biddername"
-        app:layout_constraintEnd_toStartOf="@id/biddingamount"
-        />
+        app:layout_constraintTop_toBottomOf="@id/biddername" />
 
     <Button
-        android:text="Info"
         android:id="@+id/btn_workers_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        tools:layout_editor_absoluteX="267dp"
-        tools:layout_editor_absoluteY="52dp" />
+        android:layout_margin="4dp"
+        android:text="Info"
+        app:layout_constraintTop_toBottomOf="@id/biddingamount"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

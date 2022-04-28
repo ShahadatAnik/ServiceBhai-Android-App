@@ -2,11 +2,13 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -59,6 +61,7 @@ public class Login extends AppCompatActivity {
         String encrytpedPassword = getMd5(privPassword);
         int userid = DB.getUser(privEmail, encrytpedPassword);
         if(userid==-1){
+            Toast.makeText(getApplicationContext(),"Please Input Valid Email and Password",Toast.LENGTH_SHORT).show();
             System.out.println("Error on email or password");
         }
         else{

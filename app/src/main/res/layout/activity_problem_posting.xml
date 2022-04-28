@@ -58,8 +58,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_problem_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:layout_height="match_parent"
+                android:inputType="textCapWords"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,7 +125,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="top"
-                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/green_color_cursor"
+                android:inputType="textCapSentences | textMultiLine"
                 android:textColor="@color/primaryTextColor" />
         </com.google.android.material.textfield.TextInputLayout>
 

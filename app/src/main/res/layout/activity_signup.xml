@@ -53,6 +53,7 @@
                 android:id="@+id/et_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor"
                 android:inputType="textCapWords"
                 />
@@ -73,6 +74,7 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor"
                 android:inputType="textEmailAddress"
                 />
@@ -97,7 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primaryTextColor"
-                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/green_color_cursor"
+                android:inputType="textCapSentences | textMultiLine"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,8 +120,9 @@
                 android:id="@+id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor"
-                android:inputType="textEmailAddress"
+                android:inputType="phone"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,8 +143,9 @@
                 android:id="@+id/et_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor"
-                android:inputType="textEmailAddress"
+                android:inputType="textVisiblePassword"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,8 +166,9 @@
                 android:id="@+id/et_confirm_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textCursorDrawable="@drawable/green_color_cursor"
                 android:textColor="@color/primaryTextColor"
-                android:inputType="textEmailAddress"
+                android:inputType="textVisiblePassword"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

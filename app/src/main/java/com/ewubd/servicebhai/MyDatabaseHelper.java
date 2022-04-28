@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 18;
+    private static final int Version= 20;
     private int totalProblem;
 
     private Context context;

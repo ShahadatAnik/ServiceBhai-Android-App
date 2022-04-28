@@ -37,33 +37,21 @@
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_weight="1">
 
-        <Button
-            android:id="@+id/btn_mark_as_done"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mark As Done"
-            app:layout_constraintEnd_toEndOf="@+id/tv_prob_title_static"
-            app:layout_constraintHorizontal_bias="0.894"
-            app:layout_constraintStart_toStartOf="@+id/tv_prob_title_static"
-            app:layout_constraintTop_toBottomOf="@+id/biddingListView"
-             />
-
         <TextView
             android:id="@+id/tv_prob_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
             android:text="Title dynamic"
+            android:textColor="@color/green"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="@color/green"
-            app:layout_constraintTop_toTopOf="@id/constraintLayout_form"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
-            />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/constraintLayout_form" />
 
         <TextView
             android:id="@+id/tv_prob_details"
@@ -118,6 +106,14 @@
             app:layout_constraintEnd_toEndOf="@id/constraintLayout_form2"
             app:layout_constraintStart_toStartOf="@id/constraintLayout_form2"
             app:layout_constraintTop_toBottomOf="@id/biddingListView" />
+
+        <Button
+            android:id="@+id/btn_mark_as_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mark As Done"
+            tools:layout_editor_absoluteX="102dp"
+            tools:layout_editor_absoluteY="311dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

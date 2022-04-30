@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 15;
+    private static final int Version= 20;
     private int totalProblem;
     public static final String SERVER_URL = "http://192.168.1.126/serviceBhai/insert.php";
 

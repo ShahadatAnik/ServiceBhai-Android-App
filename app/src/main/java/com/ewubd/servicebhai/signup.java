@@ -126,12 +126,7 @@ public class signup extends AppCompatActivity {
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
             saveToAppServer(prvname,Email,prvAdress,Phone,checkedOne,encryptedPassword);
-            Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, encryptedPassword, checkedOne);
-            if(noError==true){
-                System.out.println("Data Inserted");
-                LoginPage();
-            }
-            else System.out.println("Got some error");
+
         }
     }
 
@@ -147,6 +142,12 @@ public class signup extends AppCompatActivity {
                     System.out.println(Response);
                     if(Response.equals("ok")){
                         System.out.println("Data Inserted in Remote DB");
+                        Boolean noError = DB.insertUser(prvname, email, prvAdress, phone, encryptedPassword, checkedOne);
+                        if(noError==true){
+                            System.out.println("Data Inserted");
+                            LoginPage();
+                        }
+                        else System.out.println("Got some error");
                     }
                     else{
                         System.out.println("Error Data not inserted in remote1");

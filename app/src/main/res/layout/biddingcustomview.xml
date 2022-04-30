@@ -32,8 +32,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/btn_workers_info"
-        app:layout_constraintEnd_toEndOf="@+id/btn_workers_info"
-        app:layout_constraintStart_toStartOf="@+id/btn_workers_info"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/biddername" />
 
     <TextView
@@ -41,6 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="4dp"
         android:text="bidder notes"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/btn_workers_info"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:text="Info"
-        app:layout_constraintTop_toBottomOf="@id/biddingamount"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toEndOf="@+id/biddername"
+        app:layout_constraintTop_toBottomOf="@id/biddingamount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

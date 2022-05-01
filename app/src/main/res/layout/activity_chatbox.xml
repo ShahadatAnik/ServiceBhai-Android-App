@@ -53,20 +53,22 @@
         android:hint="Enter messages here"
         android:inputType="textPersonName"
         android:padding="10dp"
+        android:layout_marginBottom="8dp"
         android:textColor="@color/green"
-        app:layout_constraintBottom_toBottomOf="@+id/sendMessageButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sendMessageButton"
         app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
-        app:layout_constraintTop_toTopOf="@+id/sendMessageButton" />
+         />
 
-    <Button
+    <ImageView
         android:id="@+id/sendMessageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="send"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
         app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
         app:layout_constraintStart_toEndOf="@+id/messageBox"
-         />
+        app:layout_constraintTop_toTopOf="@+id/messageBox"
+        app:layout_constraintBottom_toBottomOf="@id/messageBox"
+        app:srcCompat="@drawable/ic_baseline_send_24"
+        app:tint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

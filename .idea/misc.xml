@@ -7,8 +7,18 @@
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_btn_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_form_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/font/cabinatefont.xml" value="0.28512820512820514" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_bidding.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_create_workers_profile.xml" value="0.2490740740740741" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_login.xml" value="0.2553846153846154" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_problem_open.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_problem_posting.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_problem_show.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_show_nid.xml" value="0.259375" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_signup.xml" value="0.264" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_upload_nid.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_user_profile.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_workers_profile.xml" value="0.2490740740740741" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/biddingcustomview.xml" value="0.2490740740740741" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/drawable/profile_layout_shaper.xml" value="0.2735" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_chatbox.xml" value="0.33" />

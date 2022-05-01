@@ -1,45 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".bidding">
-
+    tools:context=".Login"
+    android:background="#3ECC3E"
+    >
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_Post_Your_Problem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter Bidding Amount" />
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/profile_layout_shaper"
+        android:fontFamily="@font/belmist"
+        android:gravity="center"
+        android:text="Post Your Bidding"
+        android:textColor="@color/green"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/bidingAmount"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:hint="Enter amount in taka"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/signup_form_shaper"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/saveBid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_Post_Your_Problem"
+        app:layout_constraintVertical_weight="1">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter additional note" />
 
-    <EditText
-        android:id="@+id/additionalnotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="such as why the user will hire you"
-        tools:ignore="TouchTargetSizeCheck" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textView6"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="Bidding Amount"
+            app:boxStrokeColor="@color/primaryTextColor"
+            app:counterEnabled="true"
+            app:counterMaxLength="9"
+            app:hintTextColor="@color/primaryTextColor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/bidingAmount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:textCursorDrawable="@drawable/green_color_cursor"
+                android:inputType="number"
+                android:textColor="@color/primaryTextColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tv_problem_details"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="10dp"
+            android:hint="Bidding Notes"
+            app:boxStrokeColor="@color/primaryTextColor"
+            app:counterEnabled="true"
+            app:counterMaxLength="200"
+            app:hintTextColor="@color/primaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+            app:layout_constraintTop_toBottomOf="@id/textView6">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/additionalnotes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:textCursorDrawable="@drawable/green_color_cursor"
+                android:inputType="textCapSentences | textMultiLine"
+                android:textColor="@color/primaryTextColor" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/saveBid"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Submit" />
-</LinearLayout>
+        android:background="@drawable/signup_btn_shaper"
+        android:text="Post"
+        app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
+        app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="12dp"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

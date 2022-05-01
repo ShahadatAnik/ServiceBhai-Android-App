@@ -127,7 +127,7 @@ public class problemOpen extends AppCompatActivity {
 
     void markAsDoneObj(){
         System.out.println(DB.markAsDone(postid));
-        Intent intent = new Intent(this, problemShow.class);
+        Intent intent = new Intent(this, homepageForUser.class);
         startActivity(intent);
     }
 

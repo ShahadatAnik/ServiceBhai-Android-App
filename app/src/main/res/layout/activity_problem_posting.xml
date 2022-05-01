@@ -77,28 +77,53 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginLeft="8dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@+id/tv_problem_title"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_problem_title"
             app:layout_constraintLeft_toRightOf="@id/rg_category"
             app:layout_constraintStart_toEndOf="@+id/rg_category"
-            app:layout_constraintTop_toBottomOf="@id/tv_problem_title"
             tools:ignore="MissingConstraints">
 
             <RadioButton
                 android:id="@+id/rb_electrical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Electrical" />
+                android:text="Electrician" />
+
+            <RadioButton
+                android:id="@+id/rb_plumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plumber" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/radioGroupRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_problem_title"
+            app:layout_constraintLeft_toRightOf="@id/radioGroup"
+            app:layout_constraintStart_toEndOf="@+id/radioGroup"
+            tools:ignore="MissingConstraints">
 
             <RadioButton
                 android:id="@+id/rb_mechanical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mechanical" />
+                android:text="Mechanics" />
+            <RadioButton
+                android:id="@+id/rb_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other" />
         </RadioGroup>
 
 
@@ -118,7 +143,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
             app:layout_constraintStart_toStartOf="@id/constraintLayout_form"
-            app:layout_constraintTop_toBottomOf="@id/rg_category">
+            app:layout_constraintTop_toBottomOf="@id/radioGroup">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_problem_details"

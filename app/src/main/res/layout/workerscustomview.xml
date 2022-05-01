@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="workersName"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="@color/green"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/sendWorkerMessage"

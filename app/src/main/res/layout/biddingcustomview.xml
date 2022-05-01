@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="biddername"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="@color/green"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/biddingamount"
@@ -47,13 +47,16 @@
         app:layout_constraintStart_toStartOf="@id/biddername"
         app:layout_constraintTop_toBottomOf="@id/biddername" />
 
-    <Button
+
+    <ImageView
         android:id="@+id/btn_workers_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="Info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/biddername"
-        app:layout_constraintTop_toBottomOf="@id/biddingamount" />
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:drawableStart="@drawable/ic_baseline_send_24"
+        app:layout_constraintEnd_toEndOf="@+id/biddingamount"
+        app:layout_constraintStart_toStartOf="@id/biddingamount"
+        app:layout_constraintTop_toBottomOf="@id/biddingamount"
+        app:srcCompat="@drawable/ic_baseline_send_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

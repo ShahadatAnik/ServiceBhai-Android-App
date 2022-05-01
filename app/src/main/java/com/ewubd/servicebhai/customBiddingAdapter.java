@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class customBiddingAdapter extends BaseAdapter {
         TextView biddername = rowView.findViewById(R.id.biddername);
         TextView biddingamount = rowView.findViewById(R.id.biddingamount);
         TextView biddernote = rowView.findViewById(R.id.biddernotes);
-        Button info = rowView.findViewById(R.id.btn_workers_info);
+        ImageView send = rowView.findViewById(R.id.btn_workers_info);
 
         biddingArrayList biddingArrayList = arrayList.get(position);
 
@@ -60,9 +61,9 @@ public class customBiddingAdapter extends BaseAdapter {
         biddingamount.setText(String.valueOf(biddingArrayList.getBiddingamount())+" BDT");
         biddernote.setText(biddingArrayList.getComment());
         if(userOrWorker == 0){
-            info.setVisibility(View.GONE);
+            rowView.setVisibility(View.GONE);
         }
-        info.setOnClickListener(new View.OnClickListener() {
+        rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -72,7 +73,7 @@ public class customBiddingAdapter extends BaseAdapter {
         });
 
         if(userOrWorker == 1){
-            rowView.setOnClickListener(new View.OnClickListener() {
+            send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

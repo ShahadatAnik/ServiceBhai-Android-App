@@ -47,6 +47,7 @@
             android:text="Rating"
             android:textSize="17sp"
             android:textStyle="bold"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="@id/radioGroup"
             app:layout_constraintStart_toStartOf="@+id/tv_problem_details"
             app:layout_constraintTop_toTopOf="@id/radioGroup" />

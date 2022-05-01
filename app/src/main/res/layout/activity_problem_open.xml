@@ -27,14 +27,14 @@
         android:id="@+id/constraintLayout_form"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
         android:background="@drawable/signup_form_shaper"
-        android:padding="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/biddingListView"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_Post_Your_Problem"
-        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_weight="1">
 
         <TextView
@@ -67,6 +67,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/tv_bidding"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/profile_layout_shaper"
+        android:fontFamily="@font/belmist"
+        android:gravity="center"
+        android:text="Biddings"
+        android:textColor="@color/green"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout_form"
+        />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_form2"
@@ -77,11 +96,11 @@
         android:padding="15dp"
         app:layout_constraintBottom_toTopOf="@+id/delete"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout_form"
+        app:layout_constraintTop_toBottomOf="@id/tv_bidding"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_weight="1">
+        />
 
         <ListView
             android:id="@+id/biddingListView"

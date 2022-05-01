@@ -3,11 +3,13 @@ package com.ewubd.servicebhai;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -25,10 +27,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -65,7 +74,7 @@ public class signup extends AppCompatActivity {
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         myPref.edit().putInt("loggedInID", -1).apply();
 
-
+        fetchData();
 
     }
     void saveInfo(){
@@ -205,5 +214,55 @@ public class signup extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return (networkInfo!=null && networkInfo.isConnected());
+    }
+    public void fetchData(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int id = jo.getInt("Personid");
+                        String name = jo.getString("name");
+                        String email = jo.getString("email");
+                        String address = jo.getString("address");
+                        String phone = jo.getString("phone");
+                        String type = jo.getString("type");
+                        String password = jo.getString("password");
+
+                        System.out.println(id+" "+name+" "+email+" "+address+" "+phone+" "+type+" "+password);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_USER);
     }
 }

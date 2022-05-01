@@ -18,6 +18,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final int Version= 20;
     private int totalProblem;
     public static final String SERVER_URL = "http://192.168.1.126/serviceBhai/insert.php";
+    public static final String FETCH_USER = "http://192.168.1.126/serviceBhai/selectUser.php";
 
     private Context context;
 

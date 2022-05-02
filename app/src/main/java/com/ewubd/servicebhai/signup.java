@@ -1,6 +1,5 @@
 package com.ewubd.servicebhai;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -13,18 +12,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -32,14 +25,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -236,6 +228,18 @@ public class signup extends AppCompatActivity {
                         String password = jo.getString("password");
 
                         System.out.println(id+" "+name+" "+email+" "+address+" "+phone+" "+type+" "+password);
+
+                        boolean bool = compareWithRemote(email);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.insertUser(name, email, address, phone, password, type);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -264,5 +268,19 @@ public class signup extends AppCompatActivity {
         }
         dbManager obj =new dbManager();
         obj.execute(DB.FETCH_USER);
+    }
+
+    private boolean compareWithRemote(String remail) {
+        ArrayList<String> emailFromSql;
+        DB = new MyDatabaseHelper(this);
+        emailFromSql = DB.getEmail();
+        for(int i=0;i<emailFromSql.size();i++){
+            System.out.println(remail+" "+emailFromSql.get(i));
+            if(remail.equals(emailFromSql.get(i))){
+
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -273,5 +273,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String name= count.getString(0);
         return name;
     }
+    public ArrayList<String> getEmail(){
+        ArrayList<String> emailList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select email from users;",null);
+        while(emails.moveToNext()){
+            String emailfromSQL = emails.getString(0);
+            emailList.add(emailfromSQL);
+        }
+        return emailList;
+    }
 
 }

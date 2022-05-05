@@ -18,6 +18,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
     private static final int Version= 21;
     private int totalProblem;
+    public static final String SERVER_URL = "https://servicevai.000webhostapp.com/ServiceBhai/insert.php";
+    public static final String FETCH_USER = "https://servicevai.000webhostapp.com/ServiceBhai/selectUser.php";
 
     private Context context;
 
@@ -394,6 +396,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         count.moveToFirst();
         int workersPersonID= count.getInt(0);
         return workersPersonID;
+    }
+    public ArrayList<String> getEmail(){
+        ArrayList<String> emailList = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select email from users;",null);
+        while(emails.moveToNext()){
+            String emailfromSQL = emails.getString(0);
+            emailList.add(emailfromSQL);
+        }
+        return emailList;
     }
 
 }

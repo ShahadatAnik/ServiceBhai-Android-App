@@ -17,8 +17,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
     private static final int Version= 20;
     private int totalProblem;
-    public static final String SERVER_URL = "http://192.168.1.126/serviceBhai/insert.php";
-    public static final String FETCH_USER = "http://192.168.1.126/serviceBhai/selectUser.php";
+    public static final String SERVER_URL = "https://servicevai.000webhostapp.com/ServiceBhai/insert.php";
+    public static final String FETCH_USER = "https://servicevai.000webhostapp.com/ServiceBhai/selectUser.php";
 
     private Context context;
 

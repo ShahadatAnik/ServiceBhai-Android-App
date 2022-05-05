@@ -26,29 +26,30 @@ public class notificationcheck extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        DB= new MyDatabaseHelper(this);
-        myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+        while (true){
+            DB= new MyDatabaseHelper(this);
+            myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+                NotificationManager manager = getSystemService(NotificationManager.class);
+                manager.createNotificationChannel(channel);
+            }
+
+            int user = myPref.getInt("loggedInID", -1);
+            int messageCount = DB.messageCountOfUser(user);
+
+
+            int prevMessageCount = myPref.getInt("messageCount"+user, -1);
+            if(prevMessageCount == -1 ){
+                myPref.edit().putInt("messageCount"+user, 0).apply();
+            }
+            if(messageCount > prevMessageCount && messageCount!=0){
+                //System.out.println("New Message");
+                getNotification();
+                myPref.edit().putInt("messageCount"+user, messageCount).apply();
+            }
+            return START_STICKY;
         }
-
-        int user = myPref.getInt("loggedInID", -1);
-        int messageCount = DB.messageCountOfUser(user);
-
-
-        int prevMessageCount = myPref.getInt("messageCount"+user, -1);
-        if(prevMessageCount == -1 ){
-            myPref.edit().putInt("messageCount"+user, 0).apply();
-        }
-        if(messageCount > prevMessageCount && messageCount!=0){
-            //System.out.println("New Message");
-            getNotification();
-            myPref.edit().putInt("messageCount"+user, messageCount).apply();
-        }
-
-        return START_STICKY;
     }
 
     void getNotification(){

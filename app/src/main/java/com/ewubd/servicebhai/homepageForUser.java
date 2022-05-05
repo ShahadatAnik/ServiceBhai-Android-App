@@ -64,11 +64,11 @@ public class homepageForUser extends AppCompatActivity {
             startActivity(intent);
         });
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+//            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+//            NotificationManager manager = getSystemService(NotificationManager.class);
+//            manager.createNotificationChannel(channel);
+//        }
 
 //        int user = myPref.getInt("loggedInID", -1);
 //        int messageCount = DB.messageCountOfUser(user);
@@ -117,6 +117,8 @@ public class homepageForUser extends AppCompatActivity {
         myPref.edit().putInt("loggedInID", -1).apply();
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+        Intent intent2 = new Intent(this, notificationcheck.class);
+        stopService(intent2);
     }
     void userProfilePage(){
         Intent intent = new Intent(this, userProfile.class);
@@ -139,20 +141,20 @@ public class homepageForUser extends AppCompatActivity {
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
     }
-    void getNotification(){
-        Intent intent = new Intent(this, inbox.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
-                .setSmallIcon(R.drawable.profile_layout_shaper)
-                .setContentTitle("You have a new message")
-                .setContentText("Someone Wants to get your job")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(0, builder.build());
-    }
+//    void getNotification(){
+//        Intent intent = new Intent(this, inbox.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
+//                .setSmallIcon(R.drawable.profile_layout_shaper)
+//                .setContentTitle("You have a new message")
+//                .setContentText("Someone Wants to get your job")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true);
+//
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+//        notificationManager.notify(0, builder.build());
+//    }
 }

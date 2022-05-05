@@ -40,6 +40,7 @@ import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 public class signup extends AppCompatActivity {
 
@@ -94,8 +95,8 @@ public class signup extends AppCompatActivity {
         String prvAdress = address.getText().toString().trim();
 
         String Phone = phone.getText().toString().trim();
-        int phoneInt = Integer.parseInt(Phone);
-        if (Phone.length() != 11 || phoneInt <= 0) {
+
+        if (Phone.length() != 11) {
             error += "Phone number got some error ";
             error += "\n";
         } else {
@@ -126,11 +127,14 @@ public class signup extends AppCompatActivity {
 
         System.out.println("error" + error);
         System.out.println(checkedOne);
-        if (error == "" && checkedOne != "") {
+        if (error.equals("") && !prvname.equals("") && !Email.equals("")
+                && !prvAdress.equals("") && !Phone.equals("") && !prvPassword.equals("") && !checkedOne.equals("") ) {
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
             saveToAppServer(prvname, Email, prvAdress, Phone, checkedOne, encryptedPassword);
 
+        }else{
+            Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_LONG).show();
         }
     }
         private void saveToAppServer (String prvname, String email, String prvAdress, String

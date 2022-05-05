@@ -61,8 +61,7 @@ public class createWorkersProfile extends AppCompatActivity {
         Boolean noError = DB.insertWorker(userid, checkedOne, prvNid, prv_bio);
         if(noError==true){
             System.out.println("Data Inserted");
-            Intent intent = new Intent(this, workersProfile.class);
-            startActivity(intent);
+            onBackPressed();
         }
         else System.out.println("Got some error");
     }

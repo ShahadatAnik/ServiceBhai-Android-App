@@ -140,6 +140,7 @@ public class uploadNID extends AppCompatActivity {
                             upload upload = new upload(String.valueOf(userid), downloadUrl.toString());
                             String uploadID = mDatabaseRef.push().getKey();
                             mDatabaseRef.child(uploadID).setValue(upload);
+                            onBackPressed();
                         }
                     });
 

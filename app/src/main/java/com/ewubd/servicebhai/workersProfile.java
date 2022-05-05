@@ -34,4 +34,19 @@ public class workersProfile extends AppCompatActivity {
         workerBio.setText(profile[4]);
 
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        int userid = myPref.getInt("loggedInID", -1);
+        String profile[]= DB.getWorkersProfile(userid);
+        if(profile[0]==null){
+            Intent intent = new Intent(this, createWorkersProfile.class);
+            startActivity(intent);
+        }
+
+        expertise.setText(profile[2]);
+        NID.setText(profile[3]);
+        workerBio.setText(profile[4]);
+    }
 }

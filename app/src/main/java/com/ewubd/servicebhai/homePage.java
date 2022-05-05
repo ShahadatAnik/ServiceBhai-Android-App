@@ -48,20 +48,21 @@ public class homePage extends AppCompatActivity {
             manager.createNotificationChannel(channel);
         }
 
-        int user = myPref.getInt("loggedInID", -1);
-        int messageCount = DB.messageCountOfUser(user);
-
-
-        int prevMessageCount = myPref.getInt("messageCount"+user, -1);
-        if(prevMessageCount == -1 ){
-            myPref.edit().putInt("messageCount"+user, 0).apply();
-        }
-        if(messageCount > prevMessageCount && messageCount!=0){
-            //System.out.println("New Message");
-            getNotification();
-            myPref.edit().putInt("messageCount"+user, messageCount).apply();
-        }
-
+//        int user = myPref.getInt("loggedInID", -1);
+//        int messageCount = DB.messageCountOfUser(user);
+//
+//
+//        int prevMessageCount = myPref.getInt("messageCount"+user, -1);
+//        if(prevMessageCount == -1 ){
+//            myPref.edit().putInt("messageCount"+user, 0).apply();
+//        }
+//        if(messageCount > prevMessageCount && messageCount!=0){
+//            //System.out.println("New Message");
+//            getNotification();
+//            myPref.edit().putInt("messageCount"+user, messageCount).apply();
+//        }
+        Intent intent = new Intent(this, notificationcheck.class);
+        startService(intent);
 
 
     }

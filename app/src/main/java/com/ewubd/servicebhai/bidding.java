@@ -47,12 +47,12 @@ public class bidding extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Please Fill The Bidding Amount!!",Toast.LENGTH_LONG).show();
         }
 
-        if(prvnote == ""){
+        if(prvnote.equals("")){
             System.out.println("Got some error from bidding");
             Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_LONG).show();
         }
 
-        if(prvnote != "" && amount != -1){
+        if(amount != -1 && !prvnote.equals("")){
             Boolean noError = DB.insertBidding(postid, userid, amount, prvnote);
             if(noError==true){
                 System.out.println("Data Inserted");

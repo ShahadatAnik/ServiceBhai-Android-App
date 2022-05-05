@@ -388,4 +388,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public int getWorkersPersonID(int workersID){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor count = sqLiteDatabase.rawQuery("select PersonID from workers where workerid = "+workersID+";",null);
+        count.moveToFirst();
+        int workersPersonID= count.getInt(0);
+        return workersPersonID;
+    }
+
 }

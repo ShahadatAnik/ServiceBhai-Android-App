@@ -8,7 +8,7 @@
     android:background="#3ECC3E"
     >
     <TextView
-        android:id="@+id/tv_Post_Your_Problem"
+        android:id="@+id/tv_worker_Name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"
@@ -31,7 +31,7 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_Post_Your_Problem"
+        app:layout_constraintTop_toBottomOf="@id/tv_worker_Name"
         app:layout_constraintBottom_toTopOf="@id/addreview"
         >
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,8 @@ public class workerReview extends AppCompatActivity {
     MyDatabaseHelper DB;
     ArrayList<workerReviewClass> arrayList;
     customWorkerReviewAdapter customWorkerReviewAdapter;
+    TextView workerName;
+    int workersPersonID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class workerReview extends AppCompatActivity {
 
         addReview = findViewById(R.id.addreview);
         ReviewList = findViewById(R.id.workerReviewList);
+        workerName = findViewById(R.id.tv_worker_Name);
 
         addReview.setOnClickListener(v->addReview());
 
@@ -36,6 +40,10 @@ public class workerReview extends AppCompatActivity {
             workerid = extras.getInt("workersidReview");
             loadDatainList();
         }
+        workersPersonID = DB.getWorkersPersonID(workerid);
+        workerName.setText(DB.getUserame(workersPersonID));
+        //System.out.println(workersPersonID);
+        workerName.setOnClickListener(v-> openProfile());
     }
     public void loadDatainList(){
         arrayList = DB.getReviewbyID(workerid);
@@ -54,5 +62,11 @@ public class workerReview extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         loadDatainList();
+    }
+    void openProfile(){
+        Intent intent = new Intent(this, userProfile.class);
+        intent.putExtra("Flag", 1);
+        intent.putExtra("userID", workersPersonID);
+        startActivity(intent);
     }
 }

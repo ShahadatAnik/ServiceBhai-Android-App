@@ -35,6 +35,7 @@ public class userProfile extends AppCompatActivity {
             flag = extras.getInt("Flag");
             userID = extras.getInt("userID");
         }
+        System.out.println(userID);
 
         DB= new MyDatabaseHelper(this);
         userName = findViewById(R.id.tv_profile_name_dynamic);
@@ -60,7 +61,8 @@ public class userProfile extends AppCompatActivity {
             userPhone.setText(profile[4]);
             userType.setText(profile[5]);
 
-            if(profile[5].equals("Worker")){
+            System.out.println(DB.userOrWorker(userid));
+            if(profile[5].equals("Worker") && DB.userOrWorker(userid).equals("Worker")){
                 workersProfile.setVisibility(View.VISIBLE);
             }
         }

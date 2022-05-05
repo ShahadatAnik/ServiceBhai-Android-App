@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,8 +83,8 @@ public class signup extends AppCompatActivity {
         String prvAdress = address.getText().toString().trim();
 
         String Phone = phone.getText().toString().trim();
-        int phoneInt=Integer.parseInt(Phone);
-        if(Phone.length()!= 11 || phoneInt <=0 ){
+
+        if(Phone.length()!= 11 ){
             error+= "Phone number got some error ";
             error+= "\n";
         }
@@ -116,16 +117,20 @@ public class signup extends AppCompatActivity {
 
         System.out.println("error"+ error);
         System.out.println(checkedOne);
-        if(error==""){
+        if(error.equals("") && !prvname.equals("") && !Email.equals("") && !prvAdress.equals("")
+                && !Phone.equals("") && !prvPassword.equals("") && !checkedOne.equals("") ){
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
-            //saveToAppServer(prvname,Email,prvAdress,Phone,checkedOne,encryptedPassword);
             Boolean noError = DB.insertUser(prvname, Email, prvAdress, Phone, encryptedPassword, checkedOne);
             if(noError==true){
                 System.out.println("Data Inserted");
                 LoginPage();
             }
-            else System.out.println("Got some error");
+            else{
+                Toast.makeText(getApplicationContext(),"Please Fill All The Fields!!",Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(),"Please Fill All The Fields!!",Toast.LENGTH_LONG).show();
         }
     }
 

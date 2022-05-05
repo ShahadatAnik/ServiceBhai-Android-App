@@ -11,11 +11,12 @@ import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String Database_name= "serviceBhai";
-    private static final int Version= 20;
+    private static final int Version= 21;
     private int totalProblem;
 
     private Context context;
@@ -201,16 +202,23 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public Boolean sendMessages(int fromID, int toID, String message){
         SQLiteDatabase DB = this.getWritableDatabase();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        Calendar c = Calendar.getInstance();
+//        Date date = new Date();
         ContentValues contentValues = new ContentValues();
         contentValues.put("fromID", fromID);
         contentValues.put("toID", toID);
         contentValues.put("message", message);
-        contentValues.put("datetime", dateFormat.format(date));
-        long result = DB.insert("messages",null,contentValues);
-        if(result==-1) return false;
-        else return true;
+        contentValues.put("datetime", dateFormat.format(c.getTime()));
+        if(message.equals("")){
+            Toast.makeText(context,"Write Something",Toast.LENGTH_LONG).show();
+            return false;
+        } else{
+            long result = DB.insert("messages",null,contentValues);
+            if(result==-1) return false;
+            else return true;
+        }
+
     }
 
     public ArrayList<inboxArrayList> inboxMessages(int id){

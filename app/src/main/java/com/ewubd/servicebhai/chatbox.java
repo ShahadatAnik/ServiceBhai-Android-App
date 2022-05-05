@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,17 +59,18 @@ public class chatbox extends AppCompatActivity {
     }
 
     void sendingMessages(){
-        //System.out.println(workersID);
-        //System.out.println(userid);
         String message = messagesBox.getText().toString().trim();
-        //System.out.println(message);
-        Boolean noError = DB.sendMessages(userid, workersID, message);
-        if(noError==true){
-            System.out.println("Message Send");
-            messagesBox.getText().clear();
-            loadDatainList();
-        }
-        else System.out.println("Got some error");
+
+        if(!message.equals("")){
+            Boolean noError = DB.sendMessages(userid, workersID, message);
+            if(noError==true){
+                System.out.println("Message Send");
+                messagesBox.getText().clear();
+                loadDatainList();
+            }
+            else System.out.println("Got some error");
+        } else Toast.makeText(getApplicationContext(),"Write Something!!",Toast.LENGTH_LONG).show();
+
     }
 
     public void loadDatainList(){

@@ -18,7 +18,7 @@
         android:gravity="center"
         android:text="Profile"
         android:textColor="@color/green"
-        android:textSize="50sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -149,7 +149,8 @@
     <TextView
         android:id="@+id/tv_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="16dp"
@@ -158,7 +159,7 @@
         android:gravity="center"
         android:text="History"
         android:textColor="@color/green"
-        android:textSize="50sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/constraintLayout_bottom_form_tv_profile"

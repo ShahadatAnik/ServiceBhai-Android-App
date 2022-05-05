@@ -30,7 +30,6 @@ public class problemOpen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_open);
-        Bundle extras = getIntent().getExtras();
         biddingListView = findViewById(R.id.biddingListView);
 
 
@@ -62,17 +61,16 @@ public class problemOpen extends AppCompatActivity {
             user = 0;
         }
 
-        String usertype = DB.userOrWorker(userid);
-        System.out.println(usertype);
-
-
         probtitle = findViewById(R.id.tv_prob_title);
         probdetail = findViewById(R.id.tv_prob_details);
+
+        Bundle extras = getIntent().getExtras();
+        String usertype = DB.userOrWorker(userid);
         if (extras != null) {
             postid = extras.getInt("postid");
             personid = extras.getInt("personid");
         }
-        if(userid == personid){
+        if(userid == personid && user == 1){
             delete.setVisibility(View.VISIBLE);
             markASDone.setVisibility(View.VISIBLE);
         }
@@ -80,7 +78,6 @@ public class problemOpen extends AppCompatActivity {
             accept.setVisibility(View.VISIBLE);
             bid.setVisibility(View.VISIBLE);
         }
-        //System.out.println(postid+" "+personid);
 
         loadDatainList();
     }
@@ -104,6 +101,22 @@ public class problemOpen extends AppCompatActivity {
         problem = DB.getProblembyID(postid);
         probtitle.setText(problem[0]);
         probdetail.setText(problem[2]);
+
+        Bundle extras = getIntent().getExtras();
+        String usertype = DB.userOrWorker(userid);
+        if (extras != null) {
+            postid = extras.getInt("postid");
+            personid = extras.getInt("personid");
+        }
+        if(userid == personid && user == 1){
+            delete.setVisibility(View.VISIBLE);
+            markASDone.setVisibility(View.VISIBLE);
+        }
+        if(usertype.equals("Worker")){
+            accept.setVisibility(View.VISIBLE);
+            bid.setVisibility(View.VISIBLE);
+        }
+        loadDatainList();
     }
 
     void acceptWork(){

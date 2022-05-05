@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,14 +62,21 @@ public class customBiddingAdapter extends BaseAdapter {
         biddingamount.setText(String.valueOf(biddingArrayList.getBiddingamount())+" BDT");
         biddernote.setText(biddingArrayList.getComment());
         if(userOrWorker == 0){
-            rowView.setVisibility(View.GONE);
+            send.setVisibility(View.GONE);
         }
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("workersidReview", biddingArrayList.getWorkerID());
-                context.startActivity(intent);
+                if(userOrWorker == 0){
+//                    rowView.setVisibility(View.GONE);
+                    Toast.makeText(context,"You Can Not Click!!",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("workersidReview", biddingArrayList.getWorkerID());
+                    context.startActivity(intent);
+                }
+
             }
         });
 

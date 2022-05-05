@@ -50,16 +50,17 @@ public class customInboxAdapter extends BaseAdapter {
         TextView inboxTime = rowView.findViewById(R.id.inbox_time);
 
 
-        //title.setOnClickListener(v->problemopenpage());
-
-
         inboxArrayList inboxArrayList = arrayList.get(position);
 
         getfromID = inboxArrayList.getFromIDid();
         gettoID = inboxArrayList.getToID();
         getmessages = inboxArrayList.getMessages();
 
-        inboxTime.setText(inboxArrayList.getDateTime().split(" ")[1]);
+        String inboxDate = inboxArrayList.getDateTime().split(" ")[0];
+        String inboxTimeVal = inboxArrayList.getDateTime().split(" ")[1];
+        String inboxMaridian = inboxArrayList.getDateTime().split(" ")[2];
+
+        inboxTime.setText(inboxDate+"\n"+inboxTimeVal+" "+inboxMaridian);
 
         if(inboxArrayList.getMessages().length() > 25){
             messages.setText(inboxArrayList.getMessages().substring(0,25)+"...");
@@ -67,7 +68,6 @@ public class customInboxAdapter extends BaseAdapter {
         else messages.setText(inboxArrayList.getMessages());
 
         toname.setText(inboxArrayList.getName());
-
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +77,6 @@ public class customInboxAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-
 
         return rowView;
     }

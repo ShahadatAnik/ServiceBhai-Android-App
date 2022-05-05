@@ -1,20 +1,23 @@
 package com.ewubd.servicebhai;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -34,6 +37,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 
 public class signup extends AppCompatActivity {
 
@@ -68,119 +74,113 @@ public class signup extends AppCompatActivity {
 
         fetchData();
 
+
     }
-    void saveInfo(){
+    void saveInfo() {
         String error = "";
         String prvname = name.getText().toString().trim();
-        if(prvname.length()>15){
-            error+="Name length is too high";
-        }
-        else{
-            System.out.println("User name "+ prvname);
+        if (prvname.length() > 15) {
+            error += "Name length is too high";
+        } else {
+            System.out.println("User name " + prvname);
         }
         String Email = email.getText().toString().trim();
-        if(isValidEmail(Email) == false){
-            error+= "Wrong Email";
-            error+= "\n";
-        }
-        else{
-            System.out.println("Email "+ Email);
+        if (isValidEmail(Email) == false) {
+            error += "Wrong Email";
+            error += "\n";
+        } else {
+            System.out.println("Email " + Email);
         }
         String prvAdress = address.getText().toString().trim();
 
         String Phone = phone.getText().toString().trim();
-        int phoneInt=Integer.parseInt(Phone);
-        if(Phone.length()!= 11 || phoneInt <=0 ){
-            error+= "Phone number got some error ";
-            error+= "\n";
-        }
-        else{
-            System.out.println("Phone "+ Phone);
+        int phoneInt = Integer.parseInt(Phone);
+        if (Phone.length() != 11 || phoneInt <= 0) {
+            error += "Phone number got some error ";
+            error += "\n";
+        } else {
+            System.out.println("Phone " + Phone);
         }
 
         boolean userIsChecked = rdUser.isChecked();
-        String checkedOne="";
-        if(userIsChecked== true){
+        String checkedOne = "";
+        if (userIsChecked == true) {
             checkedOne = "User";
         }
 
         boolean workerIsChecked = rdWorker.isChecked();
-        if(workerIsChecked== true){
+        if (workerIsChecked == true) {
             checkedOne = "Worker";
         }
 
 
         String prvPassword = password.getText().toString().trim();
         String prvPassword2 = rePassword.getText().toString().trim();
-        if(prvPassword.equals(prvPassword2)){
+        if (prvPassword.equals(prvPassword2)) {
             System.out.println(prvPassword);
-        }
-        else{
-            error+= "Password error ";
-            error+= "\n";
+        } else {
+            error += "Password error ";
+            error += "\n";
             System.out.println("Password Mismatch");
         }
 
-        System.out.println("error"+ error);
+        System.out.println("error" + error);
         System.out.println(checkedOne);
-        if(error==""){
+        if (error == "" && checkedOne != "") {
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
-            saveToAppServer(prvname,Email,prvAdress,Phone,checkedOne,encryptedPassword);
+            saveToAppServer(prvname, Email, prvAdress, Phone, checkedOne, encryptedPassword);
 
         }
     }
-
-    private void saveToAppServer(String prvname, String email, String prvAdress, String phone, String checkedOne, String encryptedPassword) {
-        if(checkNetworkConnection()){
-            System.out.println("ggwp");
-            MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_URL, response -> {
-                System.out.println("Name in :"+prvname);
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String Response = jsonObject.getString("response");
-                    System.out.println(Response);
-                    if(Response.equals("ok")){
-                        System.out.println("Data Inserted in Remote DB");
-                        Boolean noError = DB.insertUser(prvname, email, prvAdress, phone, encryptedPassword, checkedOne);
-                        if(noError==true){
-                            System.out.println("Data Inserted");
-                            LoginPage();
+        private void saveToAppServer (String prvname, String email, String prvAdress, String
+        phone, String checkedOne, String encryptedPassword){
+            if (checkNetworkConnection()) {
+                System.out.println("ggwp");
+                MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_URL, response -> {
+                    System.out.println("Name in :" + prvname);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String Response = jsonObject.getString("response");
+                        System.out.println(Response);
+                        if (Response.equals("ok")) {
+                            System.out.println("Data Inserted in Remote DB");
+                            Boolean noError = DB.insertUser(prvname, email, prvAdress, phone, encryptedPassword, checkedOne);
+                            if (noError == true) {
+                                System.out.println("Data Inserted");
+                                LoginPage();
+                            } else System.out.println("Got some error");
+                        } else {
+                            System.out.println("Error Data not inserted in remote1");
                         }
-                        else System.out.println("Got some error");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    else{
-                        System.out.println("Error Data not inserted in remote1");
+                }, error -> System.out.println(error)) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("name", prvname);
+                        params.put("email", email);
+                        params.put("address", prvAdress);
+                        params.put("phone", phone);
+                        params.put("type", checkedOne);
+                        params.put("password", encryptedPassword);
+                        return params;
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }, error -> System.out.println(error))
-            {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String,String> params = new HashMap<>();
-                    params.put("name",prvname);
-                    params.put("email",email);
-                    params.put("address",prvAdress);
-                    params.put("phone",phone);
-                    params.put("type",checkedOne);
-                    params.put("password",encryptedPassword);
-                    return params;
-                }
-            };
-            MySingleton.getInstance(signup.this).addToRequestQue(stringRequest);
+                };
+                MySingleton.getInstance(signup.this).addToRequestQue(stringRequest);
+            } else {
+                System.out.println("no network");
+            }
         }
-        else{
-            System.out.println("no network");
-        }
-    }
 
-    public static boolean isValidEmail(CharSequence target) {
-        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
-    }
-        public static String getMd5(String input)
+
+        public static boolean isValidEmail (CharSequence target){
+            return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+        }
+        public static String getMd5 (String input)
         {
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
@@ -191,96 +191,86 @@ public class signup extends AppCompatActivity {
                     hashtext = "0" + hashtext;
                 }
                 return hashtext;
-            }
-            catch (NoSuchAlgorithmException e) {
+            } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
         }
 
-    void LoginPage(){
-        Intent i = new Intent(this, Login.class);
-        startActivity(i);
-    }
+        void LoginPage () {
+            Intent i = new Intent(this, Login.class);
+            startActivity(i);
+        }
 
-    public boolean checkNetworkConnection(){
-        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return (networkInfo!=null && networkInfo.isConnected());
-    }
-    public void fetchData(){
-        DB = new MyDatabaseHelper(this);
-        @SuppressLint("StaticFieldLeak")
-        class dbManager extends AsyncTask<String,Void,String>
-        {
-            protected void onPostExecute(String data){
-                try {
-                    JSONArray ja = new JSONArray(data);
-                    JSONObject jo = null;
-
-                    for(int i =0;i<ja.length();i++){
-                        jo=ja.getJSONObject(i);
-                        int id = jo.getInt("Personid");
-                        String name = jo.getString("name");
-                        String email = jo.getString("email");
-                        String address = jo.getString("address");
-                        String phone = jo.getString("phone");
-                        String type = jo.getString("type");
-                        String password = jo.getString("password");
-
-                        System.out.println(id+" "+name+" "+email+" "+address+" "+phone+" "+type+" "+password);
-
-                        boolean bool = compareWithRemote(email);
-
-                        if(bool){
-                            System.out.println("Data Already Present");
-                        }
-                        else{
-                            Boolean noError = DB.insertUser(name, email, address, phone, password, type);
-                            if(noError){
-                                System.out.println("Data Inserted");
+        public boolean checkNetworkConnection () {
+            ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return (networkInfo != null && networkInfo.isConnected());
+        }
+        public void fetchData () {
+            DB = new MyDatabaseHelper(this);
+            @SuppressLint("StaticFieldLeak")
+            class dbManager extends AsyncTask<String, Void, String> {
+                protected void onPostExecute(String data) {
+                    try {
+                        JSONArray ja = new JSONArray(data);
+                        JSONObject jo = null;
+                        for (int i = 0; i < ja.length(); i++) {
+                            jo = ja.getJSONObject(i);
+                            int id = jo.getInt("Personid");
+                            String name = jo.getString("name");
+                            String email = jo.getString("email");
+                            String address = jo.getString("address");
+                            String phone = jo.getString("phone");
+                            String type = jo.getString("type");
+                            String password = jo.getString("password");
+                            System.out.println(id + " " + name + " " + email + " " + address + " " + phone + " " + type + " " + password);
+                            boolean bool = compareWithRemote(email);
+                            if (bool) {
+                                System.out.println("Data Already Present");
+                            } else {
+                                Boolean noError = DB.insertUser(name, email, address, phone, password, type);
+                                if (noError) {
+                                    System.out.println("Data Inserted");
+                                }
                             }
                         }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                }
+
+                @Override
+                protected String doInBackground(String... strings) {
+                    try {
+                        URL url = new URL(strings[0]);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                        StringBuffer data = new StringBuffer();
+                        String line;
+                        while ((line = br.readLine()) != null) {
+                            data.append(line + "\n");
+                        }
+                        br.close();
+                        return data.toString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
                 }
             }
-            @Override
-            protected String doInBackground(String... strings) {
-                try {
-                    URL url = new URL(strings[0]);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-                    StringBuffer data = new StringBuffer();
-                    String line;
-
-                    while((line=br.readLine())!=null){
-                        data.append(line+"\n");
-                    }
-                    br.close();
-                    return data.toString();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            dbManager obj = new dbManager();
+            obj.execute(DB.FETCH_USER);
+        }
+        private boolean compareWithRemote (String remail){
+            ArrayList<String> emailFromSql;
+            DB = new MyDatabaseHelper(this);
+            emailFromSql = DB.getEmail();
+            for (int i = 0; i < emailFromSql.size(); i++) {
+                System.out.println(remail + " " + emailFromSql.get(i));
+                if (remail.equals(emailFromSql.get(i))) {
+                    return true;
                 }
-                return null;
             }
+            return false;
         }
-        dbManager obj =new dbManager();
-        obj.execute(DB.FETCH_USER);
     }
-
-    private boolean compareWithRemote(String remail) {
-        ArrayList<String> emailFromSql;
-        DB = new MyDatabaseHelper(this);
-        emailFromSql = DB.getEmail();
-        for(int i=0;i<emailFromSql.size();i++){
-            System.out.println(remail+" "+emailFromSql.get(i));
-            if(remail.equals(emailFromSql.get(i))){
-
-                return true;
-            }
-        }
-        return false;
-    }
-}

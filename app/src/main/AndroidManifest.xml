@@ -12,61 +12,80 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ServiceBhai">
         <activity
+            android:screenOrientation="portrait"
             android:name=".bidding"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".showNID"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".uploadNID"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".insertReview"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".workerReview"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".inbox"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".chatbox"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".workersList"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".homepageForUser"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".problemOpen"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".problemShow"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".problemPosting"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".createWorkersProfile"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".workersProfile"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".userProfile"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".homePage"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".Login"
             android:exported="false" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".signup"
             android:exported="false" />
 
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

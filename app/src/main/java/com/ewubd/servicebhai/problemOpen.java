@@ -26,6 +26,7 @@ public class problemOpen extends AppCompatActivity {
     customBiddingAdapter customBiddingAdapter;
     private ListView biddingListView;
     int userid;
+    Boolean hasWorkerProfile = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,8 @@ public class problemOpen extends AppCompatActivity {
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
         bid = findViewById(R.id.bidding);
+
+
         markASDone = findViewById(R.id.btn_mark_as_done);
         markASDone.setVisibility(View.INVISIBLE);
         delete.setVisibility(View.INVISIBLE);
@@ -51,6 +54,8 @@ public class problemOpen extends AppCompatActivity {
         markASDone.setOnClickListener(v->markAsDoneObj());
 
         DB= new MyDatabaseHelper(this);
+
+
 
         userOrWorker = DB.userOrWorker(userid);
         System.out.println(userOrWorker);
@@ -76,7 +81,10 @@ public class problemOpen extends AppCompatActivity {
         }
         if(usertype.equals("Worker")){
             accept.setVisibility(View.VISIBLE);
-            bid.setVisibility(View.VISIBLE);
+            hasWorkerProfile = DB.hasWorkerProfile(userid);
+            if(hasWorkerProfile == true){
+                bid.setVisibility(View.VISIBLE);
+            }
         }
 
         loadDatainList();
@@ -114,7 +122,11 @@ public class problemOpen extends AppCompatActivity {
         }
         if(usertype.equals("Worker")){
             accept.setVisibility(View.VISIBLE);
-            bid.setVisibility(View.VISIBLE);
+            //bid.setVisibility(View.VISIBLE);
+            hasWorkerProfile = DB.hasWorkerProfile(userid);
+            if(hasWorkerProfile == true){
+                bid.setVisibility(View.VISIBLE);
+            }
         }
         loadDatainList();
     }

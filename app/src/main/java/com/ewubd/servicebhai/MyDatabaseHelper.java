@@ -377,4 +377,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return workerid;
     }
 
+    public boolean hasWorkerProfile(int userID){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor count = sqLiteDatabase.rawQuery("select workerid from workers where PersonID = "+userID+";",null);
+        if(count.moveToFirst() == false){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
 }

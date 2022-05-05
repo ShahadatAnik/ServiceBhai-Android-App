@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green">#3ECC3E</color>
+    <color name="danger">#F32013</color>
+
 
     <color name="primaryColor">#ffffff</color>
     <color name="primaryLightColor">#7aff6f</color>

@@ -39,8 +39,9 @@
             android:id="@+id/chatListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="15dp" />
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -63,7 +64,7 @@
     <ImageView
         android:id="@+id/sendMessageButton"
         android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_height="0dp"
         android:layout_centerInParent="true"
         app:layout_constraintEnd_toEndOf="@id/constraintLayout_form"
         app:layout_constraintStart_toEndOf="@+id/messageBox"

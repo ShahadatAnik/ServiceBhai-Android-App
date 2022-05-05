@@ -116,7 +116,7 @@ public class signup extends AppCompatActivity {
 
         System.out.println("error"+ error);
         System.out.println(checkedOne);
-        if(error==""){
+        if(error=="" && checkedOne!=""){
             System.out.println("Insert data");
             String encryptedPassword = getMd5(prvPassword);
             //saveToAppServer(prvname,Email,prvAdress,Phone,checkedOne,encryptedPassword);

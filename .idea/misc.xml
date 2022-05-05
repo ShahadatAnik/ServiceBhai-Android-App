@@ -9,14 +9,15 @@
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.206" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/login_btn_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/message_send_button.xml" value="0.206" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/rounded_10dp_white_bg.xml" value="0.1615" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_btn_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/signup_form_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/font/cabinatefont.xml" value="0.28512820512820514" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_bidding.xml" value="0.2490740740740741" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_chatbox.xml" value="0.264" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_create_workers_profile.xml" value="0.2490740740740741" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.16666666666666666" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_homepage_for_user.xml" value="0.16666666666666666" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_homepage_for_user.xml" value="0.264" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_inbox.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_insert_review.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_login.xml" value="0.2553846153846154" />
@@ -33,7 +34,8 @@
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/activity_workers_profile.xml" value="0.2490740740740741" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/biddingcustomview.xml" value="0.2490740740740741" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/chatcustomview.xml" value="0.16666666666666666" />
-        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/inboxcustomview.xml" value="0.16666666666666666" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/custom_grid_catagory.xml" value="0.259375" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/inboxcustomview.xml" value="0.264" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/problem_category_list.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/problemcustomview.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/reviewcustomview.xml" value="0.16666666666666666" />

@@ -59,7 +59,8 @@ public class Login extends AppCompatActivity {
                 signupPage();
             }
         }
-        fetchData();
+        fetchDataWORKER();
+        fetchDataproblemposting();
     }
     void signupPage(){
         Intent intent = new Intent(this, signup.class);
@@ -120,7 +121,7 @@ public class Login extends AppCompatActivity {
         return this.userid;
     }
 
-    public void fetchData(){
+    public void fetchDataWORKER(){
         DB = new MyDatabaseHelper(this);
         @SuppressLint("StaticFieldLeak")
         class dbManager extends AsyncTask<String,Void,String>
@@ -180,6 +181,66 @@ public class Login extends AppCompatActivity {
         dbManager obj =new dbManager();
         obj.execute(DB.FETCH_WORKER);
     }
+    public void fetchDataproblemposting(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int postid = jo.getInt("postid");
+                        int personID = jo.getInt("PersonID");
+                        String title = jo.getString("title");
+                        String helptype = jo.getString("helptype");
+                        String postdetails = jo.getString("postdetails");
+
+                        System.out.println(postid+" "+personID+" "+title+" "+helptype+" "+postdetails);
+
+                        boolean bool = compareWithproblemRemote(postid);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.insertproblemPosting(personID, title, helptype, postdetails);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_PROBLEM);
+    }
     private boolean compareWithRemote(int personID) {
         ArrayList<Integer> id;
         DB = new MyDatabaseHelper(this);
@@ -187,6 +248,17 @@ public class Login extends AppCompatActivity {
         for(int i=0;i<id.size();i++){
             System.out.println(personID+" "+id.get(i));
             if(personID == id.get(i)){
+                return true;
+            }
+        }
+        return false;
+    }private boolean compareWithproblemRemote(int postID) {
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getPersonIDfromproblem();
+        for(int i=0;i<id.size();i++){
+            System.out.println(postID+" "+id.get(i));
+            if(postID == id.get(i)){
                 return true;
             }
         }

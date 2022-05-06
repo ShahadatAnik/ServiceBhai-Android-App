@@ -21,7 +21,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String SERVER_URL = "https://servicevai.000webhostapp.com/ServiceBhai/insert.php";
     public static final String FETCH_USER = "https://servicevai.000webhostapp.com/ServiceBhai/selectUser.php";
     public static final String FETCH_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/selectWorker.php";
+    public static final String FETCH_PROBLEM = "https://servicevai.000webhostapp.com/ServiceBhai/selectProblemPosting.php";
     public static final String SERVER_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/insertWorker.php";
+    public static final String SERVER_PROBLEMPOSTING = "https://servicevai.000webhostapp.com/ServiceBhai/insertProblemPosting.php";
 
     private Context context;
 
@@ -418,6 +420,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             personidlist.add(emailfromSQL);
         }
         return personidlist;
+    }
+    public ArrayList<Integer> getPersonIDfromproblem(){
+        ArrayList<Integer> postidlist = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select postid from problemPosting;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            postidlist.add(emailfromSQL);
+        }
+        return postidlist;
     }
 
 }

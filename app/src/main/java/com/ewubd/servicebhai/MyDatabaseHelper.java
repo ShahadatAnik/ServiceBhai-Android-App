@@ -22,8 +22,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String FETCH_USER = "https://servicevai.000webhostapp.com/ServiceBhai/selectUser.php";
     public static final String FETCH_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/selectWorker.php";
     public static final String FETCH_PROBLEM = "https://servicevai.000webhostapp.com/ServiceBhai/selectProblemPosting.php";
+    public static final String FETCH_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/selectMessages.php";
     public static final String SERVER_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/insertWorker.php";
     public static final String SERVER_PROBLEMPOSTING = "https://servicevai.000webhostapp.com/ServiceBhai/insertProblemPosting.php";
+    public static final String SERVER_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/insertMessages.php";
 
     private Context context;
 
@@ -425,6 +427,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         ArrayList<Integer> postidlist = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor emails = sqLiteDatabase.rawQuery("select postid from problemPosting;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            postidlist.add(emailfromSQL);
+        }
+        return postidlist;
+    }
+
+    public ArrayList<Integer> getMessageFromRemote(){
+        ArrayList<Integer> postidlist = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select messageid from messages;",null);
         while(emails.moveToNext()){
             int emailfromSQL = emails.getInt(0);
             postidlist.add(emailfromSQL);

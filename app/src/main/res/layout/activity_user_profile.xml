@@ -41,6 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="Name:"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             android:textSize="17sp"
             app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_profile"
             tools:ignore="MissingConstraints" />
@@ -54,7 +56,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_name"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_name" />
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_address" />
 
 
         <TextView
@@ -64,6 +66,8 @@
             android:layout_marginTop="24dp"
             android:text="Email:"
             android:textSize="17sp"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_name" />
 
@@ -76,7 +80,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_email"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_email" />
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_address" />
 
 
         <TextView
@@ -86,6 +90,8 @@
             android:layout_marginTop="24dp"
             android:text="Address:"
             android:textSize="17sp"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_email" />
 
@@ -108,6 +114,8 @@
             android:layout_marginTop="24dp"
             android:text="Phone:"
             android:textSize="17sp"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_address" />
 
@@ -120,7 +128,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_phone"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_phone" />
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_address" />
 
 
         <TextView
@@ -130,6 +138,8 @@
             android:layout_marginTop="24dp"
             android:text="Type:"
             android:textSize="17sp"
+            android:textColor="@color/green"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_phone" />
 
@@ -142,7 +152,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@id/tv_profile_type"
-            app:layout_constraintStart_toEndOf="@+id/tv_profile_type" />
+            app:layout_constraintStart_toEndOf="@+id/tv_profile_address" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,6 +194,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:text=""
+            android:textSize="32dp"
             android:textColor="@color/green"
             app:layout_constraintEnd_toEndOf="@+id/history_list_view"
             app:layout_constraintStart_toStartOf="@+id/history_list_view"
@@ -197,6 +208,7 @@
             android:text=""
             android:layout_margin="16dp"
             android:textColor="@color/black"
+            android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="@+id/history_list_view"
             app:layout_constraintStart_toStartOf="@+id/history_list_view"
             app:layout_constraintTop_toBottomOf="@id/tv_category" />

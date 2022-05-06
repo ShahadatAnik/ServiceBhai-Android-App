@@ -70,9 +70,10 @@ public class notificationcheck extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "My Notification")
-                .setSmallIcon(R.drawable.profile_layout_shaper)
-                .setContentTitle("You have a new message")
-                .setContentText("Someone Wants to Hire you")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setTicker("ServiceBhai")
+                .setContentTitle("New Message")
+                .setContentText("Someone Wants to Contact With You")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);

@@ -2,13 +2,26 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class insertReview extends AppCompatActivity {
     private EditText reviewRate,workerReview;
@@ -69,13 +82,55 @@ public class insertReview extends AppCompatActivity {
         }
 
         String review = workerReview.getText().toString().trim();
+        savetoAppServer(userid,workerid,rate,review);
 
-        Boolean noError = DB.insertRating(userid,workerid,rate,review);
-        if(noError && review != ""){
-            System.out.println("Data Inserted");
-            workerReview.setText("");
-            onBackPressed();
+    }
+
+    private void savetoAppServer(int userid, int workerid, String rate, String review) {
+        if (checkNetworkConnection()) {
+//            System.out.println("ggwp");
+            MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_RATING, response -> {
+//                System.out.println("Name in :" + userid);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    System.out.println(Response);
+                    if (Response.equals("ok")) {
+                        System.out.println("Data Inserted in Remote DB");
+                        Boolean noError = DB.insertRating(userid,workerid,rate,review);
+                        if(noError && review != ""){
+                            System.out.println("Data Inserted");
+                            workerReview.setText("");
+                            onBackPressed();
+                        }
+                        else System.out.println("Got some error");
+                    } else {
+                        System.out.println("Error Data not inserted in remote1");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }, error -> System.out.println(error)) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("raterID", String.valueOf(userid));
+                    params.put("userID", String.valueOf(workerid));
+                    params.put("rate", String.valueOf(rate));
+                    params.put("review", review);
+                    return params;
+                }
+            };
+            MySingleton.getInstance(insertReview.this).addToRequestQue(stringRequest);
+        } else {
+            System.out.println("no network");
         }
-        else System.out.println("Got some error");
+    }
+
+    public boolean checkNetworkConnection () {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

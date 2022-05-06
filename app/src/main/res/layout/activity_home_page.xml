@@ -70,11 +70,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/danger"
+        android:textColor="@color/danger"
+        android:background="@drawable/signup_btn_shaper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_Problem"
         app:layout_constraintEnd_toEndOf="@id/tv_Problem"
+        android:layout_marginBottom="8dp"
         />
 
 

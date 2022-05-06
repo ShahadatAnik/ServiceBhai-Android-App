@@ -44,13 +44,9 @@ public class bidding extends AppCompatActivity {
         try{
             amount = Integer.parseInt(bidingAmount.getText().toString().trim());
         } catch(NumberFormatException ex){
-            Toast.makeText(getApplicationContext(),"Please Fill The Bidding Amount!!",Toast.LENGTH_LONG).show();
+            System.out.println("Got some error from bidding");
         }
 
-        if(prvnote.equals("")){
-            System.out.println("Got some error from bidding");
-            Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_LONG).show();
-        }
 
         if(amount != -1 && !prvnote.equals("")){
             Boolean noError = DB.insertBidding(postid, userid, amount, prvnote);
@@ -62,7 +58,7 @@ public class bidding extends AppCompatActivity {
         }
         else {
             System.out.println("Got some error from bidding");
-            Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_SHORT).show();
         }
     }
     void postOpen(){

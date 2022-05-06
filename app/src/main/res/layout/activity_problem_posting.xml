@@ -105,14 +105,14 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="Plumber" />
+                android:text="Plumbing" />
 
             <RadioButton
                 android:id="@+id/rb_other"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="Other" />
+                android:text="Carpenting" />
 
         </RadioGroup>
 

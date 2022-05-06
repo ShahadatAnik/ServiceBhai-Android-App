@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -101,9 +102,12 @@ public class problemOpen extends AppCompatActivity {
     private void deletePost() {
         Boolean noError = DB.deletePost(postid);
         if(noError==true){
-            problemShowactivity();
+            Intent intent = new Intent(this, homepageForUser.class);
+            startActivity(intent);
+            Toast.makeText(getApplicationContext(),"Post DELETED Successfully",Toast.LENGTH_LONG).show();
+        }else{
+            System.out.println("Got some error");
         }
-        else System.out.println("Got some error");
     }
 
     private void problemShowactivity() {
@@ -124,6 +128,14 @@ public class problemOpen extends AppCompatActivity {
             postid = extras.getInt("postid");
             personid = extras.getInt("personid");
         }
+        userOrWorker = DB.userOrWorker(userid);
+        System.out.println(userOrWorker);
+        if(userOrWorker.equals("User")){
+            user = 1;
+        }
+        else{
+            user = 0;
+        }
         if(userid == personid && user == 1){
             delete.setVisibility(View.VISIBLE);
             markASDone.setVisibility(View.VISIBLE);
@@ -134,6 +146,8 @@ public class problemOpen extends AppCompatActivity {
             hasWorkerProfile = DB.hasWorkerProfile(userid);
             if(hasWorkerProfile == true){
                 bid.setVisibility(View.VISIBLE);
+            }else{
+                createWorkersProfile.setVisibility(View.VISIBLE);
             }
         }
         loadDatainList();
@@ -162,11 +176,35 @@ public class problemOpen extends AppCompatActivity {
         System.out.println(DB.markAsDone(postid));
         Intent intent = new Intent(this, homepageForUser.class);
         startActivity(intent);
+        Toast.makeText(getApplicationContext(),"Post Added In History",Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        String usertype = DB.userOrWorker(userid);
+        userOrWorker = DB.userOrWorker(userid);
+        System.out.println(userOrWorker);
+        if(userOrWorker.equals("User")){
+            user = 1;
+        }
+        else{
+            user = 0;
+        }
+        if(userid == personid && user == 1){
+            delete.setVisibility(View.VISIBLE);
+            markASDone.setVisibility(View.VISIBLE);
+        }
+        if(usertype.equals("Worker")){
+            accept.setVisibility(View.VISIBLE);
+            //bid.setVisibility(View.VISIBLE);
+            hasWorkerProfile = DB.hasWorkerProfile(userid);
+            if(hasWorkerProfile == true){
+                bid.setVisibility(View.VISIBLE);
+            }else{
+                createWorkersProfile.setVisibility(View.VISIBLE);
+            }
+        }
         loadDatainList();
     }
 }

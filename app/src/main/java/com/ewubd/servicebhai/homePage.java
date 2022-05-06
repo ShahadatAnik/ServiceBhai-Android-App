@@ -19,6 +19,7 @@ public class homePage extends AppCompatActivity {
     Button logout, profile, problemshow, inboxButton;
     SharedPreferences myPref;
     int userid;
+    String workersCategory[];
     MyDatabaseHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,15 @@ public class homePage extends AppCompatActivity {
         profile = findViewById(R.id.userProfile);
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         userid = myPref.getInt("loggedInID", -1);
+        workersCategory = DB.getWorkersProfile(userid);
         //System.out.println(userid);
 
         profile.setOnClickListener(v->userProfile());
         problemshow = findViewById(R.id.problemShow);
         problemshow.setOnClickListener(v -> {
             Intent intent = new Intent(this, problemShow.class);
+            intent.putExtra("fromWorkers",1);
+            intent.putExtra("category",workersCategory[2]);
             startActivity(intent);
         });
         inboxButton = findViewById(R.id.inbox);

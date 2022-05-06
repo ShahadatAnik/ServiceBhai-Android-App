@@ -101,13 +101,13 @@ public class userProfile extends AppCompatActivity {
     }
     void loadDataInArrayList(){
         arrayList = DB.history(userid);
-        customProblemAdapter = new customProblemAdapter(this,arrayList, 1);
+        customProblemAdapter = new customProblemAdapter(this,arrayList, 1, 0,"");
         history.setAdapter(customProblemAdapter);
         customProblemAdapter.notifyDataSetChanged();
     }
     void loadDataInArrayList2(){
         arrayList = DB.history(userID);
-        customProblemAdapter = new customProblemAdapter(this,arrayList, 1);
+        customProblemAdapter = new customProblemAdapter(this,arrayList, 1, 0,"");
         history.setAdapter(customProblemAdapter);
         customProblemAdapter.notifyDataSetChanged();
     }

@@ -15,11 +15,19 @@ public class problemShow extends AppCompatActivity {
     MyDatabaseHelper DB;
     ArrayList<postedProblem> arrayList;
     customProblemAdapter customProblemAdapter;
+    int fromWorker = 0;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_show);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            fromWorker = extras.getInt("fromWorkers");
+            category = extras.getString("category");
+        }
 
         postShow = findViewById(R.id.postShow);
         DB= new MyDatabaseHelper(this);
@@ -30,7 +38,7 @@ public class problemShow extends AppCompatActivity {
     }
     public void loadDatainList(){
         arrayList = DB.getProblems();
-        customProblemAdapter = new customProblemAdapter(this,arrayList, 0);
+        customProblemAdapter = new customProblemAdapter(this,arrayList, 0, fromWorker, category);
         postShow.setAdapter(customProblemAdapter);
         customProblemAdapter.notifyDataSetChanged();
     }

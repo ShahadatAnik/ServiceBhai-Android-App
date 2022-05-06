@@ -9,6 +9,7 @@
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/green_color_cursor.xml" value="0.206" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.206" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/ic_launcher_background.xml" value="0.178" />
+        <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.206" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/login_btn_shaper.xml" value="0.163" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/message_send_button.xml" value="0.206" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/drawable/rounded_10dp_white_bg.xml" value="0.1615" />
@@ -43,10 +44,7 @@
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/reviewcustomview.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/layout/workerscustomview.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Studio/ServiceBhai/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.163" />
-        <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
-        <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/drawable/profile_layout_shaper.xml" value="0.2735" />
-        <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/drawable/rounded_10dp_white_bg.xml" value="0.1935" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_chatbox.xml" value="0.33" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_create_workers_profile.xml" value="0.33" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.33" />
@@ -68,8 +66,6 @@
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/spinner_item.xml" value="0.3625" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/workersCustomView.xml" value="0.3625" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/layout/workerscustomview.xml" value="0.3625" />
-        <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1935" />
-        <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1935" />
         <entry key="..\:/Users/fahad/AndroidStudioProjects/ServiceBhai2/app/src/main/res/layout/activity_signup.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_create_workers_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rashi/StudioProjects/ServiceBhai/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />

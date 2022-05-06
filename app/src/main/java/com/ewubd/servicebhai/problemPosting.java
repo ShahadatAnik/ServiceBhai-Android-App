@@ -83,6 +83,7 @@ public class problemPosting<val> extends AppCompatActivity {
             Boolean noError = DB.insertproblemPosting(userid,title,type,detail);
             if(noError){
                 System.out.println("Data Inserted");
+                onBackPressed();
                 problemshow();
                 posttitle.setText("");
                 postDetails.setText("");

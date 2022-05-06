@@ -139,6 +139,19 @@
             app:layout_constraintStart_toStartOf="@id/constraintLayout_form2"
             app:layout_constraintTop_toBottomOf="@id/biddingListView"
             />
+        <Button
+            android:id="@+id/btn_create_workers_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="@color/green"
+            android:text="Tap To Create Your Workers Profile!"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/constraintLayout_form2"
+            app:layout_constraintEnd_toEndOf="@id/constraintLayout_form2"
+            app:layout_constraintStart_toStartOf="@id/constraintLayout_form2"
+            app:layout_constraintTop_toBottomOf="@id/biddingListView"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

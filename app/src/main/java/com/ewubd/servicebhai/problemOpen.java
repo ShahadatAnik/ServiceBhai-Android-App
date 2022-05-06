@@ -17,7 +17,7 @@ public class problemOpen extends AppCompatActivity {
     int postid,personid;
     TextView probtitle, probdetail;
     SharedPreferences myPref;
-    Button delete, accept, bid, markASDone;
+    Button delete, accept, bid, markASDone, createWorkersProfile;
     MyDatabaseHelper DB;
     String userOrWorker;
     int user;
@@ -40,6 +40,7 @@ public class problemOpen extends AppCompatActivity {
         delete = findViewById(R.id.delete);
         accept = findViewById(R.id.accept);
         bid = findViewById(R.id.bidding);
+        createWorkersProfile = findViewById(R.id.btn_create_workers_profile);
 
 
         markASDone = findViewById(R.id.btn_mark_as_done);
@@ -47,15 +48,15 @@ public class problemOpen extends AppCompatActivity {
         delete.setVisibility(View.INVISIBLE);
         accept.setVisibility(View.INVISIBLE);
         bid.setVisibility(View.INVISIBLE);
+        createWorkersProfile.setVisibility(View.INVISIBLE);
 
         delete.setOnClickListener(v->deletePost());
         accept.setOnClickListener(v->acceptWork());
         bid.setOnClickListener(v->bidingIntent());
         markASDone.setOnClickListener(v->markAsDoneObj());
+        createWorkersProfile.setOnClickListener(v->createWorkersProfileFunction());
 
         DB= new MyDatabaseHelper(this);
-
-
 
         userOrWorker = DB.userOrWorker(userid);
         System.out.println(userOrWorker);
@@ -84,10 +85,17 @@ public class problemOpen extends AppCompatActivity {
             hasWorkerProfile = DB.hasWorkerProfile(userid);
             if(hasWorkerProfile == true){
                 bid.setVisibility(View.VISIBLE);
+            }else{
+                createWorkersProfile.setVisibility(View.VISIBLE);
             }
         }
 
         loadDatainList();
+    }
+
+    private void createWorkersProfileFunction() {
+        Intent intent = new Intent(this, createWorkersProfile.class);
+        startActivity(intent);
     }
 
     private void deletePost() {

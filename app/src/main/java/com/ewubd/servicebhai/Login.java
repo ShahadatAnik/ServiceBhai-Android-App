@@ -2,17 +2,27 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -48,8 +58,8 @@ public class Login extends AppCompatActivity {
             else{
                 signupPage();
             }
-
         }
+        fetchData();
     }
     void signupPage(){
         Intent intent = new Intent(this, signup.class);
@@ -108,5 +118,78 @@ public class Login extends AppCompatActivity {
     }
     public int getUserid(){
         return this.userid;
+    }
+
+    public void fetchData(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int id = jo.getInt("workerID");
+                        int personID = jo.getInt("PersonID");
+                        String expertise = jo.getString("expertise");
+                        int nid = jo.getInt("NIDNumber");
+                        String bio = jo.getString("bio");
+
+                        System.out.println(id+" "+personID+" "+expertise+" "+nid+" "+bio);
+
+                        boolean bool = compareWithRemote(personID);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.insertWorker(personID, expertise, nid, bio);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_WORKER);
+    }
+    private boolean compareWithRemote(int personID) {
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getPersonIDfromworker();
+        for(int i=0;i<id.size();i++){
+            System.out.println(personID+" "+id.get(i));
+            if(personID == id.get(i)){
+                return true;
+            }
+        }
+        return false;
     }
 }

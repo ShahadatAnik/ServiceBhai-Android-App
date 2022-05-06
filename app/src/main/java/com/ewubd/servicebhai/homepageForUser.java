@@ -97,7 +97,7 @@ public class homepageForUser extends AppCompatActivity {
 
     private void mechanicsActivity() {
         Intent intent = new Intent(this, workersList.class);
-        intent.putExtra("category", "Mechanics");
+        intent.putExtra("category", "Mechanical");
         startActivity(intent);
     }
 

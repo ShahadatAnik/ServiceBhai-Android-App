@@ -114,4 +114,12 @@ public class homePage extends AppCompatActivity {
 //        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 //        notificationManager.notify(0, builder.build());
 //    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        DB= new MyDatabaseHelper(this);
+        workersCategory = DB.getWorkersProfile(userid);
+    }
 }

@@ -40,7 +40,7 @@ public class createWorkersProfile extends AppCompatActivity {
         boolean electricianIsChecked = rdElectrician.isChecked();
         String checkedOne="";
         if(electricianIsChecked== true){
-            checkedOne = "Electrician";
+            checkedOne = "Electrical";
         }
         boolean plumberIsChecked = rdPlumber.isChecked();
         if(plumberIsChecked== true){
@@ -48,7 +48,7 @@ public class createWorkersProfile extends AppCompatActivity {
         }
         boolean mechanicsIsChecked = rdmechanics.isChecked();
         if(mechanicsIsChecked== true){
-            checkedOne = "Mechanics";
+            checkedOne = "Mechanical";
         }
 
         boolean otherIsChecked = rdOther.isChecked();

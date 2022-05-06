@@ -2,14 +2,28 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.SQLOutput;
+import java.util.HashMap;
+import java.util.Map;
 
 public class problemPosting<val> extends AppCompatActivity {
 
@@ -81,24 +95,68 @@ public class problemPosting<val> extends AppCompatActivity {
         }
         if(error.equals("") && !type.equals("") && !title.equals("") && !detail.equals("")){
             System.out.println("Insert data To Problem Posting Table");
-            Boolean noError = DB.insertproblemPosting(userid,title,type,detail);
-            if(noError){
-                System.out.println("Data Inserted");
-                onBackPressed();
-                problemshow();
-                posttitle.setText("");
-                postDetails.setText("");
-                rb_electrical.setSelected(false);
-                rb_mechanical.setSelected(false);
-                onBackPressed();
-            }
-            else System.out.println("Got some error");
+            savetoAppServer(userid,title,type,detail);
         }else{
             Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_LONG).show();
         }
     }
+
+    private void savetoAppServer(int userid, String title, String type, String detail) {
+        if (checkNetworkConnection()) {
+            System.out.println("ggwp");
+            MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_PROBLEMPOSTING, response -> {
+                System.out.println("Name in :" + userid);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    System.out.println(Response);
+                    if (Response.equals("ok")) {
+                        System.out.println("Data Inserted in Remote DB");
+                        Boolean noError = DB.insertproblemPosting(userid, title, type, detail);
+                        if (noError == true) {
+                            System.out.println("Data Inserted");
+                            problemshow();
+                            posttitle.setText("");
+                            postDetails.setText("");
+                            rb_electrical.setSelected(false);
+                            rb_mechanical.setSelected(false);
+                            Toast.makeText(getApplicationContext(),"Your Problem Has Been Posted Successfully",Toast.LENGTH_LONG).show();
+                            onBackPressed();
+                        } else{
+                            Toast.makeText(getApplicationContext(),"Please Try Again!!",Toast.LENGTH_LONG).show();
+                            System.out.println("Got some error");
+                        }
+                    } else {
+                        System.out.println("Error Data not inserted in remote1");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }, error -> System.out.println(error)) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("PersonID", String.valueOf(userid));
+                    params.put("title", title);
+                    params.put("helptype", type);
+                    params.put("postdetails", detail);
+                    return params;
+                }
+            };
+            MySingleton.getInstance(problemPosting.this).addToRequestQue(stringRequest);
+        } else {
+            System.out.println("no network");
+        }
+    }
+
     void problemshow(){
         Intent i = new Intent(this, problemShow.class);
         startActivity(i);
+    }
+    public boolean checkNetworkConnection () {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

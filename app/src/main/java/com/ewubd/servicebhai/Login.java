@@ -2,17 +2,27 @@ package com.ewubd.servicebhai;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
 
@@ -48,8 +58,12 @@ public class Login extends AppCompatActivity {
             else{
                 signupPage();
             }
-
         }
+        fetchDataWORKER();
+        fetchDataproblemposting();
+        fetchDataMessages();
+        fetchDataRating();
+        fetchDataBidding();
     }
     void signupPage(){
         Intent intent = new Intent(this, signup.class);
@@ -108,5 +122,367 @@ public class Login extends AppCompatActivity {
     }
     public int getUserid(){
         return this.userid;
+    }
+
+    public void fetchDataWORKER(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int id = jo.getInt("workerID");
+                        int personID = jo.getInt("PersonID");
+                        String expertise = jo.getString("expertise");
+                        int nid = jo.getInt("NIDNumber");
+                        String bio = jo.getString("bio");
+
+                        System.out.println(id+" "+personID+" "+expertise+" "+nid+" "+bio);
+
+                        boolean bool = compareWithRemote(personID);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.insertWorker(personID, expertise, nid, bio);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_WORKER);
+    }
+    public void fetchDataRating(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int rateid = jo.getInt("rateid");
+                        int raterID = jo.getInt("raterID");
+                        int userID = jo.getInt("userID");
+                        int rate = jo.getInt("rate");
+                        String review = jo.getString("review");
+
+                        System.out.println(rateid+" "+raterID+" "+userID+" "+rate+" "+review);
+
+                        boolean bool = compareWithRatingRemote(rateid);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.insertRating(raterID, userID, String.valueOf(rate), review);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_RATING);
+    }
+    public void fetchDataproblemposting(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int postid = jo.getInt("postid");
+                        int personID = jo.getInt("PersonID");
+                        String title = jo.getString("title");
+                        String helptype = jo.getString("helptype");
+                        String postdetails = jo.getString("postdetails");
+
+                        System.out.println(postid+" "+personID+" "+title+" "+helptype+" "+postdetails);
+
+                        boolean bool = compareWithproblemRemote(postid);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.insertproblemPosting(personID, title, helptype, postdetails);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_PROBLEM);
+    }
+    public void fetchDataBidding(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int bidingid = jo.getInt("bidingid");
+                        int postid = jo.getInt("postid");
+                        int userID = jo.getInt("userID");
+                        int biddingAmount = jo.getInt("biddingAmount");
+                        String comment = jo.getString("comment");
+
+                        System.out.println(bidingid+" "+postid+" "+userID+" "+biddingAmount+" "+comment);
+
+                        boolean bool = compareWithBiddingRemote(bidingid);
+
+                        if(bool){
+                            System.out.println("Data Already Present Bidding login");
+                        }
+                        else{
+                            Boolean noError = DB.insertBidding(postid, userID, biddingAmount, comment);
+                            if(noError){
+                                System.out.println("Data Inserted Bidding login");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_BIDDING);
+    }
+    private boolean compareWithRemote(int personID) {
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getPersonIDfromworker();
+        for(int i=0;i<id.size();i++){
+            System.out.println(personID+" "+id.get(i));
+            if(personID == id.get(i)){
+                return true;
+            }
+        }
+        return false;
+    }private boolean compareWithproblemRemote(int postID) {
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getPersonIDfromproblem();
+        for(int i=0;i<id.size();i++){
+            System.out.println(postID+" "+id.get(i));
+            if(postID == id.get(i)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean compareWithRatingRemote(int rateid) {
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getrateIDfromrating();
+        for(int i=0;i<id.size();i++){
+            System.out.println(rateid+" "+id.get(i));
+            if(rateid == id.get(i)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean compareWithBiddingRemote(int rateid) {
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getBIDDING();
+        for(int i=0;i<id.size();i++){
+            System.out.println(rateid+" "+id.get(i));
+            if(rateid == id.get(i)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void fetchDataMessages(){
+        DB = new MyDatabaseHelper(this);
+        @SuppressLint("StaticFieldLeak")
+        class dbManager extends AsyncTask<String,Void,String>
+        {
+            protected void onPostExecute(String data){
+                try {
+                    JSONArray ja = new JSONArray(data);
+                    JSONObject jo = null;
+
+                    for(int i =0;i<ja.length();i++){
+                        jo=ja.getJSONObject(i);
+                        int messageid = jo.getInt("messageid");
+                        int fromID = jo.getInt("fromID");
+                        int toID = jo.getInt("toID");
+                        String message = jo.getString("message");
+                        String datetime = jo.getString("datetime");
+
+                        System.out.println(messageid+" "+fromID+" "+toID+" "+message+" "+datetime);
+
+                        boolean bool = compareWithMessageRemote(messageid);
+
+                        if(bool){
+                            System.out.println("Data Already Present");
+                        }
+                        else{
+                            Boolean noError = DB.sendMessages(fromID, toID, message);
+                            if(noError){
+                                System.out.println("Data Inserted");
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            protected String doInBackground(String... strings) {
+                try {
+                    URL url = new URL(strings[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                    StringBuffer data = new StringBuffer();
+                    String line;
+
+                    while((line=br.readLine())!=null){
+                        data.append(line+"\n");
+                    }
+                    br.close();
+                    return data.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        }
+        dbManager obj =new dbManager();
+        obj.execute(DB.FETCH_MESSAGES);
+    }
+    public boolean compareWithMessageRemote(int postID){
+        ArrayList<Integer> id;
+        DB = new MyDatabaseHelper(this);
+        id = DB.getMessageFromRemote();
+        for(int i=0;i<id.size();i++){
+            System.out.println(postID+" "+id.get(i));
+            if(postID == id.get(i)){
+                return true;
+            }
+        }
+        return false;
     }
 }

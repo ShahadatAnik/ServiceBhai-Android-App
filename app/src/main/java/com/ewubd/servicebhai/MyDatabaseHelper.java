@@ -20,6 +20,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private int totalProblem;
     public static final String SERVER_URL = "https://servicevai.000webhostapp.com/ServiceBhai/insert.php";
     public static final String FETCH_USER = "https://servicevai.000webhostapp.com/ServiceBhai/selectUser.php";
+    public static final String FETCH_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/selectWorker.php";
+    public static final String FETCH_PROBLEM = "https://servicevai.000webhostapp.com/ServiceBhai/selectProblemPosting.php";
+
+    public static final String FETCH_BIDDING = "https://servicevai.000webhostapp.com/ServiceBhai/selectBidding.php";
+
+    public static final String SERVER_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/insertWorker.php";
+    public static final String SERVER_PROBLEMPOSTING = "https://servicevai.000webhostapp.com/ServiceBhai/insertProblemPosting.php";
+    public static final String SERVER_RATING = "https://servicevai.000webhostapp.com/ServiceBhai/insertRating.php";
+    public static final String FETCH_RATING = "https://servicevai.000webhostapp.com/ServiceBhai/selectRating.php";
+    public static final String SERVER_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/insertMessages.php";
+    public static final String SERVER_BIDDING = "https://servicevai.000webhostapp.com/ServiceBhai/insertBidding.php";
+    public static final String FETCH_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/selectMessages.php";
 
     private Context context;
 
@@ -118,11 +130,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("postdetails", postdetails);
         long result = DB.insert("problemPosting",null,contentValues);
         if(result==-1){
-            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
+
             return false;
         }
         else{
-            Toast.makeText(context,"Your Problem Has Been Posted Successfully",Toast.LENGTH_LONG).show();
+
             return true;
         }
     }
@@ -270,11 +282,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("review", review);
         long result = DB.insert("rating",null,contentValues);
         if(result==-1){
-            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
+
             return false;
         }
         else{
-            Toast.makeText(context,"Rating Has Been Posted Successfully",Toast.LENGTH_LONG).show();
+
             return true;
         }
     }
@@ -313,11 +325,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("comment", notes);
         long result = DB.insert("biding",null,contentValues);
         if(result==-1){
-            Toast.makeText(context,"Please Try Again!!",Toast.LENGTH_LONG).show();
             return false;
         }
         else{
-            Toast.makeText(context,"Bidding Has Been Posted Successfully",Toast.LENGTH_LONG).show();
             return true;
         }
     }
@@ -406,6 +416,59 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             emailList.add(emailfromSQL);
         }
         return emailList;
+    }
+    public ArrayList<Integer> getPersonIDfromworker(){
+        ArrayList<Integer> personidlist = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select PersonID from workers;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            personidlist.add(emailfromSQL);
+        }
+        return personidlist;
+    }
+    public ArrayList<Integer> getPersonIDfromproblem(){
+        ArrayList<Integer> postidlist = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select postid from problemPosting;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            postidlist.add(emailfromSQL);
+        }
+        return postidlist;
+    }
+
+    public ArrayList<Integer> getMessageFromRemote(){
+        ArrayList<Integer> postidlist = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select messageid from messages;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            postidlist.add(emailfromSQL);
+        }
+        return postidlist;
+    }
+
+    public ArrayList<Integer> getrateIDfromrating(){
+        ArrayList<Integer> rateid = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select rateid from rating;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            rateid.add(emailfromSQL);
+        }
+        return rateid;
+    }
+
+    public ArrayList<Integer> getBIDDING(){
+        ArrayList<Integer> rateid = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select bidingid from biding;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            rateid.add(emailfromSQL);
+        }
+        return rateid;
     }
 
 }

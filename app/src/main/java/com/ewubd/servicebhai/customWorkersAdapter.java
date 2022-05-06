@@ -52,9 +52,7 @@ public class customWorkersAdapter extends BaseAdapter {
 
         workersByCatagory workersByCatagory = arrayList.get(position);
 
-        workersid = workersByCatagory.getWorkersid();
         workersName = workersByCatagory.getWorkesrName();
-        personID = workersByCatagory.getPersonID();
 
         name.setText(workersByCatagory.getWorkesrName());
         bio.setText(workersByCatagory.getBio());
@@ -63,7 +61,7 @@ public class customWorkersAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, chatbox.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("workersIDToSendMessage", personID);
+                intent.putExtra("workersIDToSendMessage", workersByCatagory.getPersonID());
                 context.startActivity(intent);
             }
         });
@@ -71,7 +69,7 @@ public class customWorkersAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, workerReview.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("workersidReview", workersid);
+                intent.putExtra("workersidReview", workersByCatagory.getWorkersid());
                 context.startActivity(intent);
             }
         });

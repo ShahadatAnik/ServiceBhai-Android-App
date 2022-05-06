@@ -182,13 +182,24 @@
             android:id="@+id/tv_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:padding="16dp"
+            android:text=""
+            android:textColor="@color/green"
+            app:layout_constraintEnd_toEndOf="@+id/history_list_view"
+            app:layout_constraintStart_toStartOf="@+id/history_list_view"
+            android:textStyle="bold"
+            />
+
         <TextView
             android:id="@+id/tv_bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_category"
-            android:text="" />
+            android:text=""
+            android:layout_margin="16dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/history_list_view"
+            app:layout_constraintStart_toStartOf="@+id/history_list_view"
+            app:layout_constraintTop_toBottomOf="@id/tv_category" />
 
         <ListView
             android:id="@+id/history_list_view"
@@ -198,7 +209,6 @@
             app:layout_constraintEnd_toEndOf="@id/constraintLayout_bottom_form_tv_history"
             app:layout_constraintStart_toStartOf="@id/constraintLayout_bottom_form_tv_history"
             app:layout_constraintTop_toTopOf="@id/constraintLayout_bottom_form_tv_history" >
-
 
         </ListView>
     </androidx.constraintlayout.widget.ConstraintLayout>

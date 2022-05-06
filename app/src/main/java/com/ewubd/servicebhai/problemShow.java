@@ -32,6 +32,9 @@ public class problemShow extends AppCompatActivity {
         postShow = findViewById(R.id.postShow);
         DB= new MyDatabaseHelper(this);
 
+        Login login = new Login();
+        login.fetchDataproblemposting();
+
         arrayList = new ArrayList<>();
         loadDatainList();
 
@@ -46,5 +49,13 @@ public class problemShow extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Login login = new Login();
+        login.fetchDataproblemposting();
+        loadDatainList();
     }
 }

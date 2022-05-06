@@ -109,7 +109,7 @@ public class homepageForUser extends AppCompatActivity {
 
     private void electricianActivity() {
         Intent intent = new Intent(this, workersList.class);
-        intent.putExtra("category", "Electrician");
+        intent.putExtra("category", "Electrical");
         startActivity(intent);
     }
 

@@ -50,6 +50,15 @@ public class bidding extends AppCompatActivity {
         if (extras != null) {
             postid = extras.getInt("postID");
         }
+        Login login = new Login();
+        login.fetchDataBidding();
+    }
+
+    @Override
+    protected void onRestart() {
+        Login login = new Login();
+        login.fetchDataBidding();
+        super.onRestart();
     }
 
     void saveBid(){

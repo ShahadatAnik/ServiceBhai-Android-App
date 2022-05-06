@@ -65,6 +65,7 @@ public class userProfile extends AppCompatActivity {
             if(profile[5].equals("Worker") && DB.userOrWorker(userid).equals("Worker")){
                 workersProfile.setVisibility(View.VISIBLE);
             }
+            loadDataInArrayList2();
         }
         else{
             String profile[]= DB.getUserProfleInfo(userid);
@@ -88,6 +89,12 @@ public class userProfile extends AppCompatActivity {
     }
     void loadDataInArrayList(){
         arrayList = DB.history(userid);
+        customProblemAdapter = new customProblemAdapter(this,arrayList, 1);
+        history.setAdapter(customProblemAdapter);
+        customProblemAdapter.notifyDataSetChanged();
+    }
+    void loadDataInArrayList2(){
+        arrayList = DB.history(userID);
         customProblemAdapter = new customProblemAdapter(this,arrayList, 1);
         history.setAdapter(customProblemAdapter);
         customProblemAdapter.notifyDataSetChanged();

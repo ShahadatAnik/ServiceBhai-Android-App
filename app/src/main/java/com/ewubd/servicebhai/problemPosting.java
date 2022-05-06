@@ -88,6 +88,7 @@ public class problemPosting<val> extends AppCompatActivity {
                 postDetails.setText("");
                 rb_electrical.setSelected(false);
                 rb_mechanical.setSelected(false);
+                onBackPressed();
             }
             else System.out.println("Got some error");
         }

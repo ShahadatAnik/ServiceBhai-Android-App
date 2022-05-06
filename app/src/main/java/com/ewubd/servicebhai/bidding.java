@@ -56,7 +56,7 @@ public class bidding extends AppCompatActivity {
             Boolean noError = DB.insertBidding(postid, userid, amount, prvnote);
             if(noError==true){
                 System.out.println("Data Inserted");
-                postOpen();
+                onBackPressed();
             }
             else System.out.println("Got some error");
         }

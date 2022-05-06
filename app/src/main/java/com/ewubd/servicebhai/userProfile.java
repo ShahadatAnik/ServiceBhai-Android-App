@@ -24,6 +24,7 @@ public class userProfile extends AppCompatActivity {
     int flag, userID;
     ArrayList<postedProblem> arrayList;
     customProblemAdapter customProblemAdapter;
+    TextView tv_history, tv_category, tv_bio;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,10 @@ public class userProfile extends AppCompatActivity {
         nid.setVisibility(View.GONE);
         nid.setOnClickListener(v->nidIn());
         history = findViewById(R.id.history_list_view);
+        tv_history = findViewById(R.id.tv_history);
+        tv_category = findViewById(R.id.tv_category);
+        tv_bio = findViewById(R.id.tv_bio);
+
 
         myPref = getApplicationContext().getSharedPreferences("userId", MODE_PRIVATE);
         userid = myPref.getInt("loggedInID", -1);
@@ -60,6 +65,13 @@ public class userProfile extends AppCompatActivity {
             userAddress.setText(profile[3]);
             userPhone.setText(profile[4]);
             userType.setText(profile[5]);
+
+            if(DB.userOrWorker(userID).equals("Worker")){
+                String getWorkersProfile[] = DB.getWorkersProfile(userID);
+                tv_history.setText("Workers info");
+                tv_category.setText(getWorkersProfile[2]);
+                tv_bio.setText(getWorkersProfile[4]);
+            }
 
             System.out.println(DB.userOrWorker(userid));
             if(profile[5].equals("Worker") && DB.userOrWorker(userid).equals("Worker")){

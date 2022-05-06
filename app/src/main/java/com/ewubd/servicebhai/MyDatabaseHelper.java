@@ -22,10 +22,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String FETCH_USER = "https://servicevai.000webhostapp.com/ServiceBhai/selectUser.php";
     public static final String FETCH_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/selectWorker.php";
     public static final String FETCH_PROBLEM = "https://servicevai.000webhostapp.com/ServiceBhai/selectProblemPosting.php";
-    public static final String FETCH_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/selectMessages.php";
     public static final String SERVER_WORKER = "https://servicevai.000webhostapp.com/ServiceBhai/insertWorker.php";
     public static final String SERVER_PROBLEMPOSTING = "https://servicevai.000webhostapp.com/ServiceBhai/insertProblemPosting.php";
+    public static final String SERVER_RATING = "https://servicevai.000webhostapp.com/ServiceBhai/insertRating.php";
+    public static final String FETCH_RATING = "https://servicevai.000webhostapp.com/ServiceBhai/selectRating.php";
     public static final String SERVER_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/insertMessages.php";
+    public static final String FETCH_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/selectMessages.php";
 
     private Context context;
 
@@ -443,6 +445,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             postidlist.add(emailfromSQL);
         }
         return postidlist;
+    }
+
+    public ArrayList<Integer> getrateIDfromrating(){
+        ArrayList<Integer> rateid = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor emails = sqLiteDatabase.rawQuery("select rateid from rating;",null);
+        while(emails.moveToNext()){
+            int emailfromSQL = emails.getInt(0);
+            rateid.add(emailfromSQL);
+        }
+        return rateid;
     }
 
 }

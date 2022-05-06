@@ -57,6 +57,15 @@ public class insertReview extends AppCompatActivity {
         userid = myPref.getInt("loggedInID", -1);
 
         save.setOnClickListener(v->saveReview());
+        Login login = new Login();
+        login.fetchDataRating();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Login login = new Login();
+        login.fetchDataRating();
     }
 
     private void saveReview() {

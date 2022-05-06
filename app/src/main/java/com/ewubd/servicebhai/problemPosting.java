@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class problemPosting<val> extends AppCompatActivity {
 
@@ -78,7 +79,7 @@ public class problemPosting<val> extends AppCompatActivity {
         else{
             System.out.println("Post Title "+ title);
         }
-        if(error=="" && type != ""){
+        if(error.equals("") && !type.equals("") && !title.equals("") && !detail.equals("")){
             System.out.println("Insert data To Problem Posting Table");
             Boolean noError = DB.insertproblemPosting(userid,title,type,detail);
             if(noError){
@@ -92,6 +93,8 @@ public class problemPosting<val> extends AppCompatActivity {
                 onBackPressed();
             }
             else System.out.println("Got some error");
+        }else{
+            Toast.makeText(getApplicationContext(),"Please Fill All The Input!!",Toast.LENGTH_LONG).show();
         }
     }
     void problemshow(){

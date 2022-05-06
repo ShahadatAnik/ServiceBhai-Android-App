@@ -176,11 +176,12 @@
             android:id="@+id/tv_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SingUp As?"
+            android:text="Singup As?"
             app:layout_constraintStart_toStartOf="@id/tv_name"
             app:layout_constraintTop_toBottomOf="@id/tv_confirm_pass"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
+            android:textColor="@color/green"
             android:textSize="17sp"
             android:textStyle="bold"
             />
@@ -200,6 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User"
+                android:textColor="@color/green"
                 />
 
             <RadioButton
@@ -207,6 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Worker"
+                android:textColor="@color/green"
                 />
         </RadioGroup>
 

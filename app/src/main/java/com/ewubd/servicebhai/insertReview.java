@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -101,10 +102,14 @@ public class insertReview extends AppCompatActivity {
                         Boolean noError = DB.insertRating(userid,workerid,rate,review);
                         if(noError && review != ""){
                             System.out.println("Data Inserted");
+                            Toast.makeText(getApplicationContext(),"Rating Has Been Posted Successfully",Toast.LENGTH_LONG).show();
                             workerReview.setText("");
                             onBackPressed();
                         }
-                        else System.out.println("Got some error");
+                        else{
+                            Toast.makeText(getApplicationContext(),"Please Try Again!!",Toast.LENGTH_LONG).show();
+                            System.out.println("Got some error");
+                        }
                     } else {
                         System.out.println("Error Data not inserted in remote1");
                     }

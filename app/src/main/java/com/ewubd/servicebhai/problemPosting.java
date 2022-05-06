@@ -121,8 +121,12 @@ public class problemPosting<val> extends AppCompatActivity {
                             postDetails.setText("");
                             rb_electrical.setSelected(false);
                             rb_mechanical.setSelected(false);
+                            Toast.makeText(getApplicationContext(),"Your Problem Has Been Posted Successfully",Toast.LENGTH_LONG).show();
                             onBackPressed();
-                        } else System.out.println("Got some error");
+                        } else{
+                            Toast.makeText(getApplicationContext(),"Please Try Again!!",Toast.LENGTH_LONG).show();
+                            System.out.println("Got some error");
+                        }
                     } else {
                         System.out.println("Error Data not inserted in remote1");
                     }

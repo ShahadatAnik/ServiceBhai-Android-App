@@ -375,7 +375,9 @@ public class Login extends AppCompatActivity {
             }
         }
         return false;
-    }private boolean compareWithproblemRemote(int postID) {
+    }
+
+    private boolean compareWithproblemRemote(int postID) {
         ArrayList<Integer> id;
         DB = new MyDatabaseHelper(this);
         id = DB.getPersonIDfromproblem();

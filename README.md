@@ -11,11 +11,17 @@ Related Apps:
 Methodology:
 	We have tried to make our app as user friendly as possible. The flowchart of our application is given below. 
 <br><br>
-Flow Chart image
+![Alt text](flowchart.png?raw=true "Optional Title")
 <br><br>
 We have total 19 Activities, 1 service and 6 custom views. All the wireframes are given below which has been implemented in our application.
 <br><br>
-ss
+![Alt text](ss1.png?raw=true "Optional Title")<br>
+![Alt text](ss2.png?raw=true "Optional Title")<br>
+![Alt text](ss3.png?raw=true "Optional Title")<br>
+![Alt text](ss4.png?raw=true "Optional Title")<br>
+![Alt text](ss5.png?raw=true "Optional Title")<br>
+![Alt text](ss6.png?raw=true "Optional Title")<br>
+![Alt text](ss7.png?raw=true "Optional Title")<br>
 <br><br>
 Business Model:
 	In present world there are several business models and our application falls into the ‘Free with advertisement’ segment. This is because we are not offering neither any purchasable features nor our application is purchasable. Also, there is no subscription options in our application. If in future our application becomes popular then we can get some sponsors for our application and from them we can generate our revenue. But as for now we are publishing our application with ‘Free with advertisement’.

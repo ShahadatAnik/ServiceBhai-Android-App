@@ -3,8 +3,11 @@ package com.ewubd.servicebhai;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -21,6 +29,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class problemOpen extends AppCompatActivity {
 
@@ -109,14 +119,8 @@ public class problemOpen extends AppCompatActivity {
     }
 
     private void deletePost() {
-        Boolean noError = DB.deletePost(postid);
-        if(noError==true){
-            Intent intent = new Intent(this, homepageForUser.class);
-            startActivity(intent);
-            Toast.makeText(getApplicationContext(),"Post DELETED Successfully",Toast.LENGTH_LONG).show();
-        }else{
-            System.out.println("Got some error");
-        }
+        deleteRemote(postid);
+
     }
 
     private void problemShowactivity() {
@@ -183,10 +187,8 @@ public class problemOpen extends AppCompatActivity {
     }
 
     void markAsDoneObj(){
-        System.out.println(DB.markAsDone(postid));
-        Intent intent = new Intent(this, homepageForUser.class);
-        startActivity(intent);
-        Toast.makeText(getApplicationContext(),"Post Added In History",Toast.LENGTH_LONG).show();
+        markAsDoneRemote(postid);
+
     }
 
     @Override
@@ -289,5 +291,88 @@ public class problemOpen extends AppCompatActivity {
             }
         }
         return false;
+    }
+    public void markAsDoneRemote(int postid) {
+        if (checkNetworkConnection()) {
+            System.out.println("ggwp");
+            MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_MARKASDONE, response -> {
+                System.out.println("Post id :" + postid);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    System.out.println(Response);
+                    if (Response.equals("ok")) {
+                        System.out.println("Data Updated in Remote DB");
+                        Boolean noError = DB.markAsDone(postid);
+                        if (noError == true) {
+                            System.out.println("Data Updated in local DB");
+                            Intent intent = new Intent(this, homepageForUser.class);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(),"Post Added In History",Toast.LENGTH_LONG).show();
+                            onBackPressed();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please Try Again!!", Toast.LENGTH_LONG).show();
+                            System.out.println("Got some error");
+                        }
+                    } else {
+                        System.out.println("Error Data not inserted in remote1");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }, error -> System.out.println(error)) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("postid", String.valueOf(postid));
+                    return params;
+                }
+            };
+            MySingleton.getInstance(problemOpen.this).addToRequestQue(stringRequest);
+        }
+    }
+    public void deleteRemote(int postid) {
+        if (checkNetworkConnection()) {
+            System.out.println("ggwp");
+            MyDatabaseHelper DB2 = new MyDatabaseHelper(this);
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, DB2.SERVER_DELETEPOST, response -> {
+                System.out.println("Post id :" + postid);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String Response = jsonObject.getString("response");
+                    System.out.println(Response);
+                    if (Response.equals("ok")) {
+                        System.out.println("Data Deleted in Remote DB");
+                        Boolean noError = DB.deletePost(postid);
+                        if(noError==true){
+                            Intent intent = new Intent(this, homepageForUser.class);
+                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(),"Post DELETED Successfully",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please Try Again!!", Toast.LENGTH_LONG).show();
+                            System.out.println("Got some error");
+                        }
+                    } else {
+                        System.out.println("Error Data not inserted in remote1");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }, error -> System.out.println(error)) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("postid", String.valueOf(postid));
+                    return params;
+                }
+            };
+            MySingleton.getInstance(problemOpen.this).addToRequestQue(stringRequest);
+        }
+    }
+    public boolean checkNetworkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }

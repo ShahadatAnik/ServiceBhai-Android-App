@@ -261,8 +261,11 @@ public class Login extends AppCompatActivity {
                         String title = jo.getString("title");
                         String helptype = jo.getString("helptype");
                         String postdetails = jo.getString("postdetails");
-
+                        int markAsDone = jo.getInt("markAsDone");
                         System.out.println(postid+" "+personID+" "+title+" "+helptype+" "+postdetails);
+                        if(markAsDone!=0){
+                            DB.markAsDone(postid);
+                        }
 
                         boolean bool = compareWithproblemRemote(postid);
 

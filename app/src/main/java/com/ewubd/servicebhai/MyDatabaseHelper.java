@@ -32,6 +32,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String SERVER_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/insertMessages.php";
     public static final String SERVER_BIDDING = "https://servicevai.000webhostapp.com/ServiceBhai/insertBidding.php";
     public static final String FETCH_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/selectMessages.php";
+    public static final String SERVER_MARKASDONE = "https://servicevai.000webhostapp.com/ServiceBhai/markAsDone.php";
+    public static final String SERVER_DELETEPOST = "https://servicevai.000webhostapp.com/ServiceBhai/deletePost.php";
 
     private Context context;
 
@@ -430,13 +432,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Integer> getPersonIDfromproblem(){
         ArrayList<Integer> postidlist = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor emails = sqLiteDatabase.rawQuery("select postid from problemPosting;",null);
+        Cursor emails = sqLiteDatabase.rawQuery("select postid, markAsDone from problemPosting;",null);
         while(emails.moveToNext()){
             int emailfromSQL = emails.getInt(0);
             postidlist.add(emailfromSQL);
         }
         return postidlist;
     }
+
 
     public ArrayList<Integer> getMessageFromRemote(){
         ArrayList<Integer> postidlist = new ArrayList<>();

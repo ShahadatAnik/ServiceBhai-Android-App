@@ -262,7 +262,6 @@ public class Login extends AppCompatActivity {
                         String helptype = jo.getString("helptype");
                         String postdetails = jo.getString("postdetails");
                         int markAsDone = jo.getInt("markAsDone");
-                        System.out.println("Nasek Nasek"+markAsDone);
                         System.out.println(postid+" "+personID+" "+title+" "+helptype+" "+postdetails);
                         if(markAsDone!=0){
                             DB.markAsDone(postid);

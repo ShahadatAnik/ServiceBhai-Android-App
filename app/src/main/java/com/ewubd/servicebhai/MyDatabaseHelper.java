@@ -432,13 +432,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Integer> getPersonIDfromproblem(){
         ArrayList<Integer> postidlist = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor emails = sqLiteDatabase.rawQuery("select postid from problemPosting;",null);
+        Cursor emails = sqLiteDatabase.rawQuery("select postid, markAsDone from problemPosting;",null);
         while(emails.moveToNext()){
             int emailfromSQL = emails.getInt(0);
             postidlist.add(emailfromSQL);
         }
         return postidlist;
     }
+
 
     public ArrayList<Integer> getMessageFromRemote(){
         ArrayList<Integer> postidlist = new ArrayList<>();

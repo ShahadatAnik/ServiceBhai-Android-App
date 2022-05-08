@@ -32,6 +32,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String SERVER_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/insertMessages.php";
     public static final String SERVER_BIDDING = "https://servicevai.000webhostapp.com/ServiceBhai/insertBidding.php";
     public static final String FETCH_MESSAGES = "https://servicevai.000webhostapp.com/ServiceBhai/selectMessages.php";
+    public static final String SERVER_MARKASDONE = "https://servicevai.000webhostapp.com/ServiceBhai/markAsDone.php";
+    public static final String SERVER_DELETEPOST = "https://servicevai.000webhostapp.com/ServiceBhai/deletePost.php";
 
     private Context context;
 
